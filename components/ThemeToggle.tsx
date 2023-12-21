@@ -1,4 +1,4 @@
-import { CgDarkMode } from "react-icons/cg";
+import { GoGear } from "react-icons/go";
 import { GrRadialSelected } from "react-icons/gr";
 import { useEffect, useState } from "react";
 import { Listbox } from "@headlessui/react";
@@ -29,7 +29,7 @@ export function ThemeToggle() {
                   "text-secoundary relative flex h-8 w-8 cursor-default items-center justify-center rounded-full text-secondary hover:text-primary focus:outline-none focus:ring-0 focus-visible:outline-none"
                 )}
               >
-                <CgDarkMode className='h-5 w-5' />
+                <GoGear className='h-5 w-5' />
               </Listbox.Button>
               <AnimatePresence>
                 {open && (
