@@ -6,7 +6,7 @@ import Logo from "@/public/assets/logo/favicon.png";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Transition, Menu } from "@headlessui/react";
-import { CiLocationArrow1 } from "react-icons/ci";
+import { Cart } from "./Cart";
 import { TbDotsVertical } from "react-icons/tb";
 import { NavLink, Link } from "./ui";
 
@@ -17,7 +17,7 @@ export function Header() {
       <header
         className={cn("md:stick relative top-0 z-50 bg-primary shadow-sm")}
       >
-        <nav className='mx-auto flex max-w-[700px] items-center justify-between gap-3 px-4 py-3 md:px-6'>
+        <nav className='mx-auto flex max-w-[1200px] items-center justify-between gap-3 px-4 py-3 md:px-6'>
           {/* Logo */}
           <Link
             href='/'
@@ -34,7 +34,7 @@ export function Header() {
               />
             </div>
             <div className='flex flex-col gap-1'>
-              <span className='font-medium text-primary'>Store</span>
+              <span className='font-medium text-primary'>STORE</span>
             </div>
           </Link>
 
@@ -50,13 +50,7 @@ export function Header() {
                 </NavLink>
               </li>
             ))}
-            <Link
-              className='ml-4 text-primary'
-              href={"https://www.y-g.tech"}
-              target
-            >
-              <CiLocationArrow1 title={"Main Site"} className='h-5 w-5' />
-            </Link>
+            <Cart />
           </ul>
 
           {/* Small Nav Menu */}
@@ -83,7 +77,7 @@ export function Header() {
                         return (
                           <Menu.Item key={index}>
                             {({ active }) => (
-                              <Link
+                              <NavLink
                                 href={link.href}
                                 className={cn(
                                   "rounded-md px-4 py-2 text-sm transition-colors hover:bg-tertiary hover:text-primary",
@@ -93,7 +87,7 @@ export function Header() {
                                 )}
                               >
                                 {link.label}
-                              </Link>
+                              </NavLink>
                             )}
                           </Menu.Item>
                         );
@@ -105,9 +99,31 @@ export function Header() {
             </div>
           </div>
 
-          {/* Theme Toggle */}
-          <div className='flex h-8 w-8 items-center justify-center'>
-            <ThemeToggle />
+          {/* Right */}
+
+          {/* Login Register button */}
+          <div
+            className='
+              hidden sm:flex sm:items-center sm:space-x-2
+              md:space-x-4
+            '
+          >
+            <div className='relative ml-auto'>
+              <ThemeToggle />
+            </div>
+            <NavLink
+              href='/login'
+              className='inline-flex items-center rounded-md border border-transparent bg-secondary px-2 py-2 text-sm font-medium text-primary hover:bg-tertiary'
+            >
+              Login
+            </NavLink>
+
+            <NavLink
+              href='/register'
+              className='inline-flex items-center rounded-md border border-transparent bg-secondary px-2 py-2 text-sm font-medium text-primary hover:bg-tertiary'
+            >
+              Register
+            </NavLink>
           </div>
         </nav>
       </header>
@@ -126,7 +142,11 @@ const navLinks: navLinksProps[] = [
     label: "Home",
   },
   {
-    href: "/store",
-    label: "Store",
+    href: "/explore",
+    label: "Explore",
+  },
+  {
+    href: "/about",
+    label: "About",
   },
 ];
