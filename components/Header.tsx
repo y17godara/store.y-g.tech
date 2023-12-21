@@ -2,14 +2,13 @@
 import React, { Fragment } from "react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./ThemeToggle";
-import Link from "next/link";
 import Logo from "@/public/assets/logo/favicon.png";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Transition, Menu } from "@headlessui/react";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { TbDotsVertical } from "react-icons/tb";
-import { NavLink } from "./ui";
+import { NavLink, Link } from "./ui";
 
 export function Header() {
   const pathname = `/${usePathname().split("/")[1]}`;
@@ -51,7 +50,11 @@ export function Header() {
                 </NavLink>
               </li>
             ))}
-            <Link className='ml-4 text-primary' href={"/y-g.tech"}>
+            <Link
+              className='ml-4 text-primary'
+              href={"https://www.y-g.tech"}
+              target
+            >
               <CiLocationArrow1 title={"Main Site"} className='h-5 w-5' />
             </Link>
           </ul>
