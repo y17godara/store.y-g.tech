@@ -1,9 +1,18 @@
-import React from 'react'
+import React from "react";
 
-const page = () => {
+export default async function page() {
   return (
-    <div>page</div>
-  )
-}
+    <>
+      <div className='flex flex-col gap-16 md:gap-24'>
+        <div className='flex animate-in flex-col gap-8'>Home Page</div>
 
-export default page
+        <div
+          className='flex animate-in flex-col gap-8'
+          style={{ "--index": 3 } as React.CSSProperties}
+        >
+          This is the home page
+        </div>
+      </div>
+    </>
+  );
+}

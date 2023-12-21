@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "@radix-ui/colors/gray.css";
+@import "@radix-ui/colors/gray-alpha.css";
+@import "@radix-ui/colors/gray-dark.css";
+@import "@radix-ui/colors/gray-dark-alpha.css";
+
+@import "@radix-ui/colors/ruby.css";
+@import "@radix-ui/colors/ruby-alpha.css";
+@import "@radix-ui/colors/ruby-dark.css";
+@import "@radix-ui/colors/ruby-dark-alpha.css";
+
+@import "@radix-ui/colors/blue.css";
+@import "@radix-ui/colors/blue-alpha.css";
+@import "@radix-ui/colors/blue-dark.css";
+@import "@radix-ui/colors/blue-dark-alpha.css";
+
+@layer base {
+  :root {
+    --brand: #8b0d0d;
+    --brandTinted: #dc61611f;
+    --bg: var(--gray-1);
+    --boxBg: var(--gray-4);
+  }
+}
+
+.overflow-x-scroll.snap-x::-webkit-scrollbar {
+  display: none; /* hide scrollbars with webkit scrollbar */
+}
+
+@media (hover: hover) {
+  .animated-list:hover li {
+    opacity: 0.5;
+  }
+
+  .animated-list:hover li:hover {
+    opacity: 1;
+  }
+}
+
+.animate-in {
+  animation-delay: calc(var(--index) * 130ms);
+}
