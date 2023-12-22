@@ -1,5 +1,3 @@
-import { siteConfig } from "@/config/index";
-import { cn } from "@/lib/utils";
 import { Header, Footer } from "@/components";
 
 type RootLayoutProps = {
