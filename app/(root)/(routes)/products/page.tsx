@@ -1,4 +1,5 @@
 import React from "react";
+import Temp from "./Temp";
 
 export default async function page() {
   return (
@@ -11,6 +12,9 @@ export default async function page() {
           style={{ "--index": 3 } as React.CSSProperties}
         >
           This is the products page
+        </div>
+        <div>
+          <Temp />
         </div>
       </div>
     </>
