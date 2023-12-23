@@ -10,7 +10,7 @@ import {
 } from "@/redux/features/cart/cartSlice";
 
 function Temp() {
-  const count = useSelector(selectCartCount);
+  const count: number = useSelector(selectCartCount);
 
   const dispatch = useDispatch<AppDispatch>();
   return (

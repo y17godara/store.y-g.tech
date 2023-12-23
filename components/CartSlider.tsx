@@ -54,7 +54,7 @@ export function CartSlider() {
                   <Dialog.Panel className='pointer-events-auto w-screen max-w-md'>
                     {/* Header */}
                     <div className='flex h-full flex-col divide-y divide-secondary border-l-[1px] border-secondary bg-primary shadow-xl'>
-                      <div className='flex min-h-0 flex-col overflow-y-scroll py-3'>
+                      <div className='flex min-h-0 flex-col py-3'>
                         <div className='px-4 sm:px-6'>
                           <div className='flex flex-col items-center gap-y-16'>
                             <div className='flex w-full flex-row items-center justify-between'>
@@ -78,7 +78,12 @@ export function CartSlider() {
                         </div>
                       </div>
                       {/* Cart */}
-                      <div className='flex h-full flex-1 flex-col items-center justify-center gap-y-2'>
+                      <div
+                        className={cn(
+                          "flex h-full flex-1 flex-col items-center justify-center gap-y-2",
+                          count > 0 ? "overflow-y-scroll" : ""
+                        )}
+                      >
                         {count > 0 ? (
                           <>
                             <div className='flex flex-col items-center justify-center gap-y-2 px-4'>
