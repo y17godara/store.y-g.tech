@@ -7,6 +7,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment, useState } from "react";
 import { cn } from "@/lib/utils";
+import { Link } from "./ui";
 
 export function CartSlider() {
   const [open, setOpen] = useState<boolean>(false);
@@ -21,8 +22,6 @@ export function CartSlider() {
               "text-secoundary relative flex h-8 w-8 cursor-default items-center justify-center rounded-full text-secondary hover:text-primary focus:outline-none focus:ring-0 focus-visible:outline-none"
             )}
             onClick={() => setOpen(true)}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
           >
             <BsCart4 title={"Main Site"} className='h-5 w-5' />
           </Button>
@@ -49,30 +48,94 @@ export function CartSlider() {
                   leaveTo='translate-x-full'
                 >
                   <Dialog.Panel className='pointer-events-auto w-screen max-w-md'>
-                    <div className='flex h-full flex-col divide-y divide-gray-600 border-l-[1px] border-secondary bg-primary shadow-xl'>
-                      <div className='flex min-h-0 flex-1 flex-col overflow-y-scroll py-3'>
+                    {/* Header */}
+                    <div className='flex h-full flex-col divide-y divide-secondary border-l-[1px] border-secondary bg-primary shadow-xl'>
+                      <div className='flex min-h-0 flex-col overflow-y-scroll py-3'>
                         <div className='px-4 sm:px-6'>
-                          <div className='flex items-center justify-between'>
-                            <Dialog.Title className='text-base font-semibold leading-6 text-primary'>
-                              Shopping cart
-                            </Dialog.Title>
-                            <div className='ml-3 flex h-8 items-center'>
-                              <button
-                                type='button'
-                                className='relative rounded-md focus:outline-none focus:ring-0 focus-visible:outline-none '
-                                onClick={() => setOpen(false)}
-                              >
-                                {/* <span className='absolute -inset-2.5' />
-                                <span className='sr-only'>Close panel</span> */}
-                                <XMarkIcon
-                                  className='h-6 w-6'
-                                  aria-hidden='true'
-                                />
-                              </button>
+                          <div className='flex flex-col items-center gap-y-16'>
+                            <div className='flex w-full flex-row items-center justify-between'>
+                              <Dialog.Title className='text-base font-semibold leading-6 text-primary'>
+                                Shopping cart
+                              </Dialog.Title>
+                              <div className='flex h-8 items-center'>
+                                <button
+                                  type='button'
+                                  className='relative rounded-md focus:outline-none focus:ring-0 focus-visible:outline-none '
+                                  onClick={() => setOpen(false)}
+                                >
+                                  <XMarkIcon
+                                    className='h-6 w-6'
+                                    aria-hidden='true'
+                                  />
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
+                      {/* Cart */}
+                      <div className='flex h-full flex-1 flex-col items-center justify-center gap-y-2'>
+                        {count > 0 ? (
+                          <>
+                            <div className='flex flex-col items-center justify-center gap-y-2 px-4'>
+                              <h2 className='text-lg font-semibold text-primary'>
+                                Your cart is Filled with {count} items
+                              </h2>
+                              <p className='text-sm text-primary'>
+                                Looks like your cart is filled with {count}{" "}
+                              </p>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className='flex flex-col items-center justify-center gap-y-2 px-4'>
+                              <img
+                                src='/assets/components/empty-cart.png'
+                                alt='Empty Cart'
+                                className='h-32 w-32'
+                                loading='lazy'
+                              />
+                              <h2 className='text-lg font-semibold text-primary'>
+                                Your cart is empty
+                              </h2>
+                              <p className='text-sm text-primary'>
+                                Looks like you havent added any items to your
+                                cart yet.
+                              </p>
+                            </div>
+                            <div className='flex flex-col items-center justify-center gap-y-2 px-4'>
+                              <Link
+                                className='relative w-full rounded-md bg-secondary px-2 py-1 text-primary focus:outline-none focus:ring-0 focus-visible:outline-none'
+                                href={"/products"}
+                              >
+                                Shop now
+                              </Link>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                      {/* Checkout */}
+                      <div className='flex h-32 w-full flex-row items-center justify-between p-4 sm:h-auto'>
+                        <div className='flex h-8 w-full flex-col items-center gap-y-2 sm:flex-row'>
+                          <div className='flex w-full flex-row items-center justify-between'>
+                            <Dialog.Title className='text-base font-semibold leading-6 text-primary'>
+                              Subtotal ({count} items) :
+                            </Dialog.Title>
+                          </div>
+                          <Button
+                            type='button'
+                            className='relative w-full rounded-md bg-secondary px-2 py-1 text-primary focus:outline-none focus:ring-0 focus-visible:outline-none'
+                            onClick={() => console.log("Checkout Clicked")}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.9 }}
+                            disabled={count > 0 ? false : true}
+                          >
+                            Process to checkout
+                          </Button>
+                        </div>
+                      </div>
+                      {/* footer */}
+                      <div className='flex h-2 w-full'></div>
                     </div>
                   </Dialog.Panel>
                 </Transition.Child>
