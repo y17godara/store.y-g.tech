@@ -8,11 +8,13 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Link } from "./ui";
+import { useSelector } from "react-redux";
+import { selectCartCount } from "@/redux/features/cart/cartSlice";
 
 export function CartSlider() {
   const [open, setOpen] = useState<boolean>(false);
+  const count: number = useSelector(selectCartCount);
 
-  const count = 0;
   return (
     <>
       <div className='flex flex-col items-center justify-center'>
