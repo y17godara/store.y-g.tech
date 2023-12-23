@@ -20,5 +20,5 @@ const cartSlice = createSlice({
 });
 
 export const { increment, decrement } = cartSlice.actions;
-export const selectCartCount = (state: any) => state.cart.count;
+export const selectCartCount: any = (state: any) => state.cart.count;
 export default cartSlice.reducer;

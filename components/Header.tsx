@@ -118,7 +118,7 @@ export function Header() {
             {/* Login Register button */}
             <div
               className='
-              hidden items-center sm:flex sm:space-x-2
+              hidden items-center sm:flex sm:space-x-2 
             '
             >
               {/* Right */}
@@ -127,13 +127,6 @@ export function Header() {
                 className='inline-flex items-center rounded-md border border-transparent bg-secondary px-2 py-1 text-sm font-medium text-primary hover:bg-tertiary'
               >
                 Login
-              </NavLink>
-
-              <NavLink
-                href='/register'
-                className='inline-flex items-center rounded-md border border-transparent bg-secondary px-2 py-1 text-sm font-medium text-primary hover:bg-tertiary'
-              >
-                Register
               </NavLink>
             </div>
           </div>

@@ -15,6 +15,8 @@ export function CartSlider() {
   const [open, setOpen] = useState<boolean>(false);
   const count: number = useSelector(selectCartCount);
 
+  const formatCount = (count: number) => (count > 9 ? "9+" : count); // format count to 9+ if count is greater than 9
+
   return (
     <>
       <div className='flex flex-col items-center justify-center'>
@@ -29,7 +31,7 @@ export function CartSlider() {
           </Button>
           {/* Cart Items No. */}
           <span className='absolute -right-0 -top-1 rounded-full bg-secondary px-[2px] text-xs text-primary'>
-            {count}
+            {formatCount(count)}
           </span>
         </div>
       </div>
