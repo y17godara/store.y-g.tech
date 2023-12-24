@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./ThemeToggle";
 import Logo from "@/public/assets/logo/favicon.png";
@@ -12,6 +12,8 @@ import { CartSlider } from "./CartSlider";
 
 export function Header() {
   const pathname = `/${usePathname().split("/")[1]}`;
+
+  const session = false;
   return (
     <>
       <header
@@ -122,12 +124,26 @@ export function Header() {
             '
             >
               {/* Right */}
-              <NavLink
-                href='/login'
-                className='inline-flex items-center rounded-md border border-transparent bg-secondary px-2 py-1 text-sm font-medium text-primary hover:bg-tertiary'
-              >
-                Login
-              </NavLink>
+              {/* is session */}
+              {session ? (
+                <>
+                  <NavLink
+                    href='/signout'
+                    className='inline-flex items-center rounded-md border border-transparent bg-secondary px-2 py-1 text-sm font-medium text-primary hover:bg-tertiary'
+                  >
+                    Logout
+                  </NavLink>
+                </>
+              ) : (
+                <>
+                  <NavLink
+                    href='/login'
+                    className='inline-flex items-center rounded-md border border-transparent bg-secondary px-2 py-1 text-sm font-medium text-primary hover:bg-tertiary'
+                  >
+                    Login
+                  </NavLink>
+                </>
+              )}
             </div>
           </div>
         </nav>
