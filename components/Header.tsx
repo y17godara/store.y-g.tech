@@ -2,11 +2,13 @@ import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./ThemeToggle";
 import Logo from "@/public/assets/logo/favicon.png";
 import Image from "next/image";
-import { NavLink, Link } from "./ui";
+import { Link } from "./ui";
 import Navbar from "./Navbar";
+import { auth } from "@/auth";
+import { SignInButton } from "./SignInButton";
 
-export function Header() {
-  const session = false;
+export async function Header() {
+  const session: any = await auth();
   return (
     <>
       <header
@@ -45,26 +47,37 @@ export function Header() {
               <ThemeToggle />
             </div>
 
-            {/* is session */}
-            {session ? (
-              <>
-                <NavLink
-                  href='/signout'
-                  className='inline-flex items-center rounded-md border border-transparent bg-secondary px-2 py-1 text-sm font-medium text-primary hover:bg-tertiary'
-                >
-                  SignOut
-                </NavLink>
-              </>
-            ) : (
-              <>
-                <NavLink
-                  href='/signin'
-                  className='inline-flex items-center rounded-md border border-transparent bg-secondary px-2 py-1 text-sm font-medium text-primary hover:bg-tertiary'
-                >
-                  SignIn
-                </NavLink>
-              </>
-            )}
+            <div className='flex flex-row items-center gap-2'>
+              <div className='relative h-8 w-8 rounded-full bg-primary'>
+                {session ? (
+                  <Image
+                    src={session.user.image}
+                    alt={session.user.name}
+                    style={{
+                      objectFit: "cover",
+                      height: "100%",
+                      width: "100%",
+                    }}
+                    width={100}
+                    height={100}
+                    className='rounded-full'
+                  />
+                ) : (
+                  <span
+                    title='Guest'
+                    className='
+                      flex h-full w-full 
+                      cursor-pointer items-center justify-center 
+                      rounded-full border-2 border-primary font-medium text-primary
+                    '
+                  >
+                    G
+                  </span>
+                )}
+              </div>
+              {/* is session */}
+              <SignInButton />
+            </div>
           </div>
         </nav>
       </header>

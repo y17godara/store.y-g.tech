@@ -31,6 +31,9 @@ export const config = {
       if (pathname === "/middleware-example") return !!auth;
       return true;
     },
+    async redirect({ url, baseUrl }) {
+      return baseUrl;
+    },
   },
 } satisfies NextAuthConfig;
 
