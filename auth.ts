@@ -1,22 +1,21 @@
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
-
 import type { NextAuthConfig } from "next-auth";
 
 export const config = {
+  debug: true,
   theme: {
-    logo: "https://next-auth.js.org/img/logo/logo-sm.png",
+    logo: "/assets/logo/logo.png",
+  },
+  pages: {
+    signIn: "/login",
+    error: "/error",
+    verifyRequest: "/verify-request",
+    newUser: undefined,
   },
   providers: [
     GitHub({
       profile(profile) {
-        console.log("User profile:");
-        console.log({
-          id: profile.id.toString(),
-          name: profile.name,
-          email: profile.email,
-          image: profile.avatar_url,
-        });
         return {
           id: profile.id.toString(),
           name: profile.name,

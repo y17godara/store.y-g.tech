@@ -1,6 +1,6 @@
 import { Link } from "@/components/ui";
 import React from "react";
-import { auth } from "auth";
+import { signIn, signOut } from "auth";
 
 export default async function page() {
   return (
@@ -13,6 +13,26 @@ export default async function page() {
           style={{ "--index": 3 } as React.CSSProperties}
         >
           This is the login page
+          <div>
+            <form
+              action={async () => {
+                "use server";
+                await signIn("github", { redirectTo: "/" });
+              }}
+            >
+              <button>Sign In</button>
+            </form>
+          </div>
+          <div>
+            <form
+              action={async () => {
+                "use server";
+                await signOut({ redirectTo: "/login" });
+              }}
+            >
+              <button>Sign Out</button>
+            </form>
+          </div>
         </div>
         <p>
           <Link href='/register' className='underline'>
