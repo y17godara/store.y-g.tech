@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npx prisma generate --no-engine && next build",
     "start": "next start",
     "lint": "next lint",
     "studio": "prisma studio",
@@ -12,10 +12,12 @@
     "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@auth/core": "^0.19.0",
     "@auth/prisma-adapter": "^1.0.12",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.1.1",
     "@prisma/client": "^5.7.1",
+    "@prisma/extension-accelerate": "^0.6.2",
     "@radix-ui/colors": "^3.0.0",
     "@reduxjs/toolkit": "^2.0.1",
     "@vercel/analytics": "^1.1.1",
