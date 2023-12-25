@@ -1,9 +1,13 @@
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 import type { NextAuthConfig } from "next-auth";
+import { PrismaClient } from "@prisma/client/edge";
+import CredentialsProvider from "next-auth/providers/credentials";
+
+const prisma = new PrismaClient();
 
 export const config = {
-  debug: true,
+  debug: false,
   theme: {
     logo: "/assets/logo/logo.png",
   },
@@ -19,9 +23,27 @@ export const config = {
         return {
           id: profile.id.toString(),
           name: profile.name,
+          username: profile.login,
           email: profile.email,
           image: profile.avatar_url,
+          provider: profile.provider,
         };
+      },
+    }),
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials, req) {
+        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
+
+        if (user) {
+          return user;
+        } else {
+          return null;
+        }
       },
     }),
   ],
