@@ -1,3 +1,4 @@
+"use client";
 import { GoGear } from "react-icons/go";
 import { GrRadialSelected } from "react-icons/gr";
 import { useEffect, useState } from "react";

@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/components";
+import ReduxProvider from "./reduxToolkit";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -85,7 +86,7 @@ export default function RootLayout({
         )}
       >
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          {children}
+          <ReduxProvider>{children}</ReduxProvider>
         </ThemeProvider>
         <SpeedInsights />
         <Analytics />

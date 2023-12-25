@@ -8,11 +8,15 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Link } from "./ui";
+import { useSelector } from "react-redux";
+import { selectCartCount } from "@/redux/features/cart/cartSlice";
 
 export function CartSlider() {
   const [open, setOpen] = useState<boolean>(false);
+  const count: number = useSelector(selectCartCount);
 
-  const count = 0;
+  const formatCount = (count: number) => (count > 9 ? "9+" : count); // format count to 9+ if count is greater than 9
+
   return (
     <>
       <div className='flex flex-col items-center justify-center'>
@@ -27,7 +31,7 @@ export function CartSlider() {
           </Button>
           {/* Cart Items No. */}
           <span className='absolute -right-0 -top-1 rounded-full bg-secondary px-[2px] text-xs text-primary'>
-            {count}
+            {formatCount(count)}
           </span>
         </div>
       </div>
@@ -50,7 +54,7 @@ export function CartSlider() {
                   <Dialog.Panel className='pointer-events-auto w-screen max-w-md'>
                     {/* Header */}
                     <div className='flex h-full flex-col divide-y divide-secondary border-l-[1px] border-secondary bg-primary shadow-xl'>
-                      <div className='flex min-h-0 flex-col overflow-y-scroll py-3'>
+                      <div className='flex min-h-0 flex-col py-3'>
                         <div className='px-4 sm:px-6'>
                           <div className='flex flex-col items-center gap-y-16'>
                             <div className='flex w-full flex-row items-center justify-between'>
@@ -74,7 +78,12 @@ export function CartSlider() {
                         </div>
                       </div>
                       {/* Cart */}
-                      <div className='flex h-full flex-1 flex-col items-center justify-center gap-y-2'>
+                      <div
+                        className={cn(
+                          "flex h-full flex-1 flex-col items-center justify-center gap-y-2",
+                          count > 0 ? "overflow-y-scroll" : ""
+                        )}
+                      >
                         {count > 0 ? (
                           <>
                             <div className='flex flex-col items-center justify-center gap-y-2 px-4'>
