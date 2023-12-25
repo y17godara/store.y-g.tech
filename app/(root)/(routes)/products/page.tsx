@@ -1,7 +1,8 @@
 "use client";
 
+import axios from "axios";
 import { cn } from "@/lib/utils";
-import { Suspense, useState, useCallback, lazy } from "react";
+import { Suspense, useState, useCallback, lazy, useEffect } from "react";
 import { CiGrid41, CiCircleList, CiImageOn } from "react-icons/ci";
 
 export const runtime = "edge";
@@ -17,18 +18,54 @@ export default function Page() {
   const [products, setProducts] = useState<any[]>([
     {
       id: 1,
-      title: "Product 1",
+      name: "Product 1",
+      uui: "uuid-1",
       price: 100,
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      image: "https://picsum.photos/200",
+      image: "https://picsum.photos/200/300",
+      description: "Lorem ipsum dolor sit amet, consectetur a",
+      discount: 0,
+      stock: 10,
+      category: "Category 1",
+    },
+    {
+      id: 1,
+      name: "Product 1",
+      uui: "uuid-1",
+      price: 100,
+      image: "https://picsum.photos/200/300",
+      description: "Lorem ipsum dolor sit amet, consectetur a",
+      discount: 0,
+      stock: 10,
+      category: "Category 1",
+    },
+    {
+      id: 1,
+      name: "Product 1",
+      uui: "uuid-1",
+      price: 100,
+      image: "https://picsum.photos/200/300",
+      description: "Lorem ipsum dolor sit amet, consectetur a",
+      discount: 0,
+      stock: 10,
+      category: "Category 1",
     },
   ]);
 
   const getProducts = useCallback(async () => {
-    const response = await fetch("/api/products");
-    const data = await response.json();
-    setProducts(data);
+    try {
+      const response = await axios.get("/api/products");
+      const data = response.data;
+
+      // console.log(data); // debug
+      setProducts(data);
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
+
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]);
 
   const handleView = (view: viewTypes) => () => {
     // console.log(view); // debug
@@ -37,7 +74,7 @@ export default function Page() {
 
   return (
     <>
-      <div className='divide-y-secondary flex w-full flex-col items-end justify-end p-2 text-end'>
+      <div className='divide-y-secondary flex w-full flex-col items-end justify-end gap-y-16 p-2 text-end'>
         <div
           className='flex flex-row items-center justify-end gap-x-0 rounded-lg border border-secondary p-0 text-end transition-colors'
           style={{ "--index": 2 } as React.CSSProperties}
@@ -86,7 +123,7 @@ export default function Page() {
           </button>
         </div>
         <div
-          className='flex flex-col gap-16 overflow-y-hidden md:gap-24'
+          className='flex w-full flex-col gap-16 overflow-y-hidden md:gap-24'
           style={{ "--index": 1 } as React.CSSProperties}
         >
           <Suspense>
