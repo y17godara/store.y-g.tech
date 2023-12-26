@@ -1,11 +1,10 @@
 "use client";
 
 import axios from "axios";
-import { cn } from "@/lib/utils";
 import { Suspense, useState, useCallback, useEffect } from "react";
-import { CiGrid41, CiCircleList, CiImageOn } from "react-icons/ci";
 import { type Product } from "@/types/index";
 import { ProductsDisplay } from "./components/productsDisplay";
+import { ChangeView } from "./components/changeView";
 
 type viewTypes = "list" | "grid" | "full";
 
@@ -31,65 +30,41 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const view = params.get("view") as viewTypes;
+    // console.log("view: ", view); // debug
+    setCurrentView(view || "grid");
+
+    // const filter = params.get("f");
+    // console.log("filter: ", filter); // debug
+
+    // // get multiple filters split by comma
+    // const filters = filter?.split(",");
+    // console.log("filters: ", filters); // debug
     getProducts();
   }, [getProducts]);
 
   const handleView = (view: viewTypes) => () => {
     // console.log(view); // debug
     setCurrentView(view);
+    // add ?view=view to url
+    const params = new URLSearchParams(window.location.search);
+    params.set("view", view);
+    window.history.replaceState(
+      {},
+      "",
+      `${window.location.pathname}?${params}`
+    );
   };
 
   return (
     <>
       <div className='divide-y-secondary flex w-full flex-col items-end justify-end gap-y-16 p-2 text-end'>
         <Suspense>
-          <div
-            className='flex flex-row items-center justify-end gap-x-0 rounded-lg border border-secondary p-0 text-end transition-colors'
-            style={{ "--index": 2 } as React.CSSProperties}
-          >
-            <button
-              onClick={handleView("grid")}
-              className={cn(
-                "border-secondary p-1 transition-colors",
-                currentView === "grid" ? "border" : ""
-              )}
-            >
-              <CiGrid41
-                title={"Grid"}
-                className={
-                  "h-4 w-4 transition-all ease-in-out hover:scale-105 sm:h-5 sm:w-5 md:h-6 md:w-6"
-                }
-              />
-            </button>
-            <button
-              onClick={handleView("list")}
-              className={cn(
-                "border-secondary p-1 transition-colors",
-                currentView === "list" ? "border" : ""
-              )}
-            >
-              <CiCircleList
-                title={"List"}
-                className={
-                  "h-4 w-4 transition-all ease-in-out hover:scale-105 sm:h-5 sm:w-5 md:h-6 md:w-6"
-                }
-              />
-            </button>
-            <button
-              onClick={handleView("full")}
-              className={cn(
-                "border-secondary p-1 transition-colors",
-                currentView === "full" ? "border" : ""
-              )}
-            >
-              <CiImageOn
-                title={"Full"}
-                className={
-                  "h-4 w-4 transition-all ease-in-out hover:scale-105 sm:h-5 sm:w-5 md:h-6 md:w-6"
-                }
-              />
-            </button>
-          </div>
+          <ChangeView
+            // currentView={currentView}
+            handleView={handleView}
+          />
         </Suspense>
         <Suspense>
           <div
@@ -102,10 +77,7 @@ export default function Page() {
                   <div>Loading...</div>
                 </>
               ) : (
-                <ProductsDisplay
-                  products={products}
-                  currentView={currentView}
-                />
+                <ProductsDisplay />
               )}
             </Suspense>
           </div>

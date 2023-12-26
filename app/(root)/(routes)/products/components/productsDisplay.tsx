@@ -1,17 +1,15 @@
+"use client";
 import React from "react";
 import { Suspense, lazy } from "react";
 import { type Product } from "@/types/index";
 const LazyViewList = lazy(() => import("@/components/view/viewList"));
 const LazyViewGrid = lazy(() => import("@/components/view/viewGrid"));
 const LazyViewFull = lazy(() => import("@/components/view/viewFull"));
+import { useSelector } from "react-redux";
+import { selectProductsView } from "@/redux/features/view/productsView";
 
-export function ProductsDisplay({
-  products,
-  currentView,
-}: {
-  products: Product[];
-  currentView: string;
-}) {
+export function ProductsDisplay({ products }: { products: Product[] }) {
+  const currentView = useSelector(selectProductsView);
   return (
     <Suspense>
       {products.length > 0 ? (
