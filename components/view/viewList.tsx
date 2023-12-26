@@ -1,6 +1,7 @@
 import React from "react";
+import { type Product } from "@/types/index";
 
-function viewList({ products }: { products: any[] }): JSX.Element {
+function viewList({ products }: { products: Product[] }): JSX.Element {
   return (
     <div className='flex w-full flex-col gap-4 '>
       {products.map((product) => (

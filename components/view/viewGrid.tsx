@@ -1,6 +1,7 @@
 import React from "react";
+import { type Product } from "@/types/index";
 
-function viewGrid({ products }: { products: any[] }): JSX.Element {
+function viewGrid({ products }: { products: Product[] }): JSX.Element {
   return (
     <>
       <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
