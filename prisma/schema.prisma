@@ -24,12 +24,16 @@ model User {
 
 model Product {
   id           String        @id @default(uuid())
-  productId    String        @unique
+  productId    String        @unique @default(uuid())
   name         String
-  description  String?
-  price        Float         @default(0)
+  description  String
+  price        Float
+  ratings      Float?        @default(0)
   discount     Float?        @default(0)
-  image        String?
+  image        String?       @default("https://via.placeholder.com/350")
+  category     String?       @default("unknown")
+  company      String?       @default("unknown")
+  addedBy      String?       @default("unknown")
   cartProducts CartProduct[] @relation("CartProductToProduct")
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt

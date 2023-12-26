@@ -13,53 +13,36 @@ const LazyViewFull = lazy(() => import("@/components/view/viewFull"));
 
 type viewTypes = "list" | "grid" | "full";
 
+interface Product {
+  id: string;
+  productId: string;
+  name: string;
+  description: string;
+  price: number;
+  ratings: number;
+  discount: number;
+  image: string;
+  category: string;
+  company: string;
+  addedBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export default function Page() {
   const [currentView, setCurrentView] = useState<viewTypes>("grid");
-  const [products, setProducts] = useState<any[]>([
-    {
-      id: 1,
-      name: "Product 1",
-      uui: "uuid-1",
-      price: 100,
-      image: "https://picsum.photos/200/300",
-      description: "Lorem ipsum dolor sit amet, consectetur a",
-      discount: 0,
-      stock: 10,
-      category: "Category 1",
-    },
-    {
-      id: 1,
-      name: "Product 1",
-      uui: "uuid-1",
-      price: 100,
-      image: "https://picsum.photos/200/300",
-      description: "Lorem ipsum dolor sit amet, consectetur a",
-      discount: 0,
-      stock: 10,
-      category: "Category 1",
-    },
-    {
-      id: 1,
-      name: "Product 1",
-      uui: "uuid-1",
-      price: 100,
-      image: "https://picsum.photos/200/300",
-      description: "Lorem ipsum dolor sit amet, consectetur a",
-      discount: 0,
-      stock: 10,
-      category: "Category 1",
-    },
-  ]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   const getProducts = useCallback(async () => {
     try {
       const response = await axios.get("/api/products");
-      const data = response.data;
+      const products = response.data?.products;
 
-      // console.log(data); // debug
-      setProducts(data);
+      // console.log("data: ", response); // debug
+      setProducts(products);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
+      setProducts([]);
     }
   }, []);
 
