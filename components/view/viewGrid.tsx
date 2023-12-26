@@ -5,9 +5,9 @@ function viewGrid({ products }: { products: Product[] }): JSX.Element {
   return (
     <>
       <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
-        {products.map((product) => (
+        {products.map((product: Product) => (
           <div
-            key={product.id}
+            key={product.productId}
             className='rounded-lg bg-secondary p-6 text-primary shadow'
           >
             <div className='flex h-40 w-auto items-center justify-center'>

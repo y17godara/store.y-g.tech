@@ -4,9 +4,9 @@ import { type Product } from "@/types/index";
 function viewFull({ products }: { products: Product[] }): JSX.Element {
   return (
     <div className='flex w-full flex-col gap-4 '>
-      {products.map((product) => (
+      {products.map((product: Product) => (
         <div
-          key={product.id}
+          key={product.productId}
           className='rounded-lg bg-secondary p-6 text-primary shadow'
         >
           <div className='flex h-40 w-auto items-center justify-center'>

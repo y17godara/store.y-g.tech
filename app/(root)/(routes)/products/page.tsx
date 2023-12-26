@@ -2,38 +2,20 @@
 
 import axios from "axios";
 import { cn } from "@/lib/utils";
-import { Suspense, useState, useCallback, lazy, useEffect } from "react";
+import { Suspense, useState, useCallback, useEffect } from "react";
 import { CiGrid41, CiCircleList, CiImageOn } from "react-icons/ci";
-
-export const runtime = "edge";
-
-const LazyViewList = lazy(() => import("@/components/view/viewList"));
-const LazyViewGrid = lazy(() => import("@/components/view/viewGrid"));
-const LazyViewFull = lazy(() => import("@/components/view/viewFull"));
+import { type Product } from "@/types/index";
+import { ProductsDisplay } from "./components/productsDisplay";
 
 type viewTypes = "list" | "grid" | "full";
-
-interface Product {
-  id: string;
-  productId: string;
-  name: string;
-  description: string;
-  price: number;
-  ratings: number;
-  discount: number;
-  image: string;
-  category: string;
-  company: string;
-  addedBy: string;
-  createdAt: string;
-  updatedAt: string;
-}
 
 export default function Page() {
   const [currentView, setCurrentView] = useState<viewTypes>("grid");
   const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const getProducts = useCallback(async () => {
+    setLoading(true);
     try {
       const response = await axios.get("/api/products");
       const products = response.data?.products;
@@ -43,6 +25,8 @@ export default function Page() {
     } catch (error) {
       // console.error(error);
       setProducts([]);
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -58,73 +42,74 @@ export default function Page() {
   return (
     <>
       <div className='divide-y-secondary flex w-full flex-col items-end justify-end gap-y-16 p-2 text-end'>
-        <div
-          className='flex flex-row items-center justify-end gap-x-0 rounded-lg border border-secondary p-0 text-end transition-colors'
-          style={{ "--index": 2 } as React.CSSProperties}
-        >
-          <button
-            onClick={handleView("grid")}
-            className={cn(
-              "border-secondary p-1 transition-colors",
-              currentView === "grid" ? "border" : ""
-            )}
+        <Suspense>
+          <div
+            className='flex flex-row items-center justify-end gap-x-0 rounded-lg border border-secondary p-0 text-end transition-colors'
+            style={{ "--index": 2 } as React.CSSProperties}
           >
-            <CiGrid41
-              title={"Grid"}
-              className={
-                "h-4 w-4 transition-all ease-in-out hover:scale-105 sm:h-5 sm:w-5 md:h-6 md:w-6"
-              }
-            />
-          </button>
-          <button
-            onClick={handleView("list")}
-            className={cn(
-              "border-secondary p-1 transition-colors",
-              currentView === "list" ? "border" : ""
-            )}
+            <button
+              onClick={handleView("grid")}
+              className={cn(
+                "border-secondary p-1 transition-colors",
+                currentView === "grid" ? "border" : ""
+              )}
+            >
+              <CiGrid41
+                title={"Grid"}
+                className={
+                  "h-4 w-4 transition-all ease-in-out hover:scale-105 sm:h-5 sm:w-5 md:h-6 md:w-6"
+                }
+              />
+            </button>
+            <button
+              onClick={handleView("list")}
+              className={cn(
+                "border-secondary p-1 transition-colors",
+                currentView === "list" ? "border" : ""
+              )}
+            >
+              <CiCircleList
+                title={"List"}
+                className={
+                  "h-4 w-4 transition-all ease-in-out hover:scale-105 sm:h-5 sm:w-5 md:h-6 md:w-6"
+                }
+              />
+            </button>
+            <button
+              onClick={handleView("full")}
+              className={cn(
+                "border-secondary p-1 transition-colors",
+                currentView === "full" ? "border" : ""
+              )}
+            >
+              <CiImageOn
+                title={"Full"}
+                className={
+                  "h-4 w-4 transition-all ease-in-out hover:scale-105 sm:h-5 sm:w-5 md:h-6 md:w-6"
+                }
+              />
+            </button>
+          </div>
+        </Suspense>
+        <Suspense>
+          <div
+            className='flex w-full flex-col gap-16 overflow-y-hidden md:gap-24'
+            style={{ "--index": 1 } as React.CSSProperties}
           >
-            <CiCircleList
-              title={"List"}
-              className={
-                "h-4 w-4 transition-all ease-in-out hover:scale-105 sm:h-5 sm:w-5 md:h-6 md:w-6"
-              }
-            />
-          </button>
-          <button
-            onClick={handleView("full")}
-            className={cn(
-              "border-secondary p-1 transition-colors",
-              currentView === "full" ? "border" : ""
-            )}
-          >
-            <CiImageOn
-              title={"Full"}
-              className={
-                "h-4 w-4 transition-all ease-in-out hover:scale-105 sm:h-5 sm:w-5 md:h-6 md:w-6"
-              }
-            />
-          </button>
-        </div>
-        <div
-          className='flex w-full flex-col gap-16 overflow-y-hidden md:gap-24'
-          style={{ "--index": 1 } as React.CSSProperties}
-        >
-          <Suspense>
-            {products.length > 0 ? (
-              <>
-                {currentView === "grid" && <LazyViewGrid products={products} />}
-                {currentView === "list" && <LazyViewList products={products} />}
-                {currentView === "full" && <LazyViewFull products={products} />}
-              </>
-            ) : (
-              <div className='flex h-full w-full flex-col items-center justify-center'>
-                <p className='text-center text-2xl font-bold'>
-                  No products found.
-                </p>
-              </div>
-            )}
-          </Suspense>
-        </div>
+            <Suspense fallback={<div>Loading...</div>}>
+              {loading ? (
+                <>
+                  <div>Loading...</div>
+                </>
+              ) : (
+                <ProductsDisplay
+                  products={products}
+                  currentView={currentView}
+                />
+              )}
+            </Suspense>
+          </div>
+        </Suspense>
       </div>
     </>
   );
