@@ -11,18 +11,20 @@ import { selectProductsView } from "@/redux/features/view/productsView";
 export function ProductsDisplay({ products }: { products: Product[] }) {
   const currentView = useSelector(selectProductsView);
   return (
-    <Suspense>
-      {products.length > 0 ? (
-        <>
-          {currentView === "grid" && <LazyViewGrid products={products} />}
-          {currentView === "list" && <LazyViewList products={products} />}
-          {currentView === "full" && <LazyViewFull products={products} />}
-        </>
-      ) : (
-        <div className='flex h-full w-full flex-col items-center justify-center'>
-          <p className='text-center text-2xl font-bold'>No products found.</p>
-        </div>
-      )}
-    </Suspense>
+    <>
+      <Suspense>
+        {products.length > 0 ? (
+          <>
+            {currentView === "grid" && <LazyViewGrid products={products} />}
+            {currentView === "list" && <LazyViewList products={products} />}
+            {currentView === "full" && <LazyViewFull products={products} />}
+          </>
+        ) : (
+          <div className='flex h-full w-full flex-col items-center justify-center'>
+            <p className='text-center text-2xl font-bold'>No products found.</p>
+          </div>
+        )}
+      </Suspense>
+    </>
   );
 }

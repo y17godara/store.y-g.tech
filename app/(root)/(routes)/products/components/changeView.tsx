@@ -9,13 +9,8 @@ import {
   setView,
 } from "@/redux/features/view/productsView";
 
-export function ChangeView({
-  handleView,
-}: {
-  handleView: (view: any) => () => void;
-}) {
+export function ChangeView({}: {}) {
   const currentView = useSelector(selectProductsView);
-  console.log("currentView: ", currentView); // debug
 
   const dispatch = useDispatch<AppDispatch>();
 
