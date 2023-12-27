@@ -45,5 +45,5 @@ export const GET = auth(async (req) => {
   // } else {
   //   return Response.json({ message: "Not authenticated" }, { status: 401 });
   // }
-  // }) as any; // TODO: Fix `auth()` return type
-});
+}) as any; // TODO: Fix `auth()` return type
+// });

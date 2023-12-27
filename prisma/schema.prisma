@@ -11,32 +11,44 @@ datasource db {
 }
 
 model User {
-  id           String        @id @default(uuid())
-  userId       String        @unique
-  email        String        @unique
+  id           String         @id @default(uuid())
+  userId       String         @unique
+  email        String         @unique
   name         String?
   username     String
   avatar       String?
-  cartProducts CartProduct[] @relation("CartProductToUser")
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  cartProducts CartProduct[]  @relation("CartProductToUser")
+  favorites    UserFavorite[] @relation("UserFavoriteToUser")
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
 }
 
 model Product {
-  id           String        @id @default(uuid())
-  productId    String        @unique @default(uuid())
+  id           String         @id @default(uuid())
+  productId    String         @unique @default(uuid())
   name         String
   description  String
   price        Float
-  ratings      Float?        @default(0)
-  discount     Float?        @default(0)
-  image        String?       @default("https://via.placeholder.com/350")
-  category     String?       @default("unknown")
-  company      String?       @default("unknown")
-  addedBy      String?       @default("unknown")
-  cartProducts CartProduct[] @relation("CartProductToProduct")
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  ratings      Float?         @default(0)
+  discount     Float?         @default(0)
+  image        String?        @default("https://via.placeholder.com/350")
+  category     String?        @default("unknown")
+  company      String?        @default("unknown")
+  addedBy      String?        @default("unknown")
+  cartProducts CartProduct[]  @relation("CartProductToProduct")
+  favorites    UserFavorite[] @relation("UserFavoriteToProduct")
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model UserFavorite {
+  id        String   @id @default(uuid())
+  user      User     @relation("UserFavoriteToUser", fields: [userId], references: [id])
+  userId    String
+  product   Product  @relation("UserFavoriteToProduct", fields: [productId], references: [id])
+  productId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model CartProduct {

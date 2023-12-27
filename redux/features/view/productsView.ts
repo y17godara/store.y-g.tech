@@ -5,7 +5,7 @@ type viewTypes = "list" | "grid" | "full";
 const productsViewSlice = createSlice({
   name: "productsView",
   initialState: {
-    view: "grid" as viewTypes,
+    view: "list" as viewTypes,
   },
   reducers: {
     setView: (state, action) => {

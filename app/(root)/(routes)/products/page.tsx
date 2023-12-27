@@ -1,17 +1,13 @@
-import axios from "axios";
-import { Suspense, lazy } from "react";
+import { Suspense } from "react";
 import { type Product } from "@/types/index";
 import { ProductsDisplay } from "./components/productsDisplay";
 import { ChangeView } from "./components/changeView";
-import { getProducts } from "./action";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Products",
   description: "Products Page",
 };
-
-type viewTypes = "list" | "grid" | "full";
 
 export default async function Page() {
   const products: Product[] = [
