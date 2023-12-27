@@ -9,24 +9,24 @@ export default async function page({
     <>
       <Suspense>
         <div className='flex flex-col gap-16 overflow-y-hidden md:gap-24'>
-          <div
+          {/* <div
             className='order-first w-full flex-none animate-in md:max-w-[125px]'
             style={{ "--index": 1 } as React.CSSProperties}
           >
-            {/* Collections */}
-          </div>
+            Collections
+          </div> */}
           <div
             className='order-last min-h-screen w-full animate-in md:order-none'
             style={{ "--index": 1 } as React.CSSProperties}
           >
             {children}
           </div>
-          <div
+          {/* <div
             className='order-none flex-none animate-in md:order-last md:w-[125px]'
             style={{ "--index": 1 } as React.CSSProperties}
           >
-            {/* Filters */}
-          </div>
+            Filters
+          </div> */}
         </div>
       </Suspense>
     </>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import { type Product } from "@/types/index";
 import Image from "next/image";
 import { FaHeart } from "react-icons/fa";
@@ -10,8 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   incrementProduct,
   decrementProduct,
-  selectCartCount,
-  selectCartItems,
 } from "@/redux/features/cart/cartSlice";
 
 export function List({
@@ -160,7 +158,7 @@ function ViewList({ products }: { products: Product[] }): JSX.Element {
 
   return (
     <>
-      <ul className='animate-list flex w-full flex-col gap-4'>
+      <ul className='animate-list flex min-h-60 w-full flex-col gap-4'>
         {currentProducts.map((product) => (
           <List key={product.id} {...product} />
         ))}

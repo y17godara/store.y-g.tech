@@ -63,15 +63,20 @@ export default async function Page() {
   return (
     <>
       <Suspense>
-        <div className='divide-y-secondary flex w-full flex-col items-end justify-end gap-y-16 p-2 text-end'>
-          <Suspense>
-            <ChangeView />
-          </Suspense>
+        <div className='divide-y-secondary flex w-full flex-col items-end justify-end gap-y-16 p-2 text-start'>
+          <div className='flex w-full flex-col items-center gap-4 text-start'>
+            <h1 className='w-full text-3xl font-bold'>Products</h1>
+          </div>
+          <div>
+            <Suspense>
+              <ChangeView />
+            </Suspense>
+          </div>
           <div
             className='flex w-full flex-col gap-16 overflow-y-hidden md:gap-24'
-            style={{ "--index": 1 } as React.CSSProperties}
+            style={{ "--index": 2 } as React.CSSProperties}
           >
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense>
               <ProductsDisplay products={products} />
             </Suspense>
           </div>
