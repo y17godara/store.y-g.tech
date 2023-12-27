@@ -6,6 +6,13 @@ import { FaHeart } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { redirect, useSearchParams } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  incrementProduct,
+  decrementProduct,
+  selectCartCount,
+  selectCartItems,
+} from "@/redux/features/cart/cartSlice";
 
 export function List({
   id,
@@ -22,6 +29,24 @@ export function List({
   createdAt,
   updatedAt,
 }: Product): JSX.Element {
+  const dispatch = useDispatch();
+
+  // Log the cart state whenever it changes
+  // const cartItems = useSelector(selectCartCount);
+  // useEffect(() => {
+  //   console.log("Cart state:", cartItems);
+  // }, [cartItems]);
+
+  const handleInc = (id: string) => () => {
+    dispatch(incrementProduct(id));
+  };
+
+  const count: number = useSelector(selectCartItems);
+
+  useEffect(() => {
+    console.log("Cart state:", count);
+  }, [count]);
+
   return (
     <>
       <li className='border-tertiary flex min-h-32 flex-row gap-4 rounded-md border px-2 py-4'>
@@ -65,14 +90,17 @@ export function List({
             <div className='flex flex-row gap-2'>
               <p className='text-lg font-bold text-primary'>${price}</p>
               <p className='text-sm text-gray-400 line-through'>
-                ${price + discount}
+                ${Math.round(price / (1 - discount / 100))}
               </p>
 
               <p className='text-sm text-gray-400'>{discount}% off</p>
             </div>
 
             <div className='flex flex-row gap-2'>
-              <button className='text-sm text-gray-400 underline'>
+              <button
+                className='text-sm text-gray-400 underline'
+                onClick={handleInc(productId)}
+              >
                 Add to cart
               </button>
               <button className='text-sm text-gray-400 underline'>
