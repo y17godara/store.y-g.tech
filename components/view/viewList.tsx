@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import { type Product } from "@/types/index";
 import Image from "next/image";
 import { FaHeart } from "react-icons/fa";
@@ -31,21 +31,11 @@ export function List({
 }: Product): JSX.Element {
   const dispatch = useDispatch();
 
-  // Log the cart state whenever it changes
-  // const cartItems = useSelector(selectCartCount);
-  // useEffect(() => {
-  //   console.log("Cart state:", cartItems);
-  // }, [cartItems]);
-
   const handleInc = (id: string) => () => {
     dispatch(incrementProduct(id));
   };
 
-  const count: number = useSelector(selectCartItems);
-
-  useEffect(() => {
-    console.log("Cart state:", count);
-  }, [count]);
+  const productCount = useSelector((state: any) => state.cart.items[productId]);
 
   return (
     <>
@@ -89,21 +79,41 @@ export function List({
 
             <div className='flex flex-row gap-2'>
               <p className='text-lg font-bold text-primary'>${price}</p>
-              <p className='text-sm text-gray-400 line-through'>
+              <p className='text-sm text-primary line-through'>
                 ${Math.round(price / (1 - discount / 100))}
               </p>
 
-              <p className='text-sm text-gray-400'>{discount}% off</p>
+              <p className='text-sm text-primary'>{discount}% off</p>
             </div>
 
             <div className='flex flex-row gap-2'>
-              <button
-                className='text-sm text-gray-400 underline'
-                onClick={handleInc(productId)}
-              >
-                Add to cart
-              </button>
-              <button className='text-sm text-gray-400 underline'>
+              {productCount ? (
+                <div className='flex flex-row gap-3'>
+                  <button
+                    className='text-sm text-primary'
+                    onClick={handleInc(productId)}
+                  >
+                    +
+                  </button>
+                  <p className='text-sm text-primary'>{productCount}</p>
+                  <button
+                    className='text-sm text-primary'
+                    onClick={() => dispatch(decrementProduct(productId))}
+                  >
+                    -
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <button
+                    className='text-sm text-primary underline'
+                    onClick={handleInc(productId)}
+                  >
+                    Add to cart
+                  </button>
+                </>
+              )}
+              <button className='text-sm text-primary underline'>
                 Buy Now
               </button>
             </div>
