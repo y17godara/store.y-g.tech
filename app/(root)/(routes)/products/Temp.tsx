@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { AppDispatch, RootState } from "@/lib/store";
+import { AppDispatch } from "@/lib/store";
 import { useDispatch, useSelector } from "react-redux";
 import {
   increment,

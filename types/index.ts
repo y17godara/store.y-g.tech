@@ -1,6 +1,22 @@
 import { LinkProps as NextLinkProps } from "next/link";
 import { ReactNode } from "react";
 
+export type Product = {
+  id: string;
+  productId: string;
+  name: string;
+  description: string;
+  price: number;
+  ratings: number;
+  discount: number;
+  image: string;
+  category: string;
+  company: string;
+  addedBy: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type socialsProps = {
   href: string;
   label: string;

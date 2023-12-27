@@ -56,10 +56,31 @@ const config: Config = {
           "0%": { transform: "translateY(-18px)", opacity: "0" },
           "100%": { transform: "translateY(0px)", opacity: "1" },
         },
+        fadeIn: {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        // marquee: {
+        //   "0%": { transform: "translateX(0%)" },
+        //   "100%": { transform: "translateX(-100%)" },
+        // },
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "50%": { transform: "translateX(-50%)" }, // Added midpoint to loop smoothly
+          "100%": { transform: "translateX(-100%)" },
+        },
+        blink: {
+          "0%": { opacity: "0.2" },
+          "20%": { opacity: "1" },
+          "100% ": { opacity: "0.2" },
+        },
       },
       animation: {
         in: "in .6s both",
         "in-reverse": "in-reverse .6s both",
+        fadeIn: "fadeIn .3s ease-in-out",
+        carousel: "marquee 60s linear infinite",
+        blink: "blink 1.4s both infinite",
       },
     },
   },
