@@ -1,9 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { type Product } from "@/types/index";
 import Image from "next/image";
 import { FaHeart } from "react-icons/fa";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { redirect, useSearchParams } from "next/navigation";
 
 export function List({
   id,
@@ -85,20 +87,38 @@ export function List({
 }
 
 function ViewList({ products }: { products: Product[] }): JSX.Element {
-  const [currentPage, setCurrentPage] = useState(1);
-  const ITEMS_PER_PAGE = 1; // Adjust this based on your preference
+  const searchParams = useSearchParams();
 
-  // Calculate the index range for the current page
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const page = searchParams.get("page");
 
-  // Slice the products array to get only the items for the current page
-  const currentProducts = products.slice(startIndex, endIndex);
+  if (!page) redirect(`?page=1`);
 
-  // Function to handle pagination
-  const handlePageChange = (newPage: number) => {
-    setCurrentPage(newPage);
-  };
+  // current page min 1 and max size of products
+  // Parse the page value and ensure it's a positive integer
+  const parsedPage = Math.max(1, parseInt(page) || 1);
+
+  // Redirect to the first page if the parsed page is not a positive integer
+  if (parsedPage !== parseInt(page) || parsedPage < 1) {
+    redirect(`?page=1`);
+    return <></>; // Return an empty fragment to prevent rendering while redirecting
+  }
+
+  // // Redirect to the last page if the parsed page is greater than the number of pages
+  if (parsedPage > products.length) {
+    redirect(`?page=${products.length}`);
+    return <></>; // Return an empty fragment to prevent rendering while redirecting
+  }
+
+  const currentPage: number = parsedPage;
+
+  const productsPerPage = 2;
+
+  const endIndex = currentPage * productsPerPage;
+
+  const currentProducts = products.slice(
+    currentPage * productsPerPage - productsPerPage,
+    endIndex
+  );
 
   return (
     <>
@@ -110,19 +130,27 @@ function ViewList({ products }: { products: Product[] }): JSX.Element {
 
       {/* Pagination controls */}
       <div>
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <span>{currentPage}</span>
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={endIndex >= products.length}
-        >
-          Next
-        </button>
+        <div className='flex flex-row items-center gap-2'>
+          {currentPage > 1 ? (
+            <Link
+              className='bg-primary px-2 py-1 text-primary underline-offset-4 hover:underline'
+              href={`?page=${currentPage - 1}`}
+            >
+              Previous
+            </Link>
+          ) : null}
+          <span className='bg-tertnary border border-secondary px-2'>
+            {currentPage}
+          </span>
+          {endIndex < products.length ? (
+            <Link
+              className='bg-primary px-2 py-1 text-primary underline-offset-4 hover:underline'
+              href={`?page=${currentPage + 1}`}
+            >
+              Next
+            </Link>
+          ) : null}
+        </div>
       </div>
     </>
   );
