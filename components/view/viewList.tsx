@@ -147,7 +147,7 @@ function ViewList({ products }: { products: Product[] }): JSX.Element {
 
   const currentPage: number = parsedPage;
 
-  const productsPerPage = 2;
+  const productsPerPage = 3;
 
   const endIndex = currentPage * productsPerPage;
 
