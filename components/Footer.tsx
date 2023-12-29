@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { Link } from "./ui";
 import { siteConfig } from "@/config";
 
-export function Footer() {
+export default async function Footer() {
   return (
     <div
       className={cn(

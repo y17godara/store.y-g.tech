@@ -8,7 +8,7 @@ import { auth } from "@/auth";
 import { SignInButton } from "./SignInButton";
 import { Suspense } from "react";
 
-export async function Header() {
+export default async function Header() {
   const session: any = await auth();
   return (
     <>

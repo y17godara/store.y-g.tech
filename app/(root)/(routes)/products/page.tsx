@@ -64,13 +64,17 @@ export default async function Page() {
     <>
       <Suspense>
         <div className='divide-y-secondary flex w-full flex-col items-end justify-end gap-y-16 p-2 text-start'>
-          <div className='flex w-full flex-col items-center gap-4 text-start'>
-            <h1 className='w-full text-3xl font-bold'>Products</h1>
-          </div>
-          <div>
-            <Suspense>
-              <ChangeView />
-            </Suspense>
+          <div className='w-full'>
+            <div className='w-fulll flex flex-col items-center gap-4 text-start'>
+              <h1 className='w-full text-3xl font-bold'>Products</h1>
+            </div>
+            <div className='flex justify-end'>
+              <div className='w-fit'>
+                <Suspense>
+                  <ChangeView />
+                </Suspense>
+              </div>
+            </div>
           </div>
           <div
             className='flex w-full flex-col gap-16 overflow-y-hidden md:gap-24'

@@ -18,13 +18,18 @@
     "@heroicons/react": "^2.1.1",
     "@prisma/client": "^5.7.1",
     "@radix-ui/colors": "^3.0.0",
+    "@radix-ui/react-slot": "^1.0.2",
     "@reduxjs/toolkit": "^2.0.1",
     "@vercel/analytics": "^1.1.1",
     "@vercel/og": "^0.6.1",
     "@vercel/speed-insights": "^1.0.1",
     "axios": "^1.6.2",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "embla-carousel-autoplay": "^8.0.0-rc17",
+    "embla-carousel-react": "^8.0.0-rc17",
     "framer-motion": "^10.16.16",
+    "lucide-react": "^0.303.0",
     "next": "14.0.4",
     "next-auth": "^5.0.0-beta.4",
     "next-themes": "^0.2.1",
@@ -36,7 +41,8 @@
     "react-redux": "^9.0.4",
     "react-spinners": "^0.13.8",
     "sharp": "^0.33.0",
-    "tailwind-merge": "^2.1.0"
+    "tailwind-merge": "^2.2.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.0.4",
