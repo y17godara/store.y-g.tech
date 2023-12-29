@@ -3,9 +3,7 @@ import localFont from "next/font/local";
 import type { Metadata, Viewport } from "next";
 import { siteConfig } from "@/config/index";
 import { cn } from "@/lib/utils";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react";
-import { ThemeProvider } from "@/components";
+import ThemeProvider from "@/components/ThemeProvider";
 import ReduxProvider from "./reduxToolkit";
 
 export const viewport: Viewport = {
@@ -88,8 +86,6 @@ export default function RootLayout({
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <ReduxProvider>{children}</ReduxProvider>
         </ThemeProvider>
-        <SpeedInsights />
-        <Analytics />
       </body>
     </html>
   );

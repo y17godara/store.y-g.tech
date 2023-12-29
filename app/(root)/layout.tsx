@@ -1,4 +1,5 @@
-import { Header, Footer } from "@/components";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 type RootLayoutProps = {
   children: React.ReactNode;
@@ -10,10 +11,9 @@ export default function RootLayout({
   return (
     <>
       <Header />
+
       <main
-        className={
-          "mx-auto max-w-[1200px] px-4 pb-24 pt-16 md:px-6 md:pb-44 md:pt-20"
-        }
+        className={"mx-auto max-w-[1200px] px-4 pb-24 pt-10 md:px-6 md:pb-44"}
       >
         {children}
       </main>
