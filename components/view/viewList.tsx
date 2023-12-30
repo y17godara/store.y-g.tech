@@ -108,7 +108,9 @@ export function List({
                   <p className='text-sm text-primary'>{productCount}</p>
                   <button
                     className='text-sm text-primary'
-                    onClick={() => dispatch(decrementProduct(productId))}
+                    onClick={() =>
+                      dispatch(decrementProduct({ productId, quantity: 1 }))
+                    }
                   >
                     -
                   </button>
