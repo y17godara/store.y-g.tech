@@ -3,21 +3,72 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 interface CartState {
   items: Record<string, number>;
   count: number;
+  data: Record<string, any>;
 }
 
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
     items: {},
+    data: {
+      quantity: 0,
+      id: "",
+      productId: "",
+      name: "",
+      description: "",
+      price: "",
+      ratings: "",
+      discount: "",
+      image: "",
+      category: "",
+      company: "",
+      addedBy: "",
+    },
     count: 0,
     // Other cart-related state can be added here
   } as CartState,
   reducers: {
-    incrementProduct: (state, action: PayloadAction<string>) => {
-      const productId = action.payload;
-      state.items[productId] = (state.items[productId] || 0) + 1;
+    incrementProduct: (state, action: PayloadAction<any>) => {
+      // const productId = action.payload;
+      const {
+        id,
+        productId,
+        name,
+        description,
+        price,
+        ratings,
+        discount,
+        image,
+        category,
+        company,
+        addedBy,
+        quantity,
+      } = action.payload;
 
+      // console.log("payload: ", action);
+      state.items[productId] = (state.items[productId] || 0) + quantity;
       state.count += 1;
+
+      // add quantity from state.items but other data from action.payload
+      const createData = {
+        id,
+        productId,
+        name,
+        description,
+        price,
+        ratings,
+        discount,
+        image,
+        category,
+        company,
+        addedBy,
+        quantity: state.items[productId],
+      };
+
+      // console.log("CreatedData: ", createData);
+
+      state.data = createData;
+      // console.log("State Data: ", state.data);
     },
     decrementProduct: (state, action: PayloadAction<string>) => {
       const productId = action.payload;
@@ -44,4 +95,5 @@ export const selectCartTotal: any = (state: any) => {
   });
   return total;
 };
+export const selectCartData: any = (state: any) => state.cart.data;
 export default cartSlice.reducer;

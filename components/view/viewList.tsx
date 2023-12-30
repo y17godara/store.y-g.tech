@@ -29,8 +29,23 @@ export function List({
 }: Product): JSX.Element {
   const dispatch = useDispatch();
 
-  const handleInc = (id: string) => () => {
-    dispatch(incrementProduct(id));
+  const handleInc = (productId: string) => () => {
+    dispatch(
+      incrementProduct({
+        id,
+        productId,
+        name,
+        description,
+        price,
+        ratings,
+        discount,
+        image,
+        category,
+        company,
+        addedBy,
+        quantity: 1,
+      })
+    );
   };
 
   const productCount = useSelector((state: any) => state.cart.items[productId]);

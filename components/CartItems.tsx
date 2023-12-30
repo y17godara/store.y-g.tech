@@ -1,40 +1,33 @@
-import Image from "next/image";
-import { cn } from "@/lib/utils";
 import React, { useEffect } from "react";
-import { getProductById } from "@/app/(root)/(routes)/products/action";
+import { useSelector } from "react-redux";
+import { selectCartData } from "@/redux/features/cart/cartSlice";
 
 export const CartItem = () => {
-  const [products, setProducts] = React.useState<any>([]);
+  const products = useSelector((state: any) => state.cart);
 
   useEffect(() => {
-    const getProducts = async () => {
-      const productsFromServer = await getProductById("1");
-      setProducts(productsFromServer);
-    };
+    console.log("DATA : ", { products });
+  }, [products]);
 
-    getProducts();
-  }, []);
   return (
     <>
       <ul className='flex flex-col gap-4'>
-        {Object.keys(products).map((key) => {
+        {/* {Object.keys(products).map((key) => {
           return <Cart product={products} key={Object.keys(products)} />;
-        })}
+        })} */}
       </ul>
     </>
   );
 };
 
-export function Cart({ product }: any) {
-  const [data, setData] = React.useState<any>([]);
-  const [loading, setLoading] = React.useState<boolean>(true);
-
-  console.log(product);
+export function Cart() {
+  const data = useSelector(selectCartData());
+  console.log(data);
 
   return (
     <>
       <li
-        key={product.id}
+        // key={product.id}
         className='border-tertiary flex min-h-32 flex-row gap-4 rounded-md border px-2 py-4'
       >
         Test
