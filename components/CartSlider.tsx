@@ -101,7 +101,7 @@ export function CartSlider() {
                               <div>
                                 {/* Cart Items */}
 
-                                <CartItem products={totalProducts} />
+                                <CartItem />
                               </div>
                             </div>
                           </>

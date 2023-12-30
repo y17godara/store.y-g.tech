@@ -1,44 +1,44 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import React, { useEffect } from "react";
+import { getProductById } from "@/app/(root)/(routes)/products/action";
 
-export const CartItem = ({ products }: { products: any }) => {
+export const CartItem = () => {
+  const [products, setProducts] = React.useState<any>([]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      const productsFromServer = await getProductById("1");
+      setProducts(productsFromServer);
+    };
+
+    getProducts();
+  }, []);
   return (
     <>
       <ul className='flex flex-col gap-4'>
-        {Object.keys(products).map((key) => (
-          <Cart productId={products[key].id} key={key} />
-        ))}
+        {Object.keys(products).map((key) => {
+          return <Cart product={products} key={Object.keys(products)} />;
+        })}
       </ul>
     </>
   );
 };
 
-export function Cart({ key, productId }: any) {
-  // use server
+export function Cart({ product }: any) {
+  const [data, setData] = React.useState<any>([]);
+  const [loading, setLoading] = React.useState<boolean>(true);
 
-  const getProductById = (productId: any) => {
-    const fetchData = async () => {
-      const res = await fetch("/api/products/find", {
-        method: "POST",
-        body: JSON.stringify(productId),
-      });
-      const data = await res.json();
-      return data;
-    };
+  console.log(product);
 
-    return fetchData();
-  };
-
-  const product: any = getProductById("9b6ad7fa-4a35-4686-9be1-ec883b8bdc66");
-  console.log("product", product);
-  const { name, description, price, discount, image, company } = product;
   return (
     <>
       <li
-        key={productId}
+        key={product.id}
         className='border-tertiary flex min-h-32 flex-row gap-4 rounded-md border px-2 py-4'
       >
-        <div className='relative h-48 w-48 overflow-hidden rounded-md'>
+        Test
+        {/* <div className='relative h-48 w-48 overflow-hidden rounded-md'>
           <Image
             src={image}
             alt={name}
@@ -88,7 +88,7 @@ export function Cart({ key, productId }: any) {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
       </li>
     </>
   );

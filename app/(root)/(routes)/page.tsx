@@ -3,7 +3,6 @@ import HomeCarousel from "../components/Carousel";
 import ProductsSlider from "../components/ProductsSlider";
 import Features from "../components/Features";
 import ProductsSection from "../components/ProductsSection";
-import { title } from "process";
 
 export default async function page() {
   return (
