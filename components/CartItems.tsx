@@ -1,44 +1,70 @@
-import Image from "next/image";
+import React from "react";
+import { useSelector } from "react-redux";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { useDispatch } from "react-redux";
+import {
+  incrementProduct,
+  decrementProduct,
+} from "@/redux/features/cart/cartSlice";
 
-export const CartItem = ({ products }: { products: any }) => {
+export const CartItem = () => {
+  const products = useSelector((state: any) => state.cart.products);
   return (
     <>
-      <ul className='flex flex-col gap-4'>
-        {Object.keys(products).map((key) => (
-          <Cart productId={products[key].id} key={key} />
-        ))}
+      <ul className='flex w-full flex-col gap-4 pt-10'>
+        {products.map((product: any) => {
+          return <Cart product={product} key={product.id} />;
+        })}
       </ul>
     </>
   );
 };
 
-export function Cart({ key, productId }: any) {
-  // use server
+export function Cart({ product, key }: { product: any; key: any }) {
+  const {
+    id,
+    name,
+    company,
+    description,
+    price,
+    ratings,
+    category,
+    addedBy,
+    discount,
+    productId,
+    image,
+  } = product;
+  const dispatch = useDispatch();
 
-  const getProductById = (productId: any) => {
-    const fetchData = async () => {
-      const res = await fetch("/api/products/find", {
-        method: "POST",
-        body: JSON.stringify(productId),
-      });
-      const data = await res.json();
-      return data;
-    };
-
-    return fetchData();
+  const handleInc = (productId: string) => () => {
+    dispatch(
+      incrementProduct({
+        id,
+        productId,
+        name,
+        description,
+        price,
+        ratings,
+        discount,
+        image,
+        category,
+        company,
+        addedBy,
+        quantity: 1,
+      })
+    );
   };
 
-  const product: any = getProductById("9b6ad7fa-4a35-4686-9be1-ec883b8bdc66");
-  console.log("product", product);
-  const { name, description, price, discount, image, company } = product;
+  const productCount = useSelector((state: any) => state.cart.items[productId]);
+
   return (
     <>
       <li
-        key={productId}
-        className='border-tertiary flex min-h-32 flex-row gap-4 rounded-md border px-2 py-4'
+        key={product.id}
+        className='border-tertiary flex min-h-32 w-full flex-row gap-4 rounded-md border px-2 py-4'
       >
-        <div className='relative h-48 w-48 overflow-hidden rounded-md'>
+        <div className='relative h-20 w-20 overflow-hidden rounded-md'>
           <Image
             src={image}
             alt={name}
@@ -55,17 +81,11 @@ export function Cart({ key, productId }: any) {
             }}
           />
         </div>
-        <div className='flex h-full w-full flex-1 gap-x-4 pt-2 text-start text-xs'>
+        <div className='flex h-full w-full flex-1 gap-x-4 text-start text-xs'>
           <div className='flex flex-col gap-2'>
             <div>
-              <p className='line-clamp-1 text-lg font-bold'>{name}</p>
-              {company === "unknown" ? null : (
-                <p className='line-clamp-1 text-sm underline underline-offset-2'>
-                  {company}
-                </p>
-              )}
+              <p className='text-md line-clamp-2 font-bold'>{name}</p>
             </div>
-            <p className='line-clamp-3 text-base'>{description}</p>
 
             <div className='flex flex-row gap-2'>
               <p className='text-lg font-bold text-primary'>${price}</p>
@@ -76,15 +96,21 @@ export function Cart({ key, productId }: any) {
               <p className='text-sm text-gray-400'>{discount}% off</p>
             </div>
 
-            <div className='flex flex-row gap-2'>
+            <div className='flex flex-row gap-3'>
               <button
-                className='text-sm text-gray-400 underline'
-                onClick={() => console.log("Remove Clicked")}
+                className='text-sm text-primary'
+                onClick={handleInc(productId)}
               >
-                Add to cart
+                +
               </button>
-              <button className='text-sm text-gray-400 underline'>
-                Buy Now
+              <p className='text-sm text-primary'>{productCount}</p>
+              <button
+                className='text-sm text-primary'
+                onClick={() =>
+                  dispatch(decrementProduct({ productId, quantity: 1 }))
+                }
+              >
+                -
               </button>
             </div>
           </div>

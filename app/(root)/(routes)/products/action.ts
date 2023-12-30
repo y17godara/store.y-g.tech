@@ -1,23 +1,71 @@
+"use server";
+
+import prisma from "@/lib/db";
+
 export async function getProducts() {
-  const response = await fetch("/api/products");
-  console.log(response);
-  const data = await response.json();
+  try {
+    const products = await prisma.product.findMany();
 
-  const products = data?.products;
+    if (!products) {
+      return null;
+    }
 
-  return products;
+    const reqProducts = products.map((product) => {
+      return {
+        id: product.id,
+        productId: product.productId,
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        ratings: product.ratings,
+        discount: product.discount,
+        image: product.image,
+        category: product.category,
+        company: product.company,
+        addedBy: product.addedBy,
+        createdAt: product.createdAt,
+        updatedAt: product.updatedAt,
+      };
+    });
+    // console.log("reqProducts : ", reqProducts);
+    return reqProducts;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-export async function getProduct(id: string) {
+export async function getProductById(productId: string) {
+  console.log("productId : ", productId);
   try {
-    const response = await fetch(`/api/products/${id}`);
+    if (!productId) return null;
 
-    if (response.status === 200) {
-      const data = await response.json();
-      const product = data?.product;
-      return product;
+    const product = await prisma.product.findUnique({
+      where: {
+        productId: productId,
+      },
+    });
+
+    if (!product) {
+      return null;
     }
-    return null;
+
+    const reqProduct = {
+      id: product.id,
+      productId: product.productId,
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      ratings: product.ratings,
+      discount: product.discount,
+      image: product.image,
+      category: product.category,
+      company: product.company,
+      addedBy: product.addedBy,
+      createdAt: product.createdAt,
+      updatedAt: product.updatedAt,
+    };
+    // console.log("reqProduct : ", reqProduct);
+    return reqProduct;
   } catch (error) {
     console.log(error);
   }

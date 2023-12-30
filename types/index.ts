@@ -2,7 +2,7 @@ import { LinkProps as NextLinkProps } from "next/link";
 import { ReactNode } from "react";
 
 export type Product = {
-  id: string;
+  id?: string;
   productId: string;
   name: string;
   description: string;

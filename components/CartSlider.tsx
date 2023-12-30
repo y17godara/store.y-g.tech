@@ -9,10 +9,7 @@ import { Fragment, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Link } from "./ui";
 import { useSelector } from "react-redux";
-import {
-  selectCartCount,
-  selectCartItems,
-} from "@/redux/features/cart/cartSlice";
+import { selectCartCount } from "@/redux/features/cart/cartSlice";
 import { CartItem } from "./CartItems";
 
 export function CartSlider() {
@@ -20,11 +17,7 @@ export function CartSlider() {
   const count: number = useSelector(selectCartCount);
 
   const formatCount = (count: number) => (count > 9 ? "9+" : count); // format count to 9+ if count is greater than 9
-  const totalProducts = useSelector(selectCartItems);
 
-  const handleInc = (productId: string) => () => {
-    console.log("Inc Clicked", productId);
-  };
   return (
     <>
       <div className='flex flex-col items-center justify-center'>
@@ -88,21 +81,15 @@ export function CartSlider() {
                       {/* Cart */}
                       <div
                         className={cn(
-                          "flex h-full flex-1 flex-col items-center justify-center gap-y-2",
+                          "flex h-full flex-1 flex-col items-center justify-start gap-y-2",
                           count > 0 ? "overflow-y-scroll" : ""
                         )}
                       >
                         {count > 0 ? (
                           <>
-                            <div className='flex flex-col items-center justify-center gap-y-2 px-4'>
-                              <h2 className='text-lg font-semibold text-primary'>
-                                Your cart is Filled with {count} items
-                              </h2>
-                              <div>
-                                {/* Cart Items */}
-
-                                <CartItem products={totalProducts} />
-                              </div>
+                            <div className='flex w-full flex-col items-center justify-center gap-y-2 px-4'>
+                              {/* Cart Items */}
+                              <CartItem />
                             </div>
                           </>
                         ) : (
