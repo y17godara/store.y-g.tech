@@ -33,7 +33,7 @@ export function SignOut({ props, className }: SignOutProps): JSX.Element {
     <form
       action={async () => {
         "use server";
-        await signOut({ redirectTo: "/signin" });
+        await signOut({ redirectTo: "/" });
       }}
     >
       <button className={cn(className)} {...props}>
