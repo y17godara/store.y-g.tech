@@ -18,6 +18,7 @@ export function CartSlider() {
 
   const formatCount = (count: number) => (count > 9 ? "9+" : count); // format count to 9+ if count is greater than 9
 
+  const total_Cart_Price = useSelector((state: any) => state.cart.total);
   return (
     <>
       <div className='flex flex-col items-center justify-center'>
@@ -136,7 +137,7 @@ export function CartSlider() {
                             whileTap={{ scale: 0.9 }}
                             disabled={count > 0 ? false : true}
                           >
-                            Process to checkout
+                            Checkout{"  "} ${total_Cart_Price || 0.0}
                           </Button>
                         </div>
                       </div>

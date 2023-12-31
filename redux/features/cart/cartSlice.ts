@@ -40,17 +40,17 @@ const cartSlice = createSlice({
 
       if (existingProductIndex !== -1) {
         // If product already exists, update its quantity
-        console.info(
-          "Product",
-          productId,
-          "already exists in cart. Updating quantity by",
-          quantity,
-          "units"
-        );
+        // console.info(
+        //   "Product",
+        //   productId,
+        //   "already exists in cart. Updating quantity by",
+        //   quantity,
+        //   "units"
+        // );
         state.products[existingProductIndex].quantity += quantity;
       } else {
         // If product doesn't exist, add it to the array
-        console.info("Adding new product to cart", action.payload);
+        // console.info("Adding new product to cart", action.payload);
         state.products.push(action.payload);
       }
     },
@@ -67,23 +67,23 @@ const cartSlice = createSlice({
 
         if (existingProductIndex !== -1) {
           // If product exists, update its quantity
-          console.info(
-            "Product",
-            productId,
-            "already exists in cart. Updating quantity by",
-            quantity,
-            "unit"
-          );
+          // console.info(
+          //   "Product",
+          //   productId,
+          //   "already exists in cart. Updating quantity by",
+          //   quantity,
+          //   "unit"
+          // );
           state.products[existingProductIndex].quantity -= quantity;
         }
 
         if (state.items[productId] === 0) {
           // If product quantity reaches 0, remove it from the cart
-          console.info(
-            "Product",
-            productId,
-            "quantity reached 0. Removing product"
-          );
+          // console.info(
+          //   "Product",
+          //   productId,
+          //   "quantity reached 0. Removing product"
+          // );
           delete state.items[productId];
           state.products = state.products.filter(
             (product) => product.productId !== productId
@@ -97,17 +97,4 @@ const cartSlice = createSlice({
 
 export const { incrementProduct, decrementProduct } = cartSlice.actions;
 export const selectCartCount: any = (state: any) => state.cart.count;
-export const selectCartItems: any = (state: any) => state.cart.items;
-export const selectCartTotal: any = (state: any) => {
-  const cartItems = selectCartItems(state);
-  const products = state.products.items;
-  let total = 0;
-  Object.keys(cartItems).forEach((productId) => {
-    const product = products[productId];
-    const quantity = cartItems[productId];
-    total += product.price * quantity;
-  });
-  return total;
-};
-export const selectCartData: any = (state: any) => state.cart.data;
 export default cartSlice.reducer;
