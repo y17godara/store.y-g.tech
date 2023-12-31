@@ -99,24 +99,32 @@ const products: Product[] = [
 ];
 
 export async function GET() {
-  console.log("get all products.. ... ... ...");
-  try {
-    // Add Dummy Products to database as seed
-    const seedProducts = await prisma.product.createMany({
-      data: products,
-      skipDuplicates: true,
-    });
+  // Check if the environment is development
+  if (process.env.NODE_ENV === "development") {
+    console.log("get all products.. ... ... ...");
+    try {
+      // Add Dummy Products to database as seed
+      const seedProducts = await prisma.product.createMany({
+        data: products,
+        skipDuplicates: true,
+      });
 
-    console.log("seedProducts : ", seedProducts);
+      console.log("seedProducts : ", seedProducts);
 
-    return Response.json({ seedProducts }, { status: 200 });
-  } catch (error: any) {
-    // If something went wrong
+      return Response.json({ seedProducts }, { status: 200 });
+    } catch (error: any) {
+      // If something went wrong
+      return Response.json(
+        { message: "Something went Wrong, Try again Later" },
+        { status: 500 }
+      );
+    } finally {
+      await prisma.$disconnect(); // Disconnect from database
+    }
+  } else {
     return Response.json(
-      { message: "Something went Wrong, Try again Later" },
-      { status: 500 }
+      { message: "Endpoint is only accessible in development mode" },
+      { status: 403 } // Forbidden status code
     );
-  } finally {
-    await prisma.$disconnect(); // Disconnect from database
   }
 }
