@@ -62,9 +62,9 @@ export function Cart({ product, key }: { product: any; key: any }) {
     <>
       <li
         key={product.id}
-        className='border-tertiary flex min-h-32 w-full flex-row gap-4 rounded-md border px-2 py-4'
+        className='flex min-h-32 w-full flex-col gap-4 rounded-md border border-secondary px-2 py-4 sm:flex-row'
       >
-        <div className='relative h-20 w-20 overflow-hidden rounded-md'>
+        <div className='relative h-20 w-auto overflow-hidden rounded-md sm:h-32 sm:w-1/2'>
           <Image
             src={image}
             alt={name}
@@ -82,7 +82,7 @@ export function Cart({ product, key }: { product: any; key: any }) {
           />
         </div>
         <div className='flex h-full w-full flex-1 gap-x-4 text-start text-xs'>
-          <div className='flex flex-col gap-2'>
+          <div className='flex w-full flex-col gap-2'>
             <div>
               <p className='text-md line-clamp-2 font-bold'>{name}</p>
             </div>

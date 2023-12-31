@@ -51,27 +51,80 @@ const products: Product[] = [
     createdAt: "2023-12-26T05:04:38.321Z",
     updatedAt: "2023-12-26T05:02:57.410Z",
   },
+  {
+    id: "4",
+    productId: "38c48bfe-ca47b64c7b7",
+    name: "Another NextJs Template",
+    description: "This is another template for NextJs with different features.",
+    price: 15,
+    ratings: 4,
+    discount: 20,
+    image: "https://i.imgur.com/LjEZK9i.jpeg",
+    category: "anotherCategory",
+    company: "y17godara",
+    addedBy: "unknown",
+    createdAt: "2023-12-27T08:15:20.123Z",
+    updatedAt: "2023-12-27T08:18:45.567Z",
+  },
+  {
+    id: "5",
+    productId: "12345678-abcd-efghijklmnop",
+    name: "Product 5",
+    description: "Description for Product 5.",
+    price: 25,
+    ratings: 5,
+    discount: 15,
+    image: "https://i.imgur.com/LjEZK9i.jpeg",
+    category: "category5",
+    company: "y17godara",
+    addedBy: "unknown",
+    createdAt: "2023-12-28T12:30:45.678Z",
+    updatedAt: "2023-12-28T12:35:10.987Z",
+  },
+  {
+    id: "6",
+    productId: "87654321-dcba-ijklmnopqrstuv",
+    name: "Product 14",
+    description: "Description for Product 14.",
+    price: 40,
+    ratings: 3,
+    discount: 10,
+    image: "https://i.imgur.com/LjEZK9i.jpeg",
+    category: "category14",
+    company: "y17godara",
+    addedBy: "unknown",
+    createdAt: "2023-12-31T18:45:30.987Z",
+    updatedAt: "2023-12-31T18:50:15.654Z",
+  },
 ];
 
 export async function GET() {
-  console.log("get all products.. ... ... ...");
-  try {
-    // Add Dummy Products to database as seed
-    const seedProducts = await prisma.product.createMany({
-      data: products,
-      skipDuplicates: true,
-    });
+  // Check if the environment is development
+  if (process.env.NODE_ENV === "development") {
+    console.log("get all products.. ... ... ...");
+    try {
+      // Add Dummy Products to database as seed
+      const seedProducts = await prisma.product.createMany({
+        data: products,
+        skipDuplicates: true,
+      });
 
-    console.log("seedProducts : ", seedProducts);
+      console.log("seedProducts : ", seedProducts);
 
-    return Response.json({ seedProducts }, { status: 200 });
-  } catch (error: any) {
-    // If something went wrong
+      return Response.json({ seedProducts }, { status: 200 });
+    } catch (error: any) {
+      // If something went wrong
+      return Response.json(
+        { message: "Something went Wrong, Try again Later" },
+        { status: 500 }
+      );
+    } finally {
+      await prisma.$disconnect(); // Disconnect from database
+    }
+  } else {
     return Response.json(
-      { message: "Something went Wrong, Try again Later" },
-      { status: 500 }
+      { message: "Endpoint is only accessible in development mode" },
+      { status: 403 } // Forbidden status code
     );
-  } finally {
-    await prisma.$disconnect(); // Disconnect from database
   }
 }
