@@ -20,7 +20,7 @@ model User {
   id                 String                 @id @default(cuid())
   name               String?
   email              String?                @unique
-  emailVerified      DateTime?              @default(now()) // TODO
+  emailVerified      DateTime? // TODO
   image              String?
   password           String? // TODO
   role               UserRole               @default(USER) // TODO

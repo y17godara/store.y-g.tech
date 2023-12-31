@@ -13,21 +13,29 @@ export const {
   theme: {
     logo: "/assets/logo/logo.png",
   },
-  pages: {
-    signIn: "/login",
-    error: "/error",
-    verifyRequest: "/verify-request",
-    newUser: undefined,
+  // pages: { // TODO
+  //   signIn: "/auth/login",
+  //   signOut: "auth/logout",
+  //   error: "/auth/error",
+  // },
+  events: {
+    async linkAccount({ user }) {
+      await db.user.update({
+        where: { id: user.id },
+        data: { emailVerified: new Date() },
+      });
+    },
   },
   callbacks: {
-    authorized({ request, auth }) {
-      const { pathname } = request.nextUrl;
-      if (pathname === "/middleware-example") return !!auth;
+    async signIn({ user, account }: any) {
+      // Allow OAuth without email verification
+      if (account?.provider !== "credentials") return true;
+
+      // Creden
       return true;
     },
-    async redirect({ url, baseUrl }) {
-      return baseUrl;
-    },
   },
+  session: { strategy: "jwt" },
+  adapter: PrismaAdapter(db),
   ...authConfig,
 });
