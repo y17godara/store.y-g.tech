@@ -1,15 +1,12 @@
 import { cn } from "@/lib/utils";
-import { ThemeToggle } from "./ThemeToggle";
 import Logo from "@/public/assets/logo/favicon.png";
 import Image from "next/image";
 import { Link } from "./ui";
 import Navbar from "./Navbar";
-import { auth } from "@/auth";
-import { SignInButton } from "./SignInButton";
 import { Suspense } from "react";
+import { Avatar } from "./ui/avatar";
 
 export default async function Header() {
-  const session: any = await auth();
   return (
     <>
       <Suspense>
@@ -47,41 +44,7 @@ export default async function Header() {
               hidden items-center sm:flex sm:space-x-2 
             '
             >
-              <div className='relative '>
-                <ThemeToggle />
-              </div>
-
-              <div className='flex flex-row items-center gap-2'>
-                <div className='relative h-8 w-8 rounded-full bg-primary'>
-                  {session ? (
-                    <Image
-                      src={session.user.image}
-                      alt={session.user.name}
-                      style={{
-                        objectFit: "cover",
-                        height: "100%",
-                        width: "100%",
-                      }}
-                      width={100}
-                      height={100}
-                      className='rounded-full'
-                    />
-                  ) : (
-                    <span
-                      title='Guest'
-                      className='
-                      flex h-full w-full 
-                      cursor-pointer items-center justify-center 
-                      rounded-full border-2 border-primary font-medium text-primary
-                    '
-                    >
-                      G
-                    </span>
-                  )}
-                </div>
-                {/* is session */}
-                <SignInButton />
-              </div>
+              <Avatar />
             </div>
           </nav>
         </header>
