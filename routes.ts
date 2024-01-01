@@ -4,7 +4,7 @@
 
 export const DEFAULT_REDIRECT = "/";
 export const DEFAULT_UNAUTHENTICATED_REDIRECT = "/auth/login";
-export const DEFAULT_LOGIN_REDIRECT = "/settings";
+export const DEFAULT_LOGIN_REDIRECT = "/user/settings";
 
 /*
  * The following routes are used by the auth middleware to determine

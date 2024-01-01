@@ -3,6 +3,7 @@ import React from "react";
 import { SignIn, SignOut } from "@/components/ui/auth-components";
 import { auth } from "auth";
 import Link from "next/link";
+import { DEFAULT_UNAUTHENTICATED_REDIRECT } from "@/routes";
 
 export async function SignInButton() {
   const session: any = await auth();
@@ -20,7 +21,7 @@ export async function SignInButton() {
       ) : (
         <>
           <Link
-            href={`http://localhost:3000/api/auth/signin`}
+            href={DEFAULT_UNAUTHENTICATED_REDIRECT}
             className={
               "rounded-md bg-secondary px-4 py-2 text-sm hover:bg-tertiary"
             }

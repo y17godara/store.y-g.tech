@@ -13,11 +13,10 @@ export const {
   theme: {
     logo: "/assets/logo/logo.png",
   },
-  // pages: { // TODO
-  //   signIn: "/auth/login",
-  //   signOut: "auth/logout",
-  //   error: "/auth/error",
-  // },
+  pages: {
+    signIn: "/auth/login",
+    error: "/auth/error",
+  },
   events: {
     async linkAccount({ user }) {
       await db.user.update({
@@ -33,6 +32,17 @@ export const {
 
       // Creden
       return true;
+    },
+    async session({ token, session }) {
+      if (token.sub && session.user) {
+        session.user.id = token.sub;
+      }
+      if (session.user) {
+        session.user.name = token.name;
+        session.user.email = token.email;
+      }
+
+      return session;
     },
   },
   session: { strategy: "jwt" },
