@@ -18,8 +18,8 @@ import {
 } from "@/components/shadcn/ui/form";
 import { Input } from "@/components/shadcn/ui/input";
 import { Button } from "@/components/shadcn/ui/button";
-// import { FormError } from "@/components/ui/form-error";
-// import { FormSuccess } from "@/components/ui/form-success";
+import { FormError } from "@/components/ui/form-error";
+import { FormSuccess } from "@/components/ui/form-success";
 
 export default function RegisterCard() {
   const [error, setError] = useState<string | undefined>("");
@@ -122,8 +122,8 @@ export default function RegisterCard() {
                 )}
               />
             </div>
-            {/* <FormError message={error} /> */}
-            {/* <FormSuccess message={success} /> */}
+            <FormError message={error} />
+            <FormSuccess message={success} />
             <Button disabled={isPending} type='submit' className='w-full'>
               Create an account
             </Button>
