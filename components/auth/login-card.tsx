@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AuthCard } from "@/components/auth/auth-card";
 import { login } from "@/actions/login";
+import Link from "next/link";
 import {
   Form,
   FormControl,
@@ -73,8 +74,8 @@ export default function LoginCard() {
     <>
       <AuthCard
         header='Create an account'
-        footer='Already have an account?'
-        footerLink='/auth/login'
+        footer='Create an account?'
+        footerLink='/auth/register'
         showSocials={true}
       >
         <Form {...form}>
@@ -118,6 +119,16 @@ export default function LoginCard() {
                   </FormItem>
                 )}
               />
+              <div className='flex w-full text-start'>
+                <Button
+                  variant='link'
+                  className='px-0 font-normal'
+                  size='sm'
+                  asChild
+                >
+                  <Link href='/auth/forgot-password'>Forgot password?</Link>
+                </Button>
+              </div>
             </div>
             <FormError message={error} />
             <FormSuccess message={success} />
