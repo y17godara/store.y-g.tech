@@ -3,7 +3,7 @@
 import React from "react";
 import { LoginSchema } from "@/schemas";
 import * as z from "zod";
-import { useSearchParams } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -60,6 +60,7 @@ export default function LoginCard() {
             if (data?.success) {
               form.reset();
               setSuccess(data.success);
+              redirect("/user/settings");
             }
           })
           .catch(() => setError("Something went wrong"));

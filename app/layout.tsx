@@ -5,6 +5,8 @@ import { siteConfig } from "@/config/index";
 import { cn } from "@/lib/utils";
 import ThemeProvider from "@/components/ThemeProvider";
 import ReduxProvider from "./reduxToolkit";
+import { SessionProvider } from "next-auth/react";
+import { auth } from "@/auth";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -72,21 +74,24 @@ type RootLayoutProps = {
   children: React.ReactNode;
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: RootLayoutProps): React.ReactElement<RootLayoutProps> {
+}: RootLayoutProps): Promise<React.ReactElement<RootLayoutProps>> {
+  const session = await auth();
   return (
-    <html lang='en' dir='ltr' suppressHydrationWarning>
-      <body
-        className={cn(
-          "w-full bg-primary font-sans text-primary antialiased selection:bg-secondaryA",
-          hubot.variable
-        )}
-      >
-        <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          <ReduxProvider>{children}</ReduxProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <SessionProvider session={session}>
+      <html lang='en' dir='ltr' suppressHydrationWarning>
+        <body
+          className={cn(
+            "w-full bg-primary font-sans text-primary antialiased selection:bg-secondaryA",
+            hubot.variable
+          )}
+        >
+          <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+            <ReduxProvider>{children}</ReduxProvider>
+          </ThemeProvider>
+        </body>
+      </html>
+    </SessionProvider>
   );
 }
