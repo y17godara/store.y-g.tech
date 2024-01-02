@@ -10,17 +10,83 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserRole {
+  USER
+  ADMIN
+  ROOT
+}
+
 model User {
-  id           String         @id @default(uuid())
-  userId       String         @unique
-  email        String         @unique
-  name         String?
-  username     String
-  avatar       String?
-  cartProducts CartProduct[]  @relation("CartProductToUser")
-  favorites    UserFavorite[] @relation("UserFavoriteToUser")
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
+  id                 String                 @id @default(cuid())
+  name               String?
+  email              String?                @unique
+  emailVerified      DateTime? // TODO
+  image              String?
+  password           String? // TODO
+  role               UserRole               @default(USER) // TODO
+  accounts           Account[] // TODO
+  isBlocked          Boolean                @default(false) // TODO
+  isTwoFactorEnabled Boolean                @default(false) // TODO
+  twoFactorEnabled   TwoFactorConfirmation? // TODO
+  cartProducts       CartProduct[] // TODO
+  favorites          UserFavorite[] // TODO
+  createdAt          DateTime               @default(now())
+  updatedAt          DateTime               @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model VerificationToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model PasswordResetToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model TwoFactorToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model TwoFactorConfirmation {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId])
 }
 
 model Product {
@@ -43,7 +109,7 @@ model Product {
 
 model UserFavorite {
   id        String   @id @default(uuid())
-  user      User     @relation("UserFavoriteToUser", fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
   userId    String
   product   Product  @relation("UserFavoriteToProduct", fields: [productId], references: [id])
   productId String
@@ -54,7 +120,7 @@ model UserFavorite {
 model CartProduct {
   id        String   @id @default(uuid())
   quantity  Int      @default(1)
-  user      User     @relation("CartProductToUser", fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
   userId    String
   product   Product  @relation("CartProductToProduct", fields: [productId], references: [id])
   productId String

@@ -1,62 +1,51 @@
 import NextAuth from "next-auth";
-import GitHub from "next-auth/providers/github";
-import type { NextAuthConfig } from "next-auth";
-import { PrismaClient } from "@prisma/client";
-import CredentialsProvider from "next-auth/providers/credentials";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import db from "@/lib/db";
+import authConfig from "@/auth.config";
 
-const prisma = new PrismaClient();
-
-export const config = {
-  debug: false,
+export const {
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
+  update,
+} = NextAuth({
   theme: {
     logo: "/assets/logo/logo.png",
   },
   pages: {
-    signIn: "/login",
-    error: "/error",
-    verifyRequest: "/verify-request",
-    newUser: undefined,
+    signIn: "/auth/login",
+    error: "/auth/error",
   },
-  providers: [
-    GitHub({
-      profile(profile) {
-        return {
-          id: profile.id.toString(),
-          name: profile.name,
-          username: profile.login,
-          email: profile.email,
-          image: profile.avatar_url,
-          provider: profile.provider,
-        };
-      },
-    }),
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials, req) {
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
-
-        if (user) {
-          return user;
-        } else {
-          return null;
-        }
-      },
-    }),
-  ],
+  events: {
+    async linkAccount({ user }) {
+      await db.user.update({
+        where: { id: user.id },
+        data: { emailVerified: new Date() },
+      });
+    },
+  },
   callbacks: {
-    authorized({ request, auth }) {
-      const { pathname } = request.nextUrl;
-      if (pathname === "/middleware-example") return !!auth;
+    async signIn({ user, account }: any) {
+      // Allow OAuth without email verification
+      if (account?.provider !== "credentials") return true;
+
+      // Creden
       return true;
     },
-    async redirect({ url, baseUrl }) {
-      return baseUrl;
+    async session({ token, session }) {
+      if (token.sub && session.user) {
+        session.user.id = token.sub;
+      }
+      if (session.user) {
+        session.user.name = token.name;
+        session.user.email = token.email;
+      }
+
+      return session;
     },
   },
-} satisfies NextAuthConfig;
-
-export const { handlers, auth, signIn, signOut } = NextAuth(config);
+  session: { strategy: "jwt" },
+  adapter: PrismaAdapter(db),
+  ...authConfig,
+});
