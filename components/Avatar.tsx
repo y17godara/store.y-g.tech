@@ -19,7 +19,7 @@ import Link from "next/link";
 import { MdLogin, MdLogout, MdSettings, MdFavorite } from "react-icons/md";
 import { IoMdCart } from "react-icons/io";
 import { logout } from "@/actions/logout";
-import { ThemeToggle } from "./ThemeToggle";
+import { ThemeSelect } from "./ThemeSelect";
 
 function AvatarMenu() {
   const user = useCurrentUser();
@@ -46,11 +46,11 @@ function AvatarMenu() {
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent className='bg-primary text-primary'>
-          <DropdownMenuLabel>{user?.name || "Guest"}</DropdownMenuLabel>
+          <DropdownMenuLabel>{user?.name || "Guest Account"}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className='hover:bg-tertiary'>
-            {/* Theme */}
-          </DropdownMenuItem>
+          <DropdownMenuLabel className='hove px-0'>
+            <ThemeSelect />
+          </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem className='hover:bg-tertiary'>
             <Link href='#' className='flex flex-row items-center gap-1'>
