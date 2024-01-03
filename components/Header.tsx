@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Link } from "./ui";
 import Navbar from "./Navbar";
 import { Suspense } from "react";
-import { Avatar } from "./ui/avatar";
+import Avatar from "./Avatar";
 
 export default async function Header() {
   return (
@@ -39,13 +39,8 @@ export default async function Header() {
             </Suspense>
 
             {/* Login Register button */}
-            <div
-              className='
-              hidden items-center sm:flex sm:space-x-2 
-            '
-            >
-              <Avatar />
-            </div>
+
+            <Avatar />
           </nav>
         </header>
       </Suspense>
