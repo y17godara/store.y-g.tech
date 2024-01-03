@@ -5,6 +5,7 @@ import { Link } from "./ui";
 import Navbar from "./Navbar";
 import { Suspense } from "react";
 import Avatar from "./Avatar";
+import { CartSlider } from "./CartSlider";
 
 export default async function Header() {
   return (
@@ -34,13 +35,22 @@ export default async function Header() {
               </div>
             </Link>
 
-            <Suspense>
-              <Navbar />
-            </Suspense>
+            <div className='flex flex-row items-center justify-center gap-x-3'>
+              <Suspense>
+                <Navbar />
+              </Suspense>
+              <div className='item-center flex flex-row gap-x-3'>
+                <div className='relative flex items-center'>
+                  <CartSlider />
+                </div>
+                <div className='relative flex items-center'>
+                  {/* <CartSlider /> */}
+                  <Avatar />
+                </div>
+              </div>
+            </div>
 
             {/* Login Register button */}
-
-            <Avatar />
           </nav>
         </header>
       </Suspense>

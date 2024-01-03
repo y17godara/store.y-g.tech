@@ -16,7 +16,8 @@ import {
 } from "@/components/shadcn/ui/dropdown-menu";
 import { useCurrentUser } from "@/hooks/currentUser";
 import Link from "next/link";
-import { MdLogin, MdLogout } from "react-icons/md";
+import { MdLogin, MdLogout, MdSettings, MdFavorite } from "react-icons/md";
+import { IoMdCart } from "react-icons/io";
 import { logout } from "@/actions/logout";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -48,10 +49,29 @@ function AvatarMenu() {
           <DropdownMenuLabel>{user?.name || "Guest"}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem className='hover:bg-tertiary'>
-            <Link href='#'>Orders</Link>
+            {/* Theme */}
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem className='hover:bg-tertiary'>
+            <Link href='#' className='flex flex-row items-center gap-1'>
+              <IoMdCart className='mr-2' />
+              Orders
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem className='hover:bg-tertiary'>
-            <Link href='/user/settings'>Settings</Link>
+            <Link href='#' className='flex flex-row items-center gap-1'>
+              <MdFavorite className='mr-2' />
+              Wishlist
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem className='hover:bg-tertiary'>
+            <Link
+              href='/user/settings'
+              className='flex flex-row items-center gap-1'
+            >
+              <MdSettings className='mr-2' />
+              Settings
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem className='hover:bg-tertiary'>
@@ -74,10 +94,6 @@ function AvatarMenu() {
                 </Link>
               </>
             )}
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem className='hover:bg-tertiary'>
-            {/* Theme */}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

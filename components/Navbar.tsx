@@ -1,14 +1,10 @@
 "use client";
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { cn } from "@/lib/utils";
-import { ThemeToggle } from "./ThemeToggle";
-import Logo from "@/public/assets/logo/favicon.png";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Transition, Menu } from "@headlessui/react";
 import { TbDotsVertical } from "react-icons/tb";
-import { NavLink, Link } from "./ui";
-import { CartSlider } from "./CartSlider";
+import { NavLink } from "./ui";
 
 type navLinksProps = {
   href: string;
@@ -35,11 +31,11 @@ const Navbar = () => {
 
   return (
     <>
-      <div className='item-center flex flex-row gap-x-2'>
+      <div className='item-center flex flex-row'>
         {/* Desktop Nav */}
         <ul className='relative hidden h-8 items-center justify-center gap-1 sm:flex'>
-          {navLinks.map((link: navLinksProps, index: number) => (
-            <li key={index}>
+          {navLinks.map((link: navLinksProps) => (
+            <li key={link.label}>
               <NavLink
                 className='text-primary hover:bg-tertiary'
                 href={link.href}
@@ -49,12 +45,6 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-
-        <div className='item-center flex flex-row gap-x-2'>
-          <div className='relative flex items-center'>
-            <CartSlider />
-          </div>
-        </div>
 
         {/* Small Nav Menu */}
         <div className='flex flex-row items-center justify-normal gap-x-2 sm:hidden'>
