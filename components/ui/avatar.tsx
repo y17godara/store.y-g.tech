@@ -1,6 +1,5 @@
 import React from "react";
 import { SignInButton } from "../SignInButton";
-import { ThemeToggle } from "../ThemeToggle";
 import Image from "next/image";
 import { auth } from "@/auth";
 
@@ -8,10 +7,6 @@ export const Avatar = async () => {
   const session: any = await auth();
   return (
     <>
-      <div className='relative '>
-        <ThemeToggle />
-      </div>
-
       <div className='flex flex-row items-center gap-2'>
         <div className='relative h-8 w-8 rounded-full bg-primary'>
           {session ? (
