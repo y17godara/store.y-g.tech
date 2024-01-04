@@ -11,7 +11,14 @@ export default async function Page() {
     <>
       <Suspense>
         <div className='divide-y-secondary flex flex-col gap-16 md:gap-24 '>
-          <div className='flex animate-in flex-col gap-8'>User Settings</div>
+          <div className='flex animate-in flex-col gap-8'>
+            <h2 className='text-3xl font-bold text-primary'>
+              Profile Settings
+            </h2>
+            <p className='text-lg text-secondary'>
+              Change your profile settings and information.
+            </p>
+          </div>
 
           <div
             className='flex animate-in flex-col gap-8'
