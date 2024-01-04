@@ -6,22 +6,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition, useState } from "react";
 import { useSession } from "next-auth/react";
 import { SettingsSchema } from "@/schemas";
-import { Card, CardHeader, CardContent } from "@/components/shadcn/ui/card";
+import { CardHeader, CardContent } from "@/components/shadcn/ui/card";
 import { Button } from "@/components/shadcn/ui/button";
 import { settings } from "@/actions/settings";
+import Link from "next/link";
 import {
   Form,
   FormField,
   FormControl,
   FormItem,
   FormLabel,
-  FormDescription,
   FormMessage,
 } from "@/components/shadcn/ui/form";
 import { Input } from "@/components/shadcn/ui/input";
 import { useCurrentUser } from "@/hooks/currentUser";
 import { FormError } from "@/components/ui/form-error";
 import { FormSuccess } from "@/components/ui/form-success";
+import { UserAvatar } from "@/components/ui/avatar";
 
 export const ProfileSettings = () => {
   const user: any = useCurrentUser();
@@ -60,9 +61,52 @@ export const ProfileSettings = () => {
   };
 
   return (
-    <Card className='w-[600px] bg-primary text-primary'>
+    <>
       <CardHeader>
-        <p className='text-center text-2xl font-semibold'>⚙️ Settings</p>
+        <div className='relative flex h-full w-full flex-col gap-x-6 gap-y-6 sm:flex-row md:gap-x-10'>
+          <UserAvatar
+            name={user.name}
+            image={user.image}
+            className='h-32 w-32'
+          />
+          <div className='flex flex-1 flex-col justify-center gap-1'>
+            <h6 className='text-wrap text-base font-semibold text-secondary '>
+              _id: <span className='text-base font-normal '> {user.id}</span>
+            </h6>
+            <h2 className='text-wrap text-base font-semibold text-secondary '>
+              Name: <span className='text-base font-normal '> {user.name}</span>
+            </h2>
+            <p className='text-wrap text-base font-semibold text-secondary '>
+              Email:{" "}
+              <span className='text-base font-normal '> {user.email}</span>
+            </p>
+            <p className='text-wrap text-base font-semibold text-secondary '>
+              Avatar:{" "}
+              {user.image ? (
+                <>
+                  <Link
+                    href={user.image}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='text-base font-normal underline hover:text-brand'
+                  >
+                    {" "}
+                    {user.image}
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <span className='text-base font-normal '>
+                    :C no Avatar found!
+                  </span>
+                </>
+              )}
+            </p>
+            <p className='text-base font-semibold text-secondary' text-wrap>
+              Role: <span className='text-base font-normal '>{user.role} </span>
+            </p>
+          </div>
+        </div>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -165,11 +209,11 @@ export const ProfileSettings = () => {
             <FormError message={error} />
             <FormSuccess message={success} />
             <Button disabled={isPending} type='submit'>
-              Save
+              Save Changes
             </Button>
           </form>
         </Form>
       </CardContent>
-    </Card>
+    </>
   );
 };

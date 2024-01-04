@@ -2,11 +2,6 @@
 
 import React from "react";
 import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/shadcn/ui/avatar";
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -20,9 +15,10 @@ import { MdLogin, MdLogout, MdSettings, MdFavorite } from "react-icons/md";
 import { IoMdCart } from "react-icons/io";
 import { logout } from "@/actions/logout";
 import { ThemeSelect } from "./ThemeSelect";
+import { UserAvatar } from "./ui/avatar";
 
 function AvatarMenu() {
-  const user = useCurrentUser();
+  const user: any = useCurrentUser();
 
   const onClick = () => {
     logout();
@@ -32,18 +28,7 @@ function AvatarMenu() {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <Avatar>
-            <AvatarImage src={user?.image!} />
-            {user?.name ? (
-              <>
-                <AvatarFallback>{user?.name[0].toUpperCase()}</AvatarFallback>
-              </>
-            ) : (
-              <>
-                <AvatarFallback>G</AvatarFallback>
-              </>
-            )}
-          </Avatar>
+          <UserAvatar name={user.name} image={user.image} />
         </DropdownMenuTrigger>
         <DropdownMenuContent className='bg-primary text-primary'>
           <DropdownMenuLabel>{user?.name || "Guest Account"}</DropdownMenuLabel>

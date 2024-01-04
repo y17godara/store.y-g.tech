@@ -27,7 +27,6 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
   if (user.isOAuth) {
     values.email = "";
     values.password = "";
-    values.newPassword = "";
     values.image = "";
   }
 
