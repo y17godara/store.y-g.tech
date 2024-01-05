@@ -65,8 +65,8 @@ export const ProfileSettings = () => {
       <CardHeader>
         <div className='relative flex h-full w-full flex-col gap-x-6 gap-y-6 sm:flex-row md:gap-x-10'>
           <UserAvatar
-            name={user.name}
-            image={user.image}
+            name={user?.name}
+            image={user?.image}
             className='h-32 w-32'
           />
           <div className='flex flex-1 flex-col justify-center gap-1'>

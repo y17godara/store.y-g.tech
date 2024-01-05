@@ -28,7 +28,7 @@ function AvatarMenu() {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <UserAvatar name={user.name} image={user.image} />
+          <UserAvatar name={user?.name} image={user?.image} />
         </DropdownMenuTrigger>
         <DropdownMenuContent className='bg-primary text-primary'>
           <DropdownMenuLabel>{user?.name || "Guest Account"}</DropdownMenuLabel>
