@@ -39,17 +39,17 @@ export default function RegisterCard() {
     setSuccess("");
     setError("");
 
-    console.log("values", values); // debug
+    // console.log("values", values); // debug
     try {
       startTransition(() => {
         register(values).then((data: any) => {
-          console.log("data", data); // debug
+          // console.log("data", data); // debug
           setError(data.error);
           setSuccess(data.success);
         });
       });
     } catch (err: any) {
-      console.log("err", err); // debug
+      // console.log("err", err); // debug
       setError(err.message);
     }
   };

@@ -134,7 +134,7 @@ export default function LoginCard() {
             <FormError message={error} />
             <FormSuccess message={success} />
             <Button disabled={isPending} type='submit' className='w-full'>
-              Create an account
+              Login
             </Button>
           </form>
         </Form>
