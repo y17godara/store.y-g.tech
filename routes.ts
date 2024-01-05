@@ -21,4 +21,5 @@ export const authRoutes = [
   "/auth/new-password",
 ];
 
+export const apiAuthPrefix = "/api/auth";
 export const apiAuthRoutes = ["/api/auth"];

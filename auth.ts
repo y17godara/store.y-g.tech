@@ -1,10 +1,10 @@
-import NextAuth from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import db from "@/lib/db";
 import authConfig from "@/auth.config";
-import { UserRole } from "@prisma/client";
 import { getUserById } from "@/data/user";
 import { getAccountByUserId } from "./data/account";
+import NextAuth, { type DefaultSession } from "next-auth";
+import { UserRole } from "@prisma/client";
 
 export const {
   handlers: { GET, POST },
@@ -40,19 +40,23 @@ export const {
 
       return true;
     },
-    async session({ token, session }: any) {
+    async session({ token, session }: { token: any; session: any }) {
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
 
       if (token.role && session.user) {
-        session.user.role = token.role as UserRole;
+        session.user.role = token.role;
+      }
+
+      if (session.user) {
+        session.user.isTwoFactorEnabled = token.isTwoFactorEnabled;
       }
 
       if (session.user) {
         session.user.name = token.name;
         session.user.email = token.email;
-        session.user.isOAuth = token.isOAuth as boolean;
+        session.user.isOAuth = token.isOAuth;
       }
 
       return session;
