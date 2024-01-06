@@ -1,6 +1,7 @@
 "use client";
 
 import * as z from "zod";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition, useState } from "react";
@@ -31,12 +32,13 @@ export const ProfileSettings = () => {
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
+  const [pswdVisible, setPswdVisible] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof SettingsSchema>>({
     resolver: zodResolver(SettingsSchema),
     defaultValues: {
-      password: undefined,
-      newPassword: undefined,
+      password: "" || undefined,
+      newPassword: "" || undefined,
       name: user?.name || undefined,
       email: user?.email || undefined,
       image: user?.image || undefined,
@@ -58,6 +60,10 @@ export const ProfileSettings = () => {
         })
         .catch(() => setError("Something went wrong!"));
     });
+  };
+
+  const togglePswdVisibility = () => {
+    setPswdVisible(!pswdVisible);
   };
 
   return (
@@ -135,7 +141,7 @@ export const ProfileSettings = () => {
                 name='image'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Avatar URL</FormLabel>
+                    <FormLabel>Avatar</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -174,12 +180,22 @@ export const ProfileSettings = () => {
                       <FormItem>
                         <FormLabel>Password</FormLabel>
                         <FormControl>
-                          <Input
-                            {...field}
-                            placeholder='******'
-                            type='password'
-                            disabled={isPending}
-                          />
+                          <>
+                            <div className='relative flex w-full'>
+                              <Input
+                                {...field}
+                                placeholder='******'
+                                type={pswdVisible ? "text" : "password"}
+                                disabled={isPending}
+                              />
+                              <span
+                                className='absolute right-2.5 top-3 cursor-pointer text-secondary'
+                                onClick={() => setPswdVisible(!pswdVisible)}
+                              >
+                                {pswdVisible ? <FaEyeSlash /> : <FaEye />}
+                              </span>
+                            </div>
+                          </>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -192,12 +208,22 @@ export const ProfileSettings = () => {
                       <FormItem>
                         <FormLabel>New Password</FormLabel>
                         <FormControl>
-                          <Input
-                            {...field}
-                            placeholder='******'
-                            type='password'
-                            disabled={isPending}
-                          />
+                          <>
+                            <div className='relative flex w-full'>
+                              <Input
+                                {...field}
+                                placeholder='******'
+                                type={pswdVisible ? "text" : "password"}
+                                disabled={isPending}
+                              />
+                              <span
+                                className='absolute right-2.5 top-3 cursor-pointer text-secondary'
+                                onClick={() => setPswdVisible(!pswdVisible)}
+                              >
+                                {pswdVisible ? <FaEyeSlash /> : <FaEye />}
+                              </span>
+                            </div>
+                          </>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -208,9 +234,18 @@ export const ProfileSettings = () => {
             </div>
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button disabled={isPending} type='submit'>
-              Save Changes
-            </Button>
+            <div className='flex flex-col justify-end gap-x-2 gap-y-4 sm:flex-row'>
+              <Button disabled={isPending} type='submit'>
+                Save Changes
+              </Button>
+              <Button
+                type='button'
+                disabled={isPending}
+                onClick={() => form.reset()}
+              >
+                Reset
+              </Button>
+            </div>
           </form>
         </Form>
       </CardContent>
