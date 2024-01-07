@@ -22,6 +22,11 @@ export const RegisterSchema = z.object({
   }),
 });
 
+interface SettingType {
+  password: string;
+  newPassword?: string;
+}
+
 export const SettingsSchema = z.object({
   name: z.optional(
     z.string().min(1, {
@@ -33,14 +38,41 @@ export const SettingsSchema = z.object({
       message: "Email is required",
     })
   ),
+  isTwoFactorEnabled: z.optional(z.boolean()),
   image: z.optional(z.string().url({})),
   password: z.string().min(8, {
     message: "Password must be 8 characters long",
   }),
-  newPassword: z.optional(
-    z.string().min(8, {
-      message: "Password must be 8 characters long",
-    })
-  ),
-  code: z.optional(z.string()),
+  newPassword: z
+    .optional(
+      z.string().min(8, {
+        message: "Password must be 8 characters long",
+      })
+    )
+    .refine(
+      (data: any) => {
+        if (data.password && !data.newPassword) {
+          return false;
+        }
+
+        return true;
+      },
+      {
+        message: "New password is required!",
+        path: ["newPassword"],
+      }
+    )
+    .refine(
+      (data: any) => {
+        if (data.newPassword && !data.password) {
+          return false;
+        }
+
+        return true;
+      },
+      {
+        message: "Password is required!",
+        path: ["password"],
+      }
+    ),
 });
