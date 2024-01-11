@@ -7,22 +7,30 @@ import { TbDotsVertical } from "react-icons/tb";
 import { NavLink } from "./ui";
 
 type navLinksProps = {
+  id: number;
   href: string;
   label: string;
+  badge?: string;
 };
 
 const navLinks: navLinksProps[] = [
   {
+    id: 1,
     href: "/",
     label: "Explore",
+    badge: "",
   },
   {
+    id: 2,
+    href: "/deals",
+    label: "Deals",
+    badge: "30% off",
+  },
+  {
+    id: 3,
     href: "/products",
     label: "Products",
-  },
-  {
-    href: "/about",
-    label: "About",
+    badge: "",
   },
 ];
 
@@ -33,15 +41,20 @@ const Navbar = () => {
     <>
       <div className='item-center flex flex-row'>
         {/* Desktop Nav */}
-        <ul className='relative hidden h-8 items-center justify-center gap-1 sm:flex'>
+        <ul className='relative hidden h-8 items-center justify-center gap-3 sm:flex'>
           {navLinks.map((link: navLinksProps) => (
-            <li key={link.label}>
+            <li key={link.label} className='relative'>
               <NavLink
                 className='text-primary hover:bg-tertiary'
                 href={link.href}
               >
                 {link.label}
               </NavLink>
+              {link.badge && (
+                <span className='absolute right-2 top-0 inline-flex -translate-y-1/2 translate-x-1/2 transform items-center justify-center rounded-full bg-[var(--brand)] p-1 px-2 text-[8px] font-bold leading-none text-white'>
+                  {link.badge}
+                </span>
+              )}
             </li>
           ))}
         </ul>
@@ -74,13 +87,18 @@ const Navbar = () => {
                               <NavLink
                                 href={link.href}
                                 className={cn(
-                                  "rounded-md px-4 py-2 text-sm transition-colors hover:bg-tertiary hover:text-primary",
+                                  "relative rounded-md px-4 py-2 text-sm transition-colors hover:bg-tertiary hover:text-primary",
                                   pathname === link.href
                                     ? "bg-secondary font-medium"
                                     : "font-normal"
                                 )}
                               >
                                 {link.label}
+                                {link.badge && (
+                                  <span className='absolute right-0  inline-flex items-center justify-center rounded-full bg-[var(--brand)] p-1 px-2 text-[10px] font-bold leading-none text-white'>
+                                    {link.badge}
+                                  </span>
+                                )}
                               </NavLink>
                             )}
                           </Menu.Item>
