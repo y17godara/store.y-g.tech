@@ -1,50 +1,119 @@
 "use client";
-import React from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "./shadcn/ui/button";
+
+import * as z from "zod";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import SearchDialog from "./SearchDialog";
+import { FaSearch } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/shadcn/ui/form";
+
+import { cn } from "@/lib/utils";
+import { SearchSchema } from "@/schemas";
+import { FormError } from "@/components/ui/form-error";
+import { FormSuccess } from "@/components/ui/form-success";
 
 function SearchBar() {
-  const [open, setOpen] = React.useState<boolean>(false);
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
+  const [isPending, startTransition] = useTransition();
 
-  React.useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      if ((e.key === "k" && (e.metaKey || e.ctrlKey)) || e.key === "/") {
-        if (
-          (e.target instanceof HTMLElement && e.target.isContentEditable) ||
-          e.target instanceof HTMLInputElement ||
-          e.target instanceof HTMLTextAreaElement ||
-          e.target instanceof HTMLSelectElement
-        ) {
-          return;
-        }
+  const router = useRouter();
 
-        e.preventDefault();
-        setOpen((open) => !open);
-      }
-    };
+  const form = useForm<z.infer<typeof SearchSchema>>({
+    resolver: zodResolver(SearchSchema),
+    defaultValues: {
+      query: "",
+    },
+  });
 
-    document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
-  }, []);
+  const onsubmit = async (values: z.infer<typeof SearchSchema>) => {
+    console.log("values", values); // debug
+    try {
+      startTransition(() => {
+        router.push(`/search?q=${values.query}`);
+      });
+    } catch (err: any) {
+      // console.log("err", err); // debug
+      setError(err.message);
+    }
+  };
 
   return (
     <>
-      <Button
-        variant='main'
-        className={cn(
-          "relative h-8 w-full justify-start rounded-[0.5rem] border border-secondary bg-primary text-sm font-normal shadow-none sm:pr-12 md:w-40 lg:w-64"
-        )}
-        onClick={() => setOpen(true)}
-      >
-        <span className='hidden lg:inline-flex'>Quick Search...</span>
-        <span className='inline-flex lg:hidden'>Search...</span>
-        <kbd className='font-mono pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border border-secondary bg-primary px-1.5 text-[10px] font-medium opacity-100 sm:flex'>
-          <span className='text-xs'>⌘</span>K
-        </kbd>
-      </Button>
-      <SearchDialog open={open} setOpen={setOpen} />
+      <Form {...form}>
+        {/* <form
+          onSubmit={form.handleSubmit(onsubmit)}
+          className={cn(
+            "relative h-8 w-full justify-start rounded-[0.5rem] border border-secondary bg-primary text-sm font-normal shadow-none sm:pr-12 md:w-40 lg:w-64"
+          )}
+        >
+          <input
+            name='query'
+            disabled={isPending}
+            autoComplete='off'
+            type='text'
+            placeholder='Search...'
+            className='placeholder-primary relative inset-0 h-full w-full rounded-[0.5rem] border-none bg-transparent pl-2 pr-2 text-sm font-normal text-primary focus:bg-primary focus:outline-none focus:ring-0 sm:pr-9'
+          />
+          <button
+            className='font-mono absolute right-[0.1rem] top-[0.3rem] flex h-5 select-none items-center gap-1 rounded border border-secondary bg-primary px-1.5 text-[10px] font-medium opacity-100'
+            disabled={isPending}
+            type='submit'
+          >
+            <span className='hidden text-xs sm:flex'>Search ⏎</span>
+            <span className='text-xs sm:hidden'>
+              <FaSearch />
+            </span>
+          </button>
+          <FormError message={error} />
+          <FormSuccess message={success} />
+        </form> */}
+        <form onSubmit={form.handleSubmit(onsubmit)} className='flex flex-col'>
+          <div
+            className={cn(
+              "relative h-8 w-full items-center justify-center rounded-[0.5rem] border border-secondary bg-primary text-center text-sm font-normal shadow-none sm:pr-12 md:w-40 lg:w-64"
+            )}
+          >
+            <FormField
+              control={form.control}
+              name={"query"}
+              render={({ field }) => (
+                <FormItem className='h-full w-full'>
+                  <FormControl>
+                    <input
+                      autoComplete='off'
+                      {...field}
+                      disabled={isPending}
+                      type='text'
+                      className='placeholder-primary relative inset-0 h-full w-full items-center rounded-[0.5rem] border-none bg-transparent pl-2 pr-2 text-sm font-normal text-primary focus:bg-primary focus:outline-none focus:ring-0 sm:pr-9'
+                    />
+                  </FormControl>
+                  <FormMessage className='text-xs text-secondary' />
+                </FormItem>
+              )}
+            />
+            <button
+              disabled={isPending}
+              type='submit'
+              className='font-mono absolute right-[0.1rem] top-[0.3rem] flex h-5 select-none items-center gap-1 rounded border border-secondary bg-primary px-1.5 text-[10px] font-medium opacity-100'
+            >
+              <span className='hidden text-xs sm:flex'>Search ⏎</span>
+              <span className='text-xs sm:hidden'>
+                <FaSearch />
+              </span>
+            </button>
+          </div>
+          <FormError message={error} />
+          <FormSuccess message={success} />
+        </form>
+      </Form>
     </>
   );
 }
