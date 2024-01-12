@@ -1,7 +1,6 @@
 import prisma from "@/lib/db";
 import { type Product } from "@/types/index";
 
-// Dummy Products
 const products: Product[] = [
   {
     id: "1",
@@ -12,7 +11,16 @@ const products: Product[] = [
     price: 10,
     ratings: 4,
     discount: 30,
-    image: "https://i.imgur.com/OeuV5Lf.png",
+    featuredImage: "https://i.imgur.com/OeuV5Lf.png",
+    images: [
+      {
+        id: "1",
+        imageUrl: "https://i.imgur.com/OeuV5Lf.png",
+        productId: "8364256-9295-d1d837c09aea",
+        createdAt: "2023-12-26T02:35:43.322Z",
+        updatedAt: "2023-12-26T02:39:29.277Z",
+      },
+    ],
     category: "y17godara",
     company: "y17godara",
     addedBy: "y17godara",
@@ -28,7 +36,16 @@ const products: Product[] = [
     price: 10,
     ratings: 5,
     discount: 10,
-    image: "https://i.imgur.com/OeuV5Lf.png",
+    featuredImage: "https://i.imgur.com/OeuV5Lf.png",
+    images: [
+      {
+        id: "1",
+        imageUrl: "https://i.imgur.com/OeuV5Lf.png",
+        productId: "8364256-9295-d1d837c09aea",
+        createdAt: "2023-12-26T02:35:43.322Z",
+        updatedAt: "2023-12-26T02:39:29.277Z",
+      },
+    ],
     category: "unknown",
     company: "y17godara",
     addedBy: "unknown",
@@ -44,7 +61,16 @@ const products: Product[] = [
     price: 10,
     ratings: 5,
     discount: 10,
-    image: "https://i.imgur.com/OeuV5Lf.png",
+    featuredImage: "https://i.imgur.com/OeuV5Lf.png",
+    images: [
+      {
+        id: "1",
+        imageUrl: "https://i.imgur.com/OeuV5Lf.png",
+        productId: "8364256-9295-d1d837c09aea",
+        createdAt: "2023-12-26T02:35:43.322Z",
+        updatedAt: "2023-12-26T02:39:29.277Z",
+      },
+    ],
     category: "unknown",
     company: "y17godara",
     addedBy: "unknown",
@@ -59,7 +85,16 @@ const products: Product[] = [
     price: 15,
     ratings: 4,
     discount: 20,
-    image: "https://i.imgur.com/LjEZK9i.jpeg",
+    featuredImage: "https://i.imgur.com/OeuV5Lf.png",
+    images: [
+      {
+        id: "1",
+        imageUrl: "https://i.imgur.com/OeuV5Lf.png",
+        productId: "8364256-9295-d1d837c09aea",
+        createdAt: "2023-12-26T02:35:43.322Z",
+        updatedAt: "2023-12-26T02:39:29.277Z",
+      },
+    ],
     category: "anotherCategory",
     company: "y17godara",
     addedBy: "unknown",
@@ -74,7 +109,16 @@ const products: Product[] = [
     price: 25,
     ratings: 5,
     discount: 15,
-    image: "https://i.imgur.com/LjEZK9i.jpeg",
+    featuredImage: "https://i.imgur.com/OeuV5Lf.png",
+    images: [
+      {
+        id: "1",
+        imageUrl: "https://i.imgur.com/OeuV5Lf.png",
+        productId: "8364256-9295-d1d837c09aea",
+        createdAt: "2023-12-26T02:35:43.322Z",
+        updatedAt: "2023-12-26T02:39:29.277Z",
+      },
+    ],
     category: "category5",
     company: "y17godara",
     addedBy: "unknown",
@@ -89,7 +133,16 @@ const products: Product[] = [
     price: 40,
     ratings: 3,
     discount: 10,
-    image: "https://i.imgur.com/LjEZK9i.jpeg",
+    featuredImage: "https://i.imgur.com/OeuV5Lf.png",
+    images: [
+      {
+        id: "1",
+        imageUrl: "https://i.imgur.com/OeuV5Lf.png",
+        productId: "8364256-9295-d1d837c09aea",
+        createdAt: "2023-12-26T02:35:43.322Z",
+        updatedAt: "2023-12-26T02:39:29.277Z",
+      },
+    ],
     category: "category14",
     company: "y17godara",
     addedBy: "unknown",
@@ -103,16 +156,17 @@ export async function GET() {
   if (process.env.NODE_ENV === "development") {
     console.log("get all products.. ... ... ...");
     try {
+      console.log("Connecting to database.. ... ... ...");
       // Add Dummy Products to database as seed
       const seedProducts = await prisma.product.createMany({
         data: products,
-        skipDuplicates: true,
       });
 
       console.log("seedProducts : ", seedProducts);
 
       return Response.json({ seedProducts }, { status: 200 });
     } catch (error: any) {
+      console.log("error : ", error);
       // If something went wrong
       return Response.json(
         { message: "Something went Wrong, Try again Later" },

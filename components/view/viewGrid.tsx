@@ -21,7 +21,7 @@ export function Grid({
   price,
   ratings,
   discount,
-  image,
+  featuredImage,
   category,
   company,
   addedBy,
@@ -40,7 +40,7 @@ export function Grid({
         price,
         ratings,
         discount,
-        image,
+        featuredImage,
         category,
         company,
         addedBy,
@@ -56,7 +56,7 @@ export function Grid({
       <li className='flex min-h-32 flex-col gap-4 rounded-md border border-secondary px-2 py-4'>
         <div className='relative h-48 w-full overflow-hidden rounded-md'>
           <Image
-            src={image}
+            src={featuredImage}
             alt={name}
             width={100}
             height={100}

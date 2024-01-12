@@ -33,7 +33,7 @@ export function Cart({ product, key }: { product: any; key: any }) {
     addedBy,
     discount,
     productId,
-    image,
+    featuredImage,
   } = product;
   const dispatch = useDispatch();
 
@@ -47,7 +47,7 @@ export function Cart({ product, key }: { product: any; key: any }) {
         price,
         ratings,
         discount,
-        image,
+        featuredImage,
         category,
         company,
         addedBy,
@@ -66,7 +66,7 @@ export function Cart({ product, key }: { product: any; key: any }) {
       >
         <div className='relative h-20 w-auto overflow-hidden rounded-md sm:h-32 sm:w-1/2'>
           <Image
-            src={image}
+            src={featuredImage}
             alt={name}
             width={100}
             height={100}

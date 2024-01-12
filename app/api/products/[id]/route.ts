@@ -17,22 +17,7 @@ export const GET = async (req: any) => {
       return Response.json({ message: "Product not found" }, { status: 404 });
     }
 
-    // If product found
-    const reqProduct = {
-      productId: product.productId,
-      name: product.name,
-      description: product.description,
-      price: product.price,
-      ratings: product.ratings,
-      discount: product.discount,
-      image: product.image,
-      category: product.category,
-      company: product.company,
-      addedBy: product.addedBy,
-      createdAt: product.createdAt,
-      updatedAt: product.updatedAt,
-    };
-    return Response.json({ product: reqProduct }, { status: 200 });
+    return Response.json({ product: product }, { status: 200 });
   } catch (error: any) {
     // If something went wrong
     return Response.json(
