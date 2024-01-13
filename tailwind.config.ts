@@ -56,6 +56,9 @@ const config: Config = {
           "0%": { transform: "translateY(-18px)", opacity: "0" },
           "100%": { transform: "translateY(0px)", opacity: "1" },
         },
+        shimer: {
+          "100%": { transform: "translateX(100%)" },
+        },
         fadeIn: {
           from: { opacity: "0" },
           to: { opacity: "1" },

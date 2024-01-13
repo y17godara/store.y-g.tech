@@ -12,24 +12,7 @@ export const GET = auth(async (req) => {
       return Response.json({ message: "No products found" }, { status: 404 });
     }
 
-    const reqProducts = products.map((product) => {
-      return {
-        productId: product.productId,
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        ratings: product.ratings,
-        discount: product.discount,
-        image: product.image,
-        category: product.category,
-        company: product.company,
-        addedBy: product.addedBy,
-        createdAt: product.createdAt,
-        updatedAt: product.updatedAt,
-      };
-    });
-
-    return Response.json({ products: reqProducts }, { status: 200 });
+    return Response.json({ products: products }, { status: 200 });
   } catch (error: any) {
     // If something went wrong
     return Response.json(

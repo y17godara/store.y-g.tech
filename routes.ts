@@ -12,6 +12,12 @@ export const DEFAULT_LOGIN_REDIRECT = "/user/settings";
  */
 
 export const publicRoutes = ["/"];
+export const publicAuthRoutes = [
+  "/auth/login",
+  "/auth/register",
+  "/auth/new-verification",
+  "/auth/error",
+];
 
 export const authRoutes = [
   "/auth/register",
@@ -23,3 +29,5 @@ export const authRoutes = [
 
 export const apiAuthPrefix = "/api/auth";
 export const apiAuthRoutes = ["/api/auth"];
+
+export const publicApiRoutes = ["/api/seed/db/products"];

@@ -9,10 +9,19 @@ export type Product = {
   price: number;
   ratings: number;
   discount: number;
-  image: string;
+  featuredImage: string;
+  images: Images[];
   category: string;
   company: string;
   addedBy: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type Images = {
+  id: string;
+  imageUrl: string;
+  productId: string;
   createdAt: string;
   updatedAt: string;
 };

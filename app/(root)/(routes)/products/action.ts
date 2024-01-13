@@ -1,6 +1,58 @@
 "use server";
 
 import prisma from "@/lib/db";
+import { Product } from "@/types";
+
+// {
+//   id: "1",
+//   productId: "8364256-9295-d1d837c09aea",
+//   name: "NextJs 14 - Template",
+//   description:
+//     "This is Template for NextJs 14 Personal Portfolio Website : Styled Using TailwindCss and Headless UI on Top of Shadcn Ui Library and Used Mongodb and Prisma as Database.",
+//   price: 10,
+//   ratings: 4,
+//   discount: 30,
+//   featuredImage: "https://i.imgur.com/OeuV5Lf.png",
+//   images: [
+//     {
+//       id: "1",
+//       imageUrl: "https://i.imgur.com/OeuV5Lf.png",
+//       productId: "8364256-9295-d1d837c09aea",
+//       createdAt: "2023-12-26T02:35:43.322Z",
+//       updatedAt: "2023-12-26T02:39:29.277Z",
+//     },
+//   ],
+//   category: "y17godara",
+//   company: "y17godara",
+//   addedBy: "y17godara",
+//   createdAt: "2023-12-26T02:35:43.322Z",
+//   updatedAt: "2023-12-26T02:39:29.277Z",
+// },
+// {
+//   id: "2",
+//   productId: "38cd8bfe-eec7-4ba7-9bec-",
+//   name: "NextJs 14 - Template",
+//   description:
+//     "This is Template for NextJs 14 Personal Portfolio Website : Styled Using TailwindCss and Headless UI on Top of Shadcn Ui Library and Used Mongodb and Prisma as Database.",
+//   price: 10,
+//   ratings: 5,
+//   discount: 10,
+//   featuredImage: "https://i.imgur.com/OeuV5Lf.png",
+//   images: [
+//     {
+//       id: "1",
+//       imageUrl: "https://i.imgur.com/OeuV5Lf.png",
+//       productId: "8364256-9295-d1d837c09aea",
+//       createdAt: "2023-12-26T02:35:43.322Z",
+//       updatedAt: "2023-12-26T02:39:29.277Z",
+//     },
+//   ],
+//   category: "unknown",
+//   company: "y17godara",
+//   addedBy: "unknown",
+//   createdAt: "2023-12-26T05:04:38.321Z",
+//   updatedAt: "2023-12-26T05:02:57.410Z",
+// },
 
 export async function getProducts() {
   try {
@@ -9,33 +61,15 @@ export async function getProducts() {
     if (!products) {
       return null;
     }
-
-    const reqProducts = products.map((product) => {
-      return {
-        id: product.id,
-        productId: product.productId,
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        ratings: product.ratings,
-        discount: product.discount,
-        image: product.image,
-        category: product.category,
-        company: product.company,
-        addedBy: product.addedBy,
-        createdAt: product.createdAt,
-        updatedAt: product.updatedAt,
-      };
-    });
-    // console.log("reqProducts : ", reqProducts);
-    return reqProducts;
+    // console.log("reqProducts : ", products);
+    return products;
   } catch (error) {
     console.log(error);
   }
 }
 
 export async function getProductById(productId: string) {
-  console.log("productId : ", productId);
+  // console.log("productId : ", productId);
   try {
     if (!productId) return null;
 
@@ -49,23 +83,7 @@ export async function getProductById(productId: string) {
       return null;
     }
 
-    const reqProduct = {
-      id: product.id,
-      productId: product.productId,
-      name: product.name,
-      description: product.description,
-      price: product.price,
-      ratings: product.ratings,
-      discount: product.discount,
-      image: product.image,
-      category: product.category,
-      company: product.company,
-      addedBy: product.addedBy,
-      createdAt: product.createdAt,
-      updatedAt: product.updatedAt,
-    };
-    // console.log("reqProduct : ", reqProduct);
-    return reqProduct;
+    return product;
   } catch (error) {
     console.log(error);
   }

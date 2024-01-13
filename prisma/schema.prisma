@@ -90,21 +90,32 @@ model TwoFactorConfirmation {
 }
 
 model Product {
-  id           String         @id @default(uuid())
-  productId    String         @unique @default(uuid())
-  name         String
-  description  String
-  price        Float
-  ratings      Float?         @default(0)
-  discount     Float?         @default(0)
-  image        String?        @default("https://via.placeholder.com/350")
-  category     String?        @default("unknown")
-  company      String?        @default("unknown")
-  addedBy      String?        @default("unknown")
-  cartProducts CartProduct[]  @relation("CartProductToProduct")
-  favorites    UserFavorite[] @relation("UserFavoriteToProduct")
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
+  id            String                 @id @default(uuid())
+  productId     String                 @unique @default(uuid())
+  name          String
+  description   String
+  price         Float
+  ratings       Float?                 @default(0)
+  discount      Float?                 @default(0)
+  featuredImage String                 @default("https://source.unsplash.com/random")
+  images        ProductImage[]
+  category      String?                @default("unknown")
+  company       String?                @default("unknown")
+  addedBy       String?                @default("unknown")
+  cartProducts  CartProduct[]          @relation("CartProductToProduct")
+  favorites     UserFavorite[]         @relation("UserFavoriteToProduct")
+  siteFeatured  siteFeaturedProducts[]
+  createdAt     DateTime               @default(now())
+  updatedAt     DateTime               @updatedAt
+}
+
+model ProductImage {
+  id        String   @id @default(uuid())
+  imageUrl  String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model UserFavorite {
@@ -124,6 +135,16 @@ model CartProduct {
   userId    String
   product   Product  @relation("CartProductToProduct", fields: [productId], references: [id])
   productId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model siteFeaturedProducts {
+  id        String   @id @default(uuid())
+  href      String
+  bannerURL String
+  product   Product? @relation(fields: [productId], references: [id])
+  productId String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

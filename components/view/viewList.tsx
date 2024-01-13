@@ -20,7 +20,7 @@ export function List({
   price,
   ratings,
   discount,
-  image,
+  featuredImage,
   category,
   company,
   addedBy,
@@ -39,7 +39,7 @@ export function List({
         price,
         ratings,
         discount,
-        image,
+        featuredImage,
         category,
         company,
         addedBy,
@@ -55,7 +55,7 @@ export function List({
       <li className='flex min-h-32 flex-row gap-4 rounded-md border border-secondary px-2 py-4'>
         <div className='relative h-48 w-48 overflow-hidden rounded-md'>
           <Image
-            src={image}
+            src={featuredImage}
             alt={name}
             width={100}
             height={100}
