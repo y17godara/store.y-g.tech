@@ -8,6 +8,7 @@ import {
 } from "@/components/shadcn/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
+import Link from "next/link";
 
 import { Product } from "@/types/index";
 import { Skeleton } from "@/components/ui/Skeleton";
@@ -35,26 +36,21 @@ const HomeCarousel = () => {
           getFeaturedBanners()
             .then((data: any) => {
               if (data?.error) {
-                console.error("err no data", data.error);
                 setBanners([]);
                 setDataLoaded(true);
               }
 
               if (data?.success) {
-                console.log("data", data);
                 setBanners(data.data);
-                console.log("banners", banners);
                 setDataLoaded(true);
               }
             })
             .catch(() => {
-              console.error("err catch");
               setBanners([]);
               setDataLoaded(true);
             });
         });
       } catch (err: any) {
-        console.error("client err", err);
         setBanners([]);
         setDataLoaded(true);
       }
@@ -100,15 +96,17 @@ const BannerItem = ({ banner }: { banner: Banner }) => {
   return (
     <CarouselItem key={banner.id} className='rounded-md'>
       <div className='relative h-60 w-full'>
-        <Image
-          src={banner.bannerURL}
-          alt={banner.id}
-          layout='fill'
-          quality={80}
-          loading='lazy'
-          objectFit='cover'
-          className='rounded-md'
-        />
+        <Link href={banner.href}>
+          <Image
+            src={banner.bannerURL}
+            alt={banner.id}
+            layout='fill'
+            quality={80}
+            loading='lazy'
+            objectFit='cover'
+            className='rounded-md'
+          />
+        </Link>
       </div>
     </CarouselItem>
   );
