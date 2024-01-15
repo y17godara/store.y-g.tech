@@ -29,10 +29,10 @@ export async function GET(req: any, res: any) {
       products: products,
     };
 
-    return { data };
+    return Response.json({ data: data });
   } catch (error) {
-    console.error(error);
-    return { error: "Error 503 to Get Latest Deals" };
+    // console.error(error); // For Debugging
+    return Response.json({ error: "Error 503 to Get Latest Deals" });
   }
 }
 
