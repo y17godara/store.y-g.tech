@@ -1,4 +1,4 @@
-import db from "@/lib/db";
+import prisma from "@/lib/db";
 import { Product as ProductType } from "@/types";
 
 export async function GET(req: any, res: any) {
@@ -6,7 +6,7 @@ export async function GET(req: any, res: any) {
     // Create Products
     const products = await Promise.all(
       Products.map(async (product) => {
-        const createdProduct = await db.product.create({
+        const createdProduct = await prisma.product.create({
           data: {
             ...product,
             createdAt: new Date(product.createdAt),

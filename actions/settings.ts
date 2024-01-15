@@ -4,7 +4,7 @@ import * as z from "zod";
 import bcrypt from "bcryptjs";
 
 import { update } from "@/auth";
-import db from "@/lib/db";
+import prisma from "@/lib/db";
 import { SettingsSchema } from "@/schemas";
 import { getUserByEmail, getUserById } from "@/data/user";
 import { currentUser } from "@/lib/auth";
@@ -61,7 +61,7 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
     values.newPassword = "";
   }
 
-  const updatedUser = await db.user.update({
+  const updatedUser = await prisma.user.update({
     where: { id: dbUser.id },
     data: {
       ...values,
