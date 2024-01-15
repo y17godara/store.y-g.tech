@@ -8,7 +8,7 @@ export default async function Footer() {
       className={cn(
         "md:stick relative top-0 z-50 my-36 animate-in bg-primary pb-12 text-base"
       )}
-      style={{ "--index": 1 } as React.CSSProperties}
+      style={{ "--index": 2 } as React.CSSProperties}
     >
       {/* Socials */}
       <footer className='mx-auto flex max-w-[700px] flex-col items-center justify-between gap-3 px-4 py-3 md:px-6'>

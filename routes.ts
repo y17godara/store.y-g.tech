@@ -30,4 +30,4 @@ export const authRoutes = [
 export const apiAuthPrefix = "/api/auth";
 export const apiAuthRoutes = ["/api/auth"];
 
-export const publicApiRoutes = ["/api/seed/db/products"];
+export const publicApiRoutes = ["/api/seed"];
