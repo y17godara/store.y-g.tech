@@ -30,6 +30,7 @@ model User {
   twoFactorEnabled   TwoFactorConfirmation? // TODO
   cartProducts       CartProduct[] // TODO
   favorites          UserFavorite[] // TODO
+  historyProducts    HistoryProduct[] // TODO
   createdAt          DateTime               @default(now())
   updatedAt          DateTime               @updatedAt
 }
@@ -90,29 +91,32 @@ model TwoFactorConfirmation {
 }
 
 model Product {
-  id            String                 @id @default(uuid())
-  productId     String                 @unique @default(uuid())
-  name          String
-  description   String
-  price         Float
-  ratings       Float?                 @default(0)
-  discount      Float?                 @default(0)
-  featuredImage String                 @default("https://source.unsplash.com/random")
-  images        ProductImage[]
-  category      String?                @default("unknown")
-  company       String?                @default("unknown")
-  addedBy       String?                @default("unknown")
-  cartProducts  CartProduct[]          @relation("CartProductToProduct")
-  favorites     UserFavorite[]         @relation("UserFavoriteToProduct")
-  siteFeatured  siteFeaturedProducts[]
-  createdAt     DateTime               @default(now())
-  updatedAt     DateTime               @updatedAt
+  id                 String                 @id @default(uuid())
+  productId          String                 @unique @default(uuid())
+  name               String
+  description        String
+  price              Float
+  ratings            Float?                 @default(0)
+  discount           Float?                 @default(0)
+  featuredImage      String                 @default("https://source.unsplash.com/random")
+  images             ProductImage[]         @relation("ProductToProductImage")
+  category           String?                @default("unknown")
+  company            String?                @default("unknown")
+  addedBy            String?                @default("unknown")
+  cartProducts       CartProduct[]          @relation("CartProductToProduct")
+  favorites          UserFavorite[]         @relation("UserFavoriteToProduct")
+  historyProducts    HistoryProduct[]       @relation("HistoryProductToProduct")
+  siteFeatured       siteFeaturedProducts[]
+  siteDeals          siteDeals[]
+  newlyAddedProducts newlyAddedProducts[]
+  createdAt          DateTime               @default(now())
+  updatedAt          DateTime               @updatedAt
 }
 
 model ProductImage {
   id        String   @id @default(uuid())
   imageUrl  String
-  product   Product  @relation(fields: [productId], references: [id])
+  product   Product  @relation("ProductToProductImage", fields: [productId], references: [id])
   productId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -139,6 +143,17 @@ model CartProduct {
   updatedAt DateTime @updatedAt
 }
 
+model HistoryProduct {
+  id           String   @id @default(uuid())
+  lastViewedAt DateTime @default(now())
+  user         User     @relation(fields: [userId], references: [id])
+  userId       String
+  product      Product  @relation("HistoryProductToProduct", fields: [productId], references: [id])
+  productId    String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
 model siteFeaturedProducts {
   id        String   @id @default(uuid())
   href      String
@@ -147,4 +162,27 @@ model siteFeaturedProducts {
   productId String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model siteDeals {
+  id        String @id @default(uuid())
+  href      String
+  bannerURL String
+  discount  Float
+
+  productId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Product   Product? @relation(fields: [productId], references: [id])
+}
+
+model newlyAddedProducts {
+  id        String @id @default(uuid())
+  href      String
+  bannerURL String
+
+  productId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Product   Product? @relation(fields: [productId], references: [id])
 }

@@ -87,9 +87,11 @@ export default async function RootLayout({
             hubot.variable
           )}
         >
-          <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-            <ReduxProvider>{children}</ReduxProvider>
-          </ThemeProvider>
+          <ReduxProvider>
+            <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+              {children}
+            </ThemeProvider>
+          </ReduxProvider>
         </body>
       </html>
     </SessionProvider>
