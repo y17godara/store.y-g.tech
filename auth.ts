@@ -1,10 +1,12 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import db from "@/lib/db";
+import { PrismaClient } from "@prisma/client";
 import authConfig from "@/auth.config";
 import { getUserById } from "@/data/user";
 import { getAccountByUserId } from "./data/account";
 import NextAuth, { type DefaultSession } from "next-auth";
 import { UserRole } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export const {
   handlers: { GET, POST },
@@ -22,7 +24,7 @@ export const {
   },
   events: {
     async linkAccount({ user }) {
-      await db.user.update({
+      await prisma.user.update({
         where: { id: user.id },
         data: { emailVerified: new Date() },
       });
@@ -80,6 +82,6 @@ export const {
     },
   },
   session: { strategy: "jwt" },
-  adapter: PrismaAdapter(db),
+  adapter: PrismaAdapter(prisma as any),
   ...authConfig,
 });
