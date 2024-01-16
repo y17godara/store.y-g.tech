@@ -6,7 +6,6 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/shadcn/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,7 +45,7 @@ export type Product = {
   updatedAt: Date;
 };
 
-const FavCarousel = () => {
+const UserCarousel = () => {
   const [slides, setSlides] = useState<FavProducts[]>([]);
   const [dataLoaded, setDataLoaded] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -124,7 +123,7 @@ const FavCarousel = () => {
                       className='relative h-60 w-full overflow-hidden rounded-md md:basis-1/3'
                     >
                       <div className='relative flex h-60 w-full flex-col gap-4 overflow-hidden rounded-md border border-secondary p-2 sm:flex-row md:flex-col'>
-                        <BannerItem product={favProduct.product} />
+                        <Item product={favProduct.product} />
                         {/* Created Time on Top Right Absolute */}
                         <div className='absolute left-2 top-2 flex rounded-md border-2 border-secondary bg-primary p-1 px-2 text-xs text-secondary'>
                           {new Date(favProduct.updatedAt).toLocaleString(
@@ -155,7 +154,7 @@ const FavCarousel = () => {
   );
 };
 
-const BannerItem = ({ product }: { product: Product }) => {
+const Item = ({ product }: { product: Product }) => {
   const {
     name,
     description,
@@ -277,4 +276,4 @@ const BannerItem = ({ product }: { product: Product }) => {
   );
 };
 
-export default FavCarousel;
+export default UserCarousel;
