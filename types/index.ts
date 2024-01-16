@@ -1,5 +1,27 @@
 import { LinkProps as NextLinkProps } from "next/link";
 import { ReactNode } from "react";
+import { UserRole } from "@prisma/client";
+
+export type client = {
+  id: string;
+  name: string;
+  image: string;
+  role: UserRole;
+  email: string;
+  isTwoFactorEnabled: boolean;
+  isOAuth: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type FavProducts = {
+  id: string;
+  userId: string;
+  productId: string;
+  createdAt: Date;
+  updatedAt: Date;
+  product: Product;
+};
 
 export type Product = {
   id?: string;

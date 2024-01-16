@@ -1,5 +1,5 @@
 "use server";
-import { update } from "@/auth";
+
 import prisma from "@/lib/db";
 
 export async function getDeals() {
@@ -32,8 +32,7 @@ export const getUserById = async (id: string) => {
   }
 };
 
-export async function userFavProducts(user: any) {
-  const id = user.id.toString();
+export async function userFavProducts(id: string) {
   try {
     // check if user exists
     const user = await getUserById(id);

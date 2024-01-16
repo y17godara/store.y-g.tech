@@ -1,13 +1,16 @@
 import { Suspense } from "react";
-import HomeCarousel from "../components/Carousel";
-import UserFavProductsCarousel from "../components/FavProducts-Carousel";
-import ProductsSlider from "../components/ProductsSlider";
-import Features from "../components/Features";
-import ProductsSection from "../components/ProductsSection";
-
+import HomeCarousel from "./components/Carousel";
+import ProductsSlider from "./components/ProductsSlider";
+import Features from "./components/Features";
+import ProductsSection from "./components/ProductsSection";
+import UserFavorites from "./components/UserFavorites";
+import UserHistory from "./components/UserHistory";
 import { Skeleton } from "@/components/ui/Skeleton";
+import { getUser } from "@/actions/session";
 
 export default async function page() {
+  const user = await getUser();
+  console.log(user);
   return (
     <>
       <div className='relative flex w-full flex-col gap-16 md:gap-24'>
@@ -91,37 +94,12 @@ export default async function page() {
 
         {/* Personalized Products */}
         <Suspense fallback={<Skeleton />}>
-          <UserFavProductsCarousel />
+          <UserFavorites user={user} />
         </Suspense>
 
-        {/* View History */}
+        {/* History Products */}
         <Suspense fallback={<Skeleton />}>
-          <ProductsSection
-            slides={[
-              {
-                id: 1,
-                title: "Product 1",
-                href: "/",
-                src: "/og-bg.png",
-                alt: "Product 1",
-              },
-              {
-                id: 2,
-                title: "Product 1",
-                href: "/",
-                src: "/og-bg.png",
-                alt: "Product 1",
-              },
-              {
-                id: 3,
-                title: "Product 1",
-                href: "/",
-                src: "/og-bg.png",
-                alt: "Product 1",
-              },
-            ]}
-            alt={"History"}
-          />
+          <UserHistory user={user} />
         </Suspense>
       </div>
     </>
