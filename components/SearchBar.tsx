@@ -2,7 +2,6 @@
 
 import * as z from "zod";
 import { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
 import { FaSearch } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,6 +12,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/shadcn/ui/form";
+import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { SearchSchema } from "@/schemas";
@@ -29,15 +29,14 @@ function SearchBar() {
   const form = useForm<z.infer<typeof SearchSchema>>({
     resolver: zodResolver(SearchSchema),
     defaultValues: {
-      query: "",
+      search: "",
     },
   });
 
   const onsubmit = async (values: z.infer<typeof SearchSchema>) => {
-    console.log("values", values); // debug
     try {
       startTransition(() => {
-        router.push(`/search?q=${values.query}`);
+        router.push(`/search?search=${values.search}`);
       });
     } catch (err: any) {
       // console.log("err", err); // debug
@@ -48,33 +47,6 @@ function SearchBar() {
   return (
     <>
       <Form {...form}>
-        {/* <form
-          onSubmit={form.handleSubmit(onsubmit)}
-          className={cn(
-            "relative h-8 w-full justify-start rounded-[0.5rem] border border-secondary bg-primary text-sm font-normal shadow-none sm:pr-12 md:w-40 lg:w-64"
-          )}
-        >
-          <input
-            name='query'
-            disabled={isPending}
-            autoComplete='off'
-            type='text'
-            placeholder='Search...'
-            className='placeholder-primary relative inset-0 h-full w-full rounded-[0.5rem] border-none bg-transparent pl-2 pr-2 text-sm font-normal text-primary focus:bg-primary focus:outline-none focus:ring-0 sm:pr-9'
-          />
-          <button
-            className='font-mono absolute right-[0.1rem] top-[0.3rem] flex h-5 select-none items-center gap-1 rounded border border-secondary bg-primary px-1.5 text-[10px] font-medium opacity-100'
-            disabled={isPending}
-            type='submit'
-          >
-            <span className='hidden text-xs sm:flex'>Search ⏎</span>
-            <span className='text-xs sm:hidden'>
-              <FaSearch />
-            </span>
-          </button>
-          <FormError message={error} />
-          <FormSuccess message={success} />
-        </form> */}
         <form onSubmit={form.handleSubmit(onsubmit)} className='flex flex-col'>
           <div
             className={cn(
@@ -83,7 +55,7 @@ function SearchBar() {
           >
             <FormField
               control={form.control}
-              name={"query"}
+              name={"search"}
               render={({ field }) => (
                 <FormItem className='h-full w-full'>
                   <FormControl>
@@ -92,6 +64,7 @@ function SearchBar() {
                       {...field}
                       disabled={isPending}
                       type='text'
+                      placeholder='Search...'
                       className='placeholder-primary relative inset-0 h-full w-full items-center rounded-[0.5rem] border-none bg-transparent pl-2 pr-2 text-sm font-normal text-primary focus:bg-primary focus:outline-none focus:ring-0 sm:pr-9'
                     />
                   </FormControl>

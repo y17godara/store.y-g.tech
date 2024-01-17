@@ -57,3 +57,28 @@ export async function userFavProducts(id: string) {
     return { error: "Error 503 to Get User Fav Products" };
   }
 }
+
+export async function userCartProducts(id: string) {
+  try {
+    // check if user exists
+    const user = await getUserById(id);
+
+    if (!user) {
+      return { error: "User not found" };
+    }
+
+    const cartProducts = await prisma.cartProduct.findMany({
+      where: {
+        userId: id,
+      },
+      include: {
+        product: true,
+      },
+    });
+
+    return { data: cartProducts, success: "Success" };
+  } catch (error) {
+    console.log(error);
+    return { error: "Error 503 to Get User Cart Products" };
+  }
+}
