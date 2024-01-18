@@ -39,6 +39,8 @@ export const {
 
       // Prevent sign in without email verification
       if (!existingUser?.emailVerified) return false;
+      // Prevent sign in if user is blocked
+      if (existingUser?.isBlocked) return false;
 
       return true;
     },
@@ -59,6 +61,7 @@ export const {
         session.user.name = token.name;
         session.user.email = token.email;
         session.user.isOAuth = token.isOAuth as boolean;
+        session.user.isBlocked = token.isBlocked as boolean;
       }
 
       return session;
@@ -77,6 +80,7 @@ export const {
       token.email = existingUser.email;
       token.role = existingUser.role;
       token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
+      token.isBlocked = existingUser.isBlocked;
 
       return token;
     },
