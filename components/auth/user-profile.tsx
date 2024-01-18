@@ -129,6 +129,7 @@ export const ProfileSettings = () => {
                         {...field}
                         placeholder='John Doe'
                         disabled={isPending}
+                        autoComplete={"name"}
                       />
                     </FormControl>
                     <FormMessage />
@@ -147,6 +148,7 @@ export const ProfileSettings = () => {
                         {...field}
                         placeholder='https://example.com/avatar.png'
                         disabled={isPending}
+                        autoComplete={"url"}
                       />
                     </FormControl>
                     <FormMessage />
@@ -167,6 +169,7 @@ export const ProfileSettings = () => {
                             placeholder='john.doe@example.com'
                             type='email'
                             disabled={isPending}
+                            autoComplete={"email"}
                           />
                         </FormControl>
                         <FormMessage />
@@ -187,6 +190,7 @@ export const ProfileSettings = () => {
                                 placeholder='******'
                                 type={pswdVisible ? "text" : "password"}
                                 disabled={isPending}
+                                autoComplete='password'
                               />
                               <span
                                 className='absolute right-2.5 top-3 cursor-pointer text-secondary'
@@ -215,6 +219,7 @@ export const ProfileSettings = () => {
                                 placeholder='******'
                                 type={pswdVisible ? "text" : "password"}
                                 disabled={isPending}
+                                autoComplete='new-password'
                               />
                               <span
                                 className='absolute right-2.5 top-3 cursor-pointer text-secondary'

@@ -57,16 +57,14 @@ const config: Config = {
           "100%": { transform: "translateY(0px)", opacity: "1" },
         },
         shimer: {
+          "0%": { transform: "translateX(-100%)" },
+          "50%": { transform: "translateX(0%)" }, // Added midpoint to loop smoothly
           "100%": { transform: "translateX(100%)" },
         },
         fadeIn: {
           from: { opacity: "0" },
           to: { opacity: "1" },
         },
-        // marquee: {
-        //   "0%": { transform: "translateX(0%)" },
-        //   "100%": { transform: "translateX(-100%)" },
-        // },
         marquee: {
           "0%": { transform: "translateX(0%)" },
           "50%": { transform: "translateX(-50%)" }, // Added midpoint to loop smoothly
