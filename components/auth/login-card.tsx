@@ -74,7 +74,9 @@ export default function LoginCard() {
   return (
     <>
       <AuthCard
-        header='Create an account'
+        header='
+        Login to your account
+        '
         footer='Create an account?'
         footerLink='/auth/register'
         showSocials={true}
