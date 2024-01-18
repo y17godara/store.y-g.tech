@@ -10,7 +10,6 @@ import { getUser } from "@/actions/session";
 
 export default async function page() {
   const user = await getUser();
-  console.log(user);
   return (
     <>
       <div className='relative flex w-full flex-col gap-16 md:gap-24'>
