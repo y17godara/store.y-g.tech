@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Redirect } from "next";
-import { Link } from "@/components/ui/index";
+import { Link, Loading } from "@/components/ui/index";
 
 import { getSearch } from "@/actions/search";
 import { Grid } from "@/components/view/viewGrid";
@@ -34,15 +34,20 @@ export default async function page({ searchParams }: { searchParams: string }) {
     );
   }
 
-  if (!data) return <div>loading...</div>;
+  if (!data)
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   return (
     <>
       <div className='flex flex-col gap-16 md:gap-24'>
         {data && data.length > 0 ? (
           <>
-            <div className='flex animate-in flex-col gap-8'>
-              404 - Search Results
-            </div>
+            <h3 className='flex animate-in flex-col gap-8 text-lg'>
+              Search Result Found
+            </h3>
             <div
               className='flex animate-in flex-col gap-8'
               style={{ "--index": 1 } as React.CSSProperties}
