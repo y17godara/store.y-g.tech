@@ -9,7 +9,8 @@
     "lint": "next lint",
     "studio": "prisma studio",
     "format": "prettier --check --ignore-path .gitignore .",
-    "format:fix": "prettier --write --ignore-path .gitignore ."
+    "format:fix": "prettier --write --ignore-path .gitignore .",
+    "seed": "ts-node seed.ts"
   },
   "dependencies": {
     "@auth/core": "^0.19.0",
