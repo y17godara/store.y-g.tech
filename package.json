@@ -10,7 +10,7 @@
     "studio": "prisma studio",
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore .",
-    "seed": "ts-node seed.ts"
+    "seed": "ts-node ./prisma/seed"
   },
   "dependencies": {
     "@auth/core": "^0.19.0",
