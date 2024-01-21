@@ -1,7 +1,9 @@
 import db from "@/lib/db";
-import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: Request, res: Response) {
+export async function GET(
+  request: Request,
+  response: Response
+): Promise<Response> {
   try {
     const users = await db.user.findMany({
       include: {
@@ -20,7 +22,7 @@ export async function GET(req: Request, res: Response) {
       },
     });
 
-    return NextResponse.json(
+    return Response.json(
       {
         users,
       },
@@ -30,6 +32,6 @@ export async function GET(req: Request, res: Response) {
     );
   } catch (err: any) {
     console.error(err);
-    return NextResponse.error();
+    return Response.error();
   }
 }

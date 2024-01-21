@@ -1,8 +1,7 @@
 import db from "@/lib/db";
-import { NextRequest, NextResponse } from "next/server";
 
 // [id] is a dynamic route parameter
-export async function GET(req: Request, res: Response) {
+export async function GET(req: Request, res: Response): Promise<Response> {
   const userIdOrEmail = req.url.split("/")[6];
   try {
     const user = await db.user.findFirst({
@@ -24,7 +23,7 @@ export async function GET(req: Request, res: Response) {
       },
     });
 
-    return NextResponse.json(
+    return Response.json(
       {
         user,
       },
@@ -34,6 +33,6 @@ export async function GET(req: Request, res: Response) {
     );
   } catch (err: any) {
     console.error(err);
-    return NextResponse.error();
+    return Response.error();
   }
 }

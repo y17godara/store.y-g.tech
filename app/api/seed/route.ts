@@ -1,7 +1,10 @@
 import prisma from "@/lib/db";
 import { Product as ProductType } from "@/types";
 
-export async function GET(req: any, res: any) {
+export async function GET(
+  request: Request,
+  response: Response
+): Promise<Response> {
   try {
     // Create Products
     const products = await Promise.all(
