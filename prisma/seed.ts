@@ -176,6 +176,711 @@ export const siteDeals = async () => {
           href: "/products/nodejs-course",
           bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
         },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nextjs-course",
+          bannerURL: "https://i.imgur.com/yD1beHb.jpg",
+        },
+        {
+          discount: 30,
+          href: "/products/reactjs-course",
+          bannerURL: "https://i.imgur.com/Nwojxxi.jpeg",
+        },
+        {
+          discount: 30,
+          href: "/products/nodejs-course",
+          bannerURL: "https://i.imgur.com/OVD7UfQ.jpeg",
+        },
       ],
     });
 
@@ -215,28 +920,28 @@ const seed = async () => {
   console.log("Seeding database...");
 
   /* Create Products */
-  const addProducts = await createProducts();
-  if (!addProducts.ok) {
-    console.error(addProducts.res);
-    return;
-  }
-  console.log(addProducts.res);
+  // const addProducts = await createProducts();
+  // if (!addProducts.ok) {
+  //   console.error(addProducts.res);
+  //   return;
+  // }
+  // console.log(addProducts.res);
 
   /* Create Users */
-  const addUser = await createUsers();
-  if (!addUser.ok) {
-    console.error(addUser.res);
-    return;
-  }
-  console.log(addUser.res);
+  // const addUser = await createUsers();
+  // if (!addUser.ok) {
+  //   console.error(addUser.res);
+  //   return;
+  // }
+  // console.log(addUser.res);
 
   /* Create FeaturedProducts */
-  const addFeaturedProducts = await featuredProducts();
-  if (!addFeaturedProducts.ok) {
-    console.error(addFeaturedProducts.res);
-    return;
-  }
-  console.log(addFeaturedProducts.res);
+  // const addFeaturedProducts = await featuredProducts();
+  // if (!addFeaturedProducts.ok) {
+  //   console.error(addFeaturedProducts.res);
+  //   return;
+  // }
+  // console.log(addFeaturedProducts.res);
 
   /* Site Deals */
   const addSiteDeals = await siteDeals();
@@ -247,12 +952,12 @@ const seed = async () => {
   console.log(addSiteDeals.res);
 
   /* Newly Added Products */
-  const addNewlyAddedProducts = await newlyAddedProducts();
-  if (!addNewlyAddedProducts.ok) {
-    console.error(addNewlyAddedProducts.res);
-    return;
-  }
-  console.log(addNewlyAddedProducts.res);
+  // const addNewlyAddedProducts = await newlyAddedProducts();
+  // if (!addNewlyAddedProducts.ok) {
+  //   console.error(addNewlyAddedProducts.res);
+  //   return;
+  // }
+  // console.log(addNewlyAddedProducts.res);
 
   console.log("Done seeding database.");
   return;
