@@ -9,11 +9,11 @@ export default async function page({ searchParams }: { searchParams: string }) {
   const response = await getSearch(search);
   const data = response.data;
   if (!data)
-  return (
-    <div>
-      <Loading />
-    </div>
-  );
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   return (
     <>
       <div className='flex flex-col gap-16 md:gap-24'>

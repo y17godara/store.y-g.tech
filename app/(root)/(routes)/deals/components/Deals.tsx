@@ -19,53 +19,50 @@ function Deals() {
 }
 
 function Deal() {
+  const [dealsGot, setDealsGot] = useState<any>([]);
 
-    const [dealsGot, setDealsGot] = useState<any>([]);
+  const MAX_LIMIT = 8;
+  const page = 1;
 
-    const MAX_LIMIT = 8;
-    const page = 1;
-  
-    const { isPending, error, data, status, isFetched } = useQuery({
-      queryKey: ["dealsData"],
-      queryFn: () =>
-        fetch(
-          `/api/search/products/deals?page=${page}&limit=${MAX_LIMIT}`
-        ).then((res) => res.json()),
-    });
-  
-    useEffect(() => {
+  const { isPending, error, data, status, isFetched } = useQuery({
+    queryKey: ["dealsData"],
+    queryFn: () =>
+      fetch(`/api/search/products/deals?page=${page}&limit=${MAX_LIMIT}`).then(
+        (res) => res.json()
+      ),
+  });
 
-        if(!data || !data.success) return console.log("No deals found");
+  useEffect(() => {
+    if (!data || !data.success) return console.log("No deals found");
 
-        if (!data.success) {
-          console.log("No deals found");
-        } 
-          console.log(data);
-          setDealsGot(data.res);
-          console.log("useState", dealsGot); // This will not log the updated state immediately
-        
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [data]);
+    if (!data.success) {
+      console.log("No deals found");
+    }
+    console.log(data);
+    setDealsGot(data.res);
+    console.log("useState", dealsGot); // This will not log the updated state immediately
 
-    if (isPending) return "Loading...";
-  
-    if (error) return "An error has occurred: " + error.message;
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
-    return (
-      <>
-        <section className='grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-            Deals
-            {dealsGot.map((deal: any) => (
-        <div key={deal.id}>
-          {/* Render individual deal information */}
-          {deal.id}
-        </div>
-      ))}
-        </section>
-        {/* <LoadMore /> */}
-      </>
-    );
-  }
+  if (isPending) return "Loading...";
+
+  if (error) return "An error has occurred: " + error.message;
+
+  return (
+    <>
+      <section className='grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+        Deals
+        {dealsGot.map((deal: any) => (
+          <div key={deal.id}>
+            {/* Render individual deal information */}
+            {deal.id}
+          </div>
+        ))}
+      </section>
+      {/* <LoadMore /> */}
+    </>
+  );
+}
 
 export default Deals;
