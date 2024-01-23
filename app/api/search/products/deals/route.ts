@@ -1,39 +1,32 @@
-import db from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/lib/db";
 
-export async function GET(
-  request: NextRequest,
-  response: NextResponse
-): Promise<Response> {
-  // console.log("GET /api/search/products/deals"); // debug
-  // `/api/search/products/deals?limit=${MAX_LIMIT}&page=${page}`
-  const reqUrl = request.nextUrl.searchParams;
+export async function GET(req: NextRequest, res: NextResponse) {
+ 
+    const options = req.nextUrl.searchParams;
 
-  // const limit = reqUrl.get("limit");
-  // const page = reqUrl.get("page");
-  const { limit, page } = Object.fromEntries(reqUrl.entries());
+    const limit = options.get("limit");
+    const page = options.get("page");
 
-  // console.info({
-  //   limit,
-  //   page,
-  // }); // debug
+    try {
 
-  try {
-    if (!limit || !page) {
-      return NextResponse.error();
+        if (!limit || !page) {
+            return NextResponse.json({ res: "Missing limit or page", success: false  }, { status: 400 });
+        }
+
+        const deals = await prisma.siteDeals.findMany({
+            include: {
+                Product: true
+            },
+            take: parseInt(limit),
+            skip: (parseInt(page) -1) * parseInt(limit),
+            orderBy: {
+                createdAt: "desc"
+            }
+        });
+
+        return NextResponse.json({res: deals, success: true}, { status: 200 });
+    } catch (error: any) {
+        return NextResponse.json({ res: error.message, success: false }, { status: 500 });
     }
-
-    const deals = await db.siteDeals.findMany({
-      include: {
-        Product: true,
-      },
-      take: Number(limit) || 8,
-      skip: (Number(page) - 1) * Number(limit) || 0,
-    });
-
-    return NextResponse.json({ deals });
-  } catch (err: any) {
-    console.error(err);
-    return NextResponse.error();
-  }
 }
