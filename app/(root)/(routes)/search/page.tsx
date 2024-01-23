@@ -1,45 +1,19 @@
 import Image from "next/image";
-import { Redirect } from "next";
 import { Link, Loading } from "@/components/ui/index";
 
 import { getSearch } from "@/actions/search";
 import { Grid } from "@/components/view/viewGrid";
 
-export const revalidate = 3600;
-
-export const runtime = "edge"; // 'nodejs' (default) | 'edge'
-
 export default async function page({ searchParams }: { searchParams: string }) {
   const { search }: any = searchParams;
-
-  // redirect to ?search= if no search query
-
   const response = await getSearch(search);
   const data = response.data;
-  // console.log("data", data); // debug
-
-  if (!search || !data) {
-    return (
-      <>
-        <div className='flex flex-col gap-16 md:gap-24'>
-          <div className='flex animate-in flex-col gap-8'>404 - Not Found</div>
-          <div
-            className='flex animate-in flex-col gap-8'
-            style={{ "--index": 1 } as React.CSSProperties}
-          >
-            Search for something else
-          </div>
-        </div>
-      </>
-    );
-  }
-
   if (!data)
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
+  return (
+    <div>
+      <Loading />
+    </div>
+  );
   return (
     <>
       <div className='flex flex-col gap-16 md:gap-24'>
