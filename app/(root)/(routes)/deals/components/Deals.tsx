@@ -44,6 +44,7 @@ function Deal() {
           setDealsGot(data.res);
           console.log("useState", dealsGot); // This will not log the updated state immediately
         
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [data]);
 
     if (isPending) return "Loading...";
