@@ -2,13 +2,11 @@
 
 import * as z from "zod";
 import { AuthError } from "next-auth";
-// import db from "@/lib/db";
 import { signIn } from "@/auth";
 import { LoginSchema } from "@/schemas";
 import { getUserByEmail } from "./user";
-
+import bcrypt from "bcryptjs";
 import { sendVerificationEmail } from "@/lib/mail";
-
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { generateVerificationToken } from "@/lib/tokens";
 
@@ -26,8 +24,18 @@ export const login = async (
 
   const existingUser = await getUserByEmail(email);
 
-  if (!existingUser || !existingUser.email || !existingUser.password) {
+  if (!existingUser || !existingUser.email) {
     return { error: "Email does not exist!" };
+  }
+
+  if (!existingUser.password) {
+    return { error: "Invalid password!" };
+  }
+
+  const passwordValid = await bcrypt.compare(password, existingUser.password);
+
+  if (!passwordValid) {
+    return { error: "Password does Not Match, Try Again" };
   }
 
   if (!existingUser.emailVerified) {

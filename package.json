@@ -12,6 +12,12 @@
     "format:fix": "prettier --write --ignore-path .gitignore .",
     "seed": "ts-node ./prisma/seed"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "browser": {
+    "crypto": false
+  },
   "dependencies": {
     "@auth/core": "^0.19.0",
     "@auth/prisma-adapter": "^1.0.12",
@@ -36,8 +42,6 @@
     "@vercel/og": "^0.6.1",
     "@vercel/speed-insights": "^1.0.1",
     "axios": "^1.6.2",
-    "bcrypt": "^5.1.1",
-    "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
@@ -62,14 +66,16 @@
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^9.0.1",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/bcryptjs": "^2.4.6",
     "@next/eslint-plugin-next": "^14.0.4",
     "@tailwindcss/typography": "^0.5.10",
     "@tanstack/eslint-plugin-query": "^5.0.0",
-    "@types/bcrypt": "^5.0.2",
-    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
