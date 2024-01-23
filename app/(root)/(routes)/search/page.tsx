@@ -7,8 +7,6 @@ import { Grid } from "@/components/view/viewGrid";
 
 export const revalidate = 3600;
 
-export const runtime = "edge"; // 'nodejs' (default) | 'edge'
-
 export default async function page({ searchParams }: { searchParams: string }) {
   const { search }: any = searchParams;
 

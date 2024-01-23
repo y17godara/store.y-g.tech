@@ -1,9 +1,6 @@
 import { Suspense } from "react";
 import Deals from "./_components/Deals";
 
-export const revalidate = 3600;
-export const runtime = "nodejs";
-
 export default async function page() {
   return (
     <>
