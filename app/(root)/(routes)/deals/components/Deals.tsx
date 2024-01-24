@@ -17,13 +17,14 @@ interface DealsProps {
   updatedAt: string;
 }
 
-export default function Deals({
-  page,
-  limit,
-}: {
-  page: number;
-  limit: number;
-}) {
+const stagger = 0.25;
+
+const variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
+export default function Deals({ page, limit }: { page: any; limit: number }) {
   const { data, status, isLoading, isError, isSuccess, refetch } = useQuery({
     queryKey: ["deals"],
     queryFn: () =>
@@ -58,11 +59,15 @@ export default function Deals({
           {data.res.map((deal: DealsProps, index: number) => (
             <motion.div
               key={deal.id}
-              // render animation slowly
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 * index }}
-              className='flex animate-in flex-col gap-4'
+              initial='hidden'
+              animate='visible'
+              transition={{
+                delay: index * stagger,
+                ease: "easeInOut",
+                duration: 0.5,
+              }}
+              viewport={{ amount: 0 }}
+              className='relative w-full max-w-sm rounded'
             >
               <div className='relative flex h-64 w-64 items-center justify-center overflow-hidden rounded-lg bg-gray-100'>
                 <Image
@@ -96,7 +101,7 @@ export default function Deals({
         <button
           className='rounded bg-blue-500 p-2 text-white'
           onClick={() => {
-            const newPage = (page as number) + 1;
+            const newPage = parseInt(page, 10) + 1;
             window.location.href = `/deals?page=${newPage}&limit=${limit}`;
           }}
         >
