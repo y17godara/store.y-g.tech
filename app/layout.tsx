@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import ThemeProvider from "@/components/ThemeProvider";
 import ReduxProvider from "./reduxToolkit";
 import { SessionProvider } from "next-auth/react";
+import Providers from "./Provider";
 import { auth } from "@/auth";
 
 export const viewport: Viewport = {
@@ -89,7 +90,7 @@ export default async function RootLayout({
         >
           <ReduxProvider>
             <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-              {children}
+              <Providers>{children}</Providers>
             </ThemeProvider>
           </ReduxProvider>
         </body>
