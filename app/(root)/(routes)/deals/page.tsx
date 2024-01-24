@@ -1,7 +1,8 @@
 import { Suspense } from "react";
 import Deals from "./components/Deals";
 
-export default async function page() {
+export default async function page({ searchParams }: { searchParams: string }) {
+  const { page = 1, limit = 8 }: any = searchParams;
   return (
     <>
       <div className='flex flex-col gap-16 md:gap-24'>
@@ -13,7 +14,7 @@ export default async function page() {
             </h2>
             <div className='flex w-full animate-in flex-col gap-8'>
               <Suspense fallback={<div>Loading...</div>}>
-                <Deals />
+                <Deals page={page} limit={limit} />
               </Suspense>
             </div>
           </div>

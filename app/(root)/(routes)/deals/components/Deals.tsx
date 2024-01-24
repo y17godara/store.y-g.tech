@@ -1,68 +1,39 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
-
-const queryClient = new QueryClient();
-
-function Deals() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Deal />
-    </QueryClientProvider>
-  );
-}
-
-function Deal() {
-  const [dealsGot, setDealsGot] = useState<any>([]);
-
-  const MAX_LIMIT = 8;
-  const page = 1;
-
-  const { isPending, error, data, status, isFetched } = useQuery({
-    queryKey: ["dealsData"],
+export default function Deals({
+  page = 1,
+  limit = 8,
+}: {
+  page: number;
+  limit: number;
+}) {
+  const { data, isLoading, isError, isSuccess } = useQuery({
+    queryKey: ["deals"],
     queryFn: () =>
-      fetch(`/api/search/products/deals?page=${page}&limit=${MAX_LIMIT}`).then(
+      fetch(`/api/search/products/deals?page=${page}&limit=${limit}`).then(
         (res) => res.json()
       ),
   });
 
-  useEffect(() => {
-    if (!data || !data.success) return console.log("No deals found");
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-    if (!data.success) {
-      console.log("No deals found");
-    }
+  if (isError) {
+    return <div>Error!</div>;
+  }
+
+  if (!data.res) {
+  }
+
+  if (isSuccess && data?.res) {
     console.log(data);
-    setDealsGot(data.res);
-    console.log("useState", dealsGot); // This will not log the updated state immediately
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
-
-  if (isPending) return "Loading...";
-
-  if (error) return "An error has occurred: " + error.message;
-
-  return (
-    <>
-      <section className='grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        Deals
-        {dealsGot.map((deal: any) => (
-          <div key={deal.id}>
-            {/* Render individual deal information */}
-            {deal.id}
-          </div>
-        ))}
-      </section>
-      {/* <LoadMore /> */}
-    </>
-  );
+    return (
+      <>
+        <section>Hello</section>
+      </>
+    );
+  }
 }
-
-export default Deals;
