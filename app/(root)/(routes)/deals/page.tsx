@@ -1,8 +1,14 @@
 import { Suspense } from "react";
 import Deals from "./components/Deals";
+import { redirect } from "next/navigation";
 
 export default async function page({ searchParams }: { searchParams: string }) {
   const { page = 1, limit = 8 }: any = searchParams;
+
+  if (page < 1) {
+    redirect(`/deals?page=1&limit=${limit}`);
+  }
+
   return (
     <>
       <div className='flex flex-col gap-16 md:gap-24'>
@@ -15,7 +21,7 @@ export default async function page({ searchParams }: { searchParams: string }) {
               gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
             }}
           >
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense>
               <Deals page={page as number} limit={limit as number} />
             </Suspense>
           </div>
