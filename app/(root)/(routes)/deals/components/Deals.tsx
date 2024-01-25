@@ -1,10 +1,11 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface DealsProps {
   Product?: any;
@@ -34,58 +35,75 @@ export default function Deals({ page, limit }: { page: any; limit: number }) {
   });
 
   // refetch data when page or limit changes
-
   useEffect(() => {
     refetch();
-    // console.log("refetch", page, limit);
-  }, [page, limit]);
+  }, [page, limit, refetch]);
 
-  // useEffect(() => {
-  //   console.log("data", data);
-  // }, [data]);
+  const LoadingStatus = ({
+    status,
+    loading,
+  }: {
+    status: any;
+    loading: boolean;
+  }) => {
+    if (status !== "pending" && !loading) return null;
+    return (
+      <div>
+        <div className='relative z-50 flex h-full min-h-60 w-full flex-col items-center justify-center text-center'>
+          <div className='h-2 w-28 animate-spin rounded-full border-b-2 border-[var(--brand)]'></div>
+          <p className={cn("mt-2 text-sm font-semibold text-[var(--brand)]")}>
+            {"Loading..."}
+          </p>
+        </div>
+      </div>
+    );
+  };
 
   return (
-    <div>
-      <p
-        className={cn(
-          "text-bold text-sm uppercase",
-          status === "success" ? "text-green-500" : "text-red-500"
-        )}
-      >
-        {status}
-      </p>
+    <div className='relative flex w-full flex-col items-center justify-center gap-8'>
+      <LoadingStatus status={status} loading={isLoading} />
+
       {isSuccess && (
-        <section className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-          {data.res.map((deal: DealsProps, index: number) => (
-            <motion.div
-              key={deal.id}
-              initial='hidden'
-              animate='visible'
-              transition={{
-                delay: index * stagger,
-                ease: "easeInOut",
-                duration: 0.5,
-              }}
-              viewport={{ amount: 0 }}
-              className='relative w-full max-w-sm rounded'
-            >
-              <div className='relative flex h-64 w-64 items-center justify-center overflow-hidden rounded-lg bg-gray-100'>
-                <Image
-                  src={deal.bannerURL}
-                  alt={deal.id}
-                  layout='fill'
-                  objectFit='cover'
-                  className='rounded-lg'
-                />
-              </div>
-              <div className='flex flex-col gap-2'>
-                <p className='text-sm text-secondary'>{deal.discount}% off</p>
-              </div>
-            </motion.div>
-          ))}
-        </section>
+        <Suspense>
+          <section className='grid h-full grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+            {data.res.map((deal: DealsProps, index: number) => (
+              <Suspense key={deal.id}>
+                <motion.div
+                  key={deal.id}
+                  initial={variants.hidden}
+                  animate={variants.visible}
+                  transition={{
+                    delay: index * stagger,
+                    ease: "easeInOut",
+                    duration: 0.5,
+                  }}
+                  viewport={{ amount: 0 }}
+                  className='relative h-64 w-full max-w-sm overflow-hidden rounded shadow-lg'
+                >
+                  <Link
+                    href={`${deal.href}`}
+                    className='relative flex h-64 w-64 items-center justify-center overflow-hidden rounded-lg bg-gray-100'
+                  >
+                    <Image
+                      src={deal.bannerURL}
+                      alt={deal.id}
+                      layout='fill'
+                      objectFit='cover'
+                      className='rounded-lg'
+                    />
+                  </Link>
+                  <div className='absolute flex flex-col gap-2'>
+                    <p className='text-sm text-secondary'>
+                      {deal.discount}% off
+                    </p>
+                  </div>
+                </motion.div>
+              </Suspense>
+            ))}
+          </section>
+        </Suspense>
       )}
-      <div className='item-center flex w-full flex-col justify-center gap-4 sm:flex-row sm:justify-start '>
+      <div className='item-center relative flex w-full flex-col justify-center gap-4 sm:flex-row sm:justify-start '>
         {/* show previous if page is larger than 1 */}
         {page > 1 && (
           <button
