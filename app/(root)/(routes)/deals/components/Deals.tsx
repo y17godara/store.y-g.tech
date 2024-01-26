@@ -105,19 +105,20 @@ export default function Deals({ page, limit }: { page: any; limit: number }) {
       )}
       <div className='item-center relative flex w-full flex-col justify-center gap-4 sm:flex-row sm:justify-start '>
         {/* show previous if page is larger than 1 */}
-        {page > 1 && (
-          <button
-            className='rounded bg-blue-500 p-2 text-white'
-            onClick={() => {
-              window.location.href = `/deals?page=${page - 1}&limit=${limit}`;
-            }}
-          >
-            Previous
-          </button>
-        )}
+
+        <button
+          className='cursor-pointer rounded bg-secondary p-2 text-white disabled:cursor-not-allowed disabled:opacity-60'
+          onClick={() => {
+            window.location.href = `/deals?page=${page - 1}&limit=${limit}`;
+          }}
+          disabled={page <= 1}
+        >
+          Previous
+        </button>
+
         {/* Load more by navigating user to next page */}
         <button
-          className='rounded bg-blue-500 p-2 text-white'
+          className='diabled:cursor-not-allowed cursor-pointer rounded bg-secondary p-2 text-white disabled:opacity-60'
           onClick={() => {
             const newPage = parseInt(page, 10) + 1;
             window.location.href = `/deals?page=${newPage}&limit=${limit}`;

@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import HomeCarousel from "./components/Carousel";
-import ProductsSlider from "./components/ProductsSlider";
+// import ProductsSlider from "./components/ProductsSlider";
 import Features from "./components/Features";
 import ProductsSection from "./components/ProductsSection";
 import UserFavorites from "./components/UserFavorites";

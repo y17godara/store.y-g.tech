@@ -3,9 +3,9 @@ import Deals from "./components/Deals";
 import { redirect } from "next/navigation";
 
 export default async function page({ searchParams }: { searchParams: string }) {
-  const { page = 1, limit = 8 }: any = searchParams;
+  const { page, limit = 8 }: any = searchParams;
 
-  if (page < 1) {
+  if (!page || page < 1) {
     redirect(`/deals?page=1&limit=${limit}`);
   }
 

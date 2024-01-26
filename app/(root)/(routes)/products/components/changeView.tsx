@@ -2,18 +2,16 @@
 import React from "react";
 import { CiGrid41, CiCircleList, CiImageOn } from "react-icons/ci";
 import { cn } from "@/lib/utils";
-import { AppDispatch } from "@/lib/store";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectProductsView,
-  setView,
-} from "@/redux/features/view/productsView";
 
-export function ChangeView({}: {}) {
-  const currentView = useSelector(selectProductsView);
-
-  const dispatch = useDispatch<AppDispatch>();
-
+export function ChangeView({
+  currentView,
+  page,
+  limit,
+}: {
+  currentView: string;
+  page: number;
+  limit: number;
+}) {
   return (
     <>
       <div
@@ -21,44 +19,56 @@ export function ChangeView({}: {}) {
         style={{ "--index": 2 } as React.CSSProperties}
       >
         <button
-          onClick={() => dispatch(setView("grid"))}
+          onClick={() => {
+            window.location.href = `/products?page=${
+              page - 1
+            }&limit=${limit}&view=grid`;
+          }}
           className={cn(
-            "border-secondary p-1 transition-colors",
+            "border-secondary transition-colors",
             currentView === "grid" ? "border" : ""
           )}
         >
           <CiGrid41
             title={"Grid"}
             className={
-              "h-4 w-4 transition-all ease-in-out hover:scale-105 sm:h-5 sm:w-5 md:h-6 md:w-6"
+              "h-5 w-5 transition-all ease-in-out hover:scale-105 sm:h-5 sm:w-5 md:h-6 md:w-6"
             }
           />
         </button>
         <button
-          onClick={() => dispatch(setView("list"))}
+          onClick={() => {
+            window.location.href = `/products?page=${
+              page - 1
+            }&limit=${limit}&view=list`;
+          }}
           className={cn(
-            "border-secondary p-1 transition-colors",
+            "border-secondary transition-colors",
             currentView === "list" ? "border" : ""
           )}
         >
           <CiCircleList
             title={"List"}
             className={
-              "h-4 w-4 transition-all ease-in-out hover:scale-105 sm:h-5 sm:w-5 md:h-6 md:w-6"
+              "h-5 w-5 transition-all ease-in-out hover:scale-105 sm:h-5 sm:w-5 md:h-6 md:w-6"
             }
           />
         </button>
         <button
-          onClick={() => dispatch(setView("full"))}
+          onClick={() => {
+            window.location.href = `/products?page=${
+              page - 1
+            }&limit=${limit}&view=full`;
+          }}
           className={cn(
-            "border-secondary p-1 transition-colors",
+            "border-secondary transition-colors",
             currentView === "full" ? "border" : ""
           )}
         >
           <CiImageOn
             title={"Full"}
             className={
-              "h-4 w-4 transition-all ease-in-out hover:scale-105 sm:h-5 sm:w-5 md:h-6 md:w-6"
+              "h-5 w-5 transition-all ease-in-out hover:scale-105 sm:h-5 sm:w-5 md:h-6 md:w-6"
             }
           />
         </button>
