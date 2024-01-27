@@ -103,17 +103,6 @@ export default async function page({ params }: { params: { slug: string } }) {
               <ProductCard product={product} />
             </Suspense>
           </div>
-
-          {/* Recommeded Products */}
-          <div
-            className='flex w-full flex-col gap-16 overflow-y-hidden md:gap-24'
-            style={{ "--index": 2 } as React.CSSProperties}
-          >
-            {/* History Products */}
-            <Suspense fallback={<Skeleton />}>
-              <UserHistory user={user} />
-            </Suspense>
-          </div>
         </div>
       </Suspense>
     </>

@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { type ProductProps, type ProductImages } from "../[slug]/page";
 import { MdStar, MdStarHalf } from "react-icons/md";
-import { DetailsFooter, ShareButton } from "./Cart";
+import { DetailsFooter, ShareButtons } from "./Client";
 import Image from "next/image";
 
 export const ProductCard = async ({ product }: { product: ProductProps }) => {
@@ -134,10 +134,10 @@ const Rating = ({ rating }: { rating: number }) => {
 const ShareProduct = ({ product }: { product: ProductProps }) => {
   return (
     <>
-      <section className='flex h-full w-full flex-col gap-y-2 py-4'>
+      <section className='scrollbar-thin scrollbar-thumb-[#D9D9D9] scrollbar-track-[#D9D9D9] dark:scrollbar-thumb-[#646464] dark:scrollbar-track-[#646464] flex h-full w-full flex-col gap-y-2 overflow-x-scroll py-4 sm:overflow-x-hidden'>
         <div className='flex h-full w-full flex-row items-center gap-x-2'>
           <p className='text-sm text-primary'>Share:</p>
-          <ShareButton productId={product.productId} />
+          <ShareButtons productId={product.productId} />
         </div>
       </section>
     </>
