@@ -42,7 +42,7 @@ export type ProductProps = {
 
 const Product = async (slug: any) => {
   const product = await getProductById(slug);
-  console.log(product);
+  // console.log(product);
 
   if (!product) {
     notFound();
@@ -101,17 +101,6 @@ export default async function page({ params }: { params: { slug: string } }) {
           >
             <Suspense fallback={<Skeleton />}>
               <ProductCard product={product} />
-            </Suspense>
-          </div>
-
-          {/* Recommeded Products */}
-          <div
-            className='flex w-full flex-col gap-16 overflow-y-hidden md:gap-24'
-            style={{ "--index": 2 } as React.CSSProperties}
-          >
-            {/* History Products */}
-            <Suspense fallback={<Skeleton />}>
-              <UserHistory user={user} />
             </Suspense>
           </div>
         </div>
