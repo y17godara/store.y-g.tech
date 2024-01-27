@@ -32,7 +32,11 @@ const cartSlice = createSlice({
       } = action.payload; // payload is the product object
 
       state.items[productId] = (state.items[productId] || 0) + quantity;
-      state.count += 1;
+      // state.count += 1;
+      // check before adding cout is product with productID is already in cart
+      if (!state.products.find((product) => product.productId === productId)) {
+        state.count += 1;
+      }
 
       const existingProductIndex = state.products.findIndex(
         (product) => product.productId === productId

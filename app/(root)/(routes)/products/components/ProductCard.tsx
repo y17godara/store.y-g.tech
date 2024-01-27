@@ -1,7 +1,8 @@
 import { Suspense } from "react";
 import { type ProductProps, type ProductImages } from "../[slug]/page";
 import { MdStar, MdStarHalf } from "react-icons/md";
-import { DetailsFooter } from "./Cart";
+import { DetailsFooter, ShareButton } from "./Cart";
+import Image from "next/image";
 
 export const ProductCard = async ({ product }: { product: ProductProps }) => {
   return (
@@ -19,6 +20,9 @@ export const ProductCard = async ({ product }: { product: ProductProps }) => {
           <Suspense>
             <DetailsFooter product={product} />
           </Suspense>
+          <Suspense>
+            <ShareProduct product={product} />
+          </Suspense>
         </section>
       </section>
     </>
@@ -34,7 +38,15 @@ const Images = ({
 }) => {
   return (
     <>
-      <section>Images</section>
+      <section>
+        <Image
+          src={featured}
+          alt='Product Image'
+          layout='responsive'
+          width={500}
+          height={500}
+        />
+      </section>
     </>
   );
 };
@@ -42,7 +54,7 @@ const Images = ({
 const DetailsHeader = ({ product }: { product: ProductProps }) => {
   return (
     <>
-      <section className='flex h-full w-full flex-col gap-y-2 py-4'>
+      <section className='flex h-full w-full flex-col gap-y-2 py-4 '>
         <div className='flex h-full w-full flex-col gap-2'>
           <p className='line-clamp-1 text-xs font-normal'>{product.category}</p>
           <div className='flex h-full w-full flex-col'>
@@ -65,15 +77,19 @@ const DetailsHeader = ({ product }: { product: ProductProps }) => {
               ${Math.round(product.price / (1 - product.discount / 100))}
             </p>
           </div>
-          <div
-            className='
+          {product.discount > 0 && (
+            <>
+              <div
+                className='
           flex w-full rounded-md bg-tertiary px-1 py-2 text-sm text-secondary
           '
-          >
-            <p className='text-lg text-secondary'>
-              Special offer {product.discount}% off
-            </p>
-          </div>
+              >
+                <p className='text-lg text-secondary'>
+                  Special offer {product.discount}% off
+                </p>
+              </div>
+            </>
+          )}
         </div>
 
         <div className='flex h-full w-full flex-col gap-y-2'>
@@ -85,7 +101,7 @@ const DetailsHeader = ({ product }: { product: ProductProps }) => {
         <div className='flex h-full w-full flex-col gap-y-2'>
           <div className='flex flex-row gap-2'>
             <p className='text-sm text-primary'>Availablity:</p>
-            <p className='text-sm text-primary'>{"In Stock"}</p>
+            <p className='text-sm font-bold text-primary'>{"In Stock"}</p>
           </div>
         </div>
       </section>
@@ -112,6 +128,19 @@ const Rating = ({ rating }: { rating: number }) => {
     <div className='flex h-full w-full flex-row gap-x-1 text-yellow-500 dark:text-yellow-400'>
       {stars}
     </div>
+  );
+};
+
+const ShareProduct = ({ product }: { product: ProductProps }) => {
+  return (
+    <>
+      <section className='flex h-full w-full flex-col gap-y-2 py-4'>
+        <div className='flex h-full w-full flex-row items-center gap-x-2'>
+          <p className='text-sm text-primary'>Share:</p>
+          <ShareButton productId={product.productId} />
+        </div>
+      </section>
+    </>
   );
 };
 
