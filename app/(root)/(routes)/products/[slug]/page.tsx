@@ -42,7 +42,7 @@ export type ProductProps = {
 
 const Product = async (slug: any) => {
   const product = await getProductById(slug);
-  console.log(product);
+  // console.log(product);
 
   if (!product) {
     notFound();
