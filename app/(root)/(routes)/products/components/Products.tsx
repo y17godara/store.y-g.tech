@@ -216,7 +216,7 @@ const ProductCard = ({ item, index }: { item: Product; index: number }) => {
           duration: 0.5,
         }}
         viewport={{ amount: 0 }}
-        className='relative h-80 w-full overflow-hidden rounded shadow-lg'
+        className='relative h-80 w-full overflow-hidden rounded shadow-sm dark:shadow-lg'
       >
         <Link
           href={`/products/${item.productId}`}

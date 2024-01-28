@@ -1,26 +1,31 @@
 import { Suspense } from "react";
-import { type ProductProps, type ProductImages } from "../[slug]/page";
+import { type ProductProps } from "../[slug]/page";
 import { MdStar, MdStarHalf } from "react-icons/md";
-import { DetailsFooter, ShareButtons } from "./Client";
+import { DetailsFooter, ShareButtons, Images } from "./Client";
 import Image from "next/image";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 export const ProductCard = async ({ product }: { product: ProductProps }) => {
   return (
     <>
       <section className='relative flex h-full w-full flex-col gap-y-8'>
-        <Suspense>
-          {/* Images Slider */}
-          <Images featured={product.featuredImage} images={product.images} />
+        <Suspense
+          fallback={
+            <div className='relative flex h-32 w-full flex-col items-center justify-center sm:h-48'>
+              <Skeleton className='h-full w-full' />
+            </div>
+          }
+        >
+          <FeatureImage featured={product.featuredImage} />
         </Suspense>
-        <Suspense>{/* Image View and Zoom on Hover Card */}</Suspense>
         <section className='divide-y-2 divide-primary'>
-          <Suspense>
+          <Suspense fallback={<Skeleton />}>
             <DetailsHeader product={product} />
           </Suspense>
-          <Suspense>
+          <Suspense fallback={<Skeleton />}>
             <DetailsFooter product={product} />
           </Suspense>
-          <Suspense>
+          <Suspense fallback={<Skeleton />}>
             <ShareProduct product={product} />
           </Suspense>
         </section>
@@ -29,24 +34,20 @@ export const ProductCard = async ({ product }: { product: ProductProps }) => {
   );
 };
 
-const Images = ({
-  featured,
-  images,
-}: {
-  featured: string;
-  images?: ProductImages;
-}) => {
+const FeatureImage = ({ featured }: { featured: string }) => {
   return (
     <>
-      <section>
+      <div className='relative flex h-32 w-full flex-col items-center justify-center sm:h-48'>
         <Image
           src={featured}
+          layout='fill'
+          quality={80}
+          loading='lazy'
           alt='Product Image'
-          layout='responsive'
-          width={500}
-          height={500}
+          objectFit='cover'
+          className='h-full w-full rounded-md bg-secondary'
         />
-      </section>
+      </div>
     </>
   );
 };
@@ -134,7 +135,7 @@ const Rating = ({ rating }: { rating: number }) => {
 const ShareProduct = ({ product }: { product: ProductProps }) => {
   return (
     <>
-      <section className='scrollbar-thin scrollbar-thumb-[#D9D9D9] scrollbar-track-[#D9D9D9] dark:scrollbar-thumb-[#646464] dark:scrollbar-track-[#646464] flex h-full w-full flex-col gap-y-2 overflow-x-scroll py-4 sm:overflow-x-hidden'>
+      <section className='flex h-full w-full flex-col gap-y-2 overflow-x-scroll py-4 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-[#ececec] sm:overflow-x-hidden dark:scrollbar-thumb-[#292929]'>
         <div className='flex h-full w-full flex-row items-center gap-x-2'>
           <p className='text-sm text-primary'>Share:</p>
           <ShareButtons productId={product.productId} />
