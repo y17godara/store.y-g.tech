@@ -60,7 +60,7 @@ const cartSlice = createSlice({
     },
 
     decrementProduct: (state, action: PayloadAction<any>) => {
-      console.log("action", action);
+      // console.log("action", action);
       const { productId, quantity } = action.payload;
       if (state.items[productId] >= quantity) {
         state.items[productId] -= quantity;

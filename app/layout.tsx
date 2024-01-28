@@ -8,6 +8,7 @@ import ReduxProvider from "./reduxToolkit";
 import { SessionProvider } from "next-auth/react";
 import Providers from "./Provider";
 import { auth } from "@/auth";
+import { Toaster } from "@/components/shadcn/ui/toaster";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -93,6 +94,7 @@ export default async function RootLayout({
               <Providers>{children}</Providers>
             </ThemeProvider>
           </ReduxProvider>
+          <Toaster />
         </body>
       </html>
     </SessionProvider>

@@ -236,13 +236,16 @@ export const DetailsFooter = ({ product }: { product: ProductProps }) => {
     </>
   );
 };
+
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { BsFacebook } from "react-icons/bs";
 import { IoLogoInstagram, IoCopyOutline } from "react-icons/io5";
 import { IoLogoWhatsapp } from "react-icons/io";
-import { toast } from "react-toastify";
+import { useToast } from "@/components/shadcn/ui/use-toast";
 
 export const ShareButtons = ({ productId }: { productId: string }) => {
+  const { toast } = useToast();
+
   const handleShare =
     ({
       productId,
@@ -280,7 +283,10 @@ export const ShareButtons = ({ productId }: { productId: string }) => {
           break;
         case "copy":
           navigator.clipboard.writeText(window.location.href);
-          toast.success("Link copied to clipboard");
+          toast({
+            title: "Copied!",
+            description: "Link copied to clipboard",
+          });
           break;
         default:
           break;
