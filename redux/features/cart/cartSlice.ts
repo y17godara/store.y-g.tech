@@ -60,10 +60,24 @@ const cartSlice = createSlice({
     },
 
     decrementProduct: (state, action: PayloadAction<any>) => {
+      console.log("action", action);
       const { productId, quantity } = action.payload;
-      if (state.items[productId] > 0) {
+      if (state.items[productId] >= quantity) {
         state.items[productId] -= quantity;
-        state.count -= quantity;
+
+        if (state.items[productId] === 0) {
+          // If product quantity reaches 0, remove it from the cart
+          // console.info(
+          //   "Product",
+          //   productId,
+          //   "quantity reached 0. Removing product"
+          // );
+          delete state.items[productId];
+          state.count -= 1;
+          state.products = state.products.filter(
+            (product) => product.productId !== productId
+          );
+        }
 
         const existingProductIndex = state.products.findIndex(
           (product) => product.productId === productId

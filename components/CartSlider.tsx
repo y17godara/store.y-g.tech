@@ -5,7 +5,7 @@ import { BsCart4 } from "react-icons/bs";
 import { Button } from "./motion/button";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Link } from "./ui";
 import { useSelector } from "react-redux";
@@ -17,6 +17,12 @@ export function CartSlider() {
   const count: number = useSelector(selectCartCount);
 
   const formatCount = (count: number) => (count > 9 ? "9+" : count); // format count to 9+ if count is greater than 9
+
+  useEffect(() => {
+    if (count > 0) {
+      setOpen(true);
+    }
+  }, [count]);
 
   const total_Cart_Price = useSelector((state: any) => state.cart.total);
   return (

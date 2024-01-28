@@ -202,13 +202,14 @@ export const DetailsFooter = ({ product }: { product: ProductProps }) => {
 
             {/* Add to cart button */}
             <button
-              className='line-clamp-1 inline-flex w-full items-center justify-center rounded-md border border-secondary px-4 py-2 text-xs font-semibold text-secondary hover:bg-secondary hover:text-white'
+              className='line-clamp-1 inline-flex w-full flex-row items-center justify-center rounded-md border border-secondary px-4 py-2 text-xs font-semibold text-secondary hover:bg-secondary hover:text-white sm:w-auto'
               onClick={() => addToCart()}
             >
-              Add to cart
+              Add to Cart
             </button>
           </div>
         </div>
+
         <div className='flex h-full w-full flex-col justify-between gap-2 py-4 sm:flex-row'>
           <button
             title={favProduct ? "Remove from favourites" : "Add to favourites"}
