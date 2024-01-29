@@ -16,7 +16,7 @@ export default async function page({ searchParams }: { searchParams: string }) {
     );
   return (
     <>
-      <div className='flex flex-col gap-16 md:gap-24'>
+      <div className='flex flex-col gap-16 px-4 md:gap-24 md:px-6'>
         {data && data.length > 0 ? (
           <>
             <h3 className='flex animate-in flex-col gap-8 text-lg'>

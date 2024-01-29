@@ -17,9 +17,7 @@ export default function RootLayout({
       >
         <Header />
       </header>
-      <main
-        className={"mx-auto max-w-[1200px] px-4 pb-24 pt-10 md:px-6 md:pb-44"}
-      >
+      <main className={"mx-auto max-w-[1200px] pb-24 pt-10 md:pb-44"}>
         {children}
       </main>
       <Footer />
