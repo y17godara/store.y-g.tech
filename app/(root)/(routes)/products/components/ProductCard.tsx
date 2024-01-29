@@ -11,14 +11,14 @@ export const ProductCard = async ({ product }: { product: ProductProps }) => {
       <section className='relative flex h-full w-full flex-col gap-y-8'>
         <Suspense
           fallback={
-            <div className='relative flex h-32 w-full flex-col items-center justify-center sm:h-48'>
+            <div className='relative flex h-[15rem] w-full flex-col items-center justify-center sm:h-[26rem] md:h-[36rem] '>
               <Skeleton className='h-full w-full' />
             </div>
           }
         >
           <FeatureImage featured={product.featuredImage} />
         </Suspense>
-        <section className='divide-y-2 divide-primary'>
+        <section className='divide-y-2 divide-primary px-2 sm:px-4'>
           <Suspense fallback={<Skeleton />}>
             <DetailsHeader product={product} />
           </Suspense>
@@ -37,15 +37,15 @@ export const ProductCard = async ({ product }: { product: ProductProps }) => {
 const FeatureImage = ({ featured }: { featured: string }) => {
   return (
     <>
-      <div className='relative flex h-32 w-full flex-col items-center justify-center sm:h-48'>
+      <div className='relative flex h-[15rem] w-full flex-col items-center justify-center sm:h-[26rem] md:h-[36rem] '>
         <Image
           src={featured}
           layout='fill'
-          quality={80}
-          loading='lazy'
-          alt='Product Image'
+          quality={100}
+          loading='eager'
+          alt={featured}
           objectFit='cover'
-          className='h-full w-full rounded-md bg-secondary'
+          className='h-full w-full rounded-none bg-secondary'
         />
       </div>
     </>
@@ -80,11 +80,7 @@ const DetailsHeader = ({ product }: { product: ProductProps }) => {
           </div>
           {product.discount > 0 && (
             <>
-              <div
-                className='
-          flex w-full rounded-md bg-tertiary px-1 py-2 text-sm text-secondary
-          '
-              >
+              <div className='flex w-full rounded-md bg-tertiary px-1 py-2 text-sm text-secondary'>
                 <p className='text-lg text-secondary'>
                   Special offer {product.discount}% off
                 </p>

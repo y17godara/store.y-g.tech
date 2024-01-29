@@ -12,7 +12,7 @@ export default async function page() {
   const user = await getUser();
   return (
     <>
-      <div className='relative flex w-full flex-col gap-16 md:gap-24'>
+      <div className='relative flex w-full flex-col gap-16 px-4 md:gap-24 md:px-6'>
         <div className='relative flex w-full animate-in flex-col gap-8'>
           <Suspense fallback={<Skeleton />}>
             <HomeCarousel />

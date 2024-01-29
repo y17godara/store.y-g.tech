@@ -18,7 +18,7 @@ export default async function page({ searchParams }: { searchParams: string }) {
   return (
     <>
       <Suspense>
-        <div className='divide-y-secondary flex w-full flex-col items-end justify-end gap-y-16 p-2 text-start'>
+        <div className='divide-y-secondary flex w-full flex-col items-end justify-end gap-y-16 p-2 px-4 text-start md:px-6'>
           <div className='w-full'>
             <div className='w-fulll flex flex-col items-center gap-4 text-start'>
               <h1 className='w-full text-3xl font-bold'>Products</h1>

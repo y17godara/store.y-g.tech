@@ -11,7 +11,7 @@ export default async function page({ searchParams }: { searchParams: string }) {
 
   return (
     <>
-      <div className='flex flex-col gap-16 md:gap-24'>
+      <div className='flex flex-col gap-16 px-4 md:gap-24 md:px-6'>
         <div className='flex animate-in flex-col gap-6'>
           <h2 className='text-xl'>Deals</h2>
           <h2 className='text-3xl font-bold text-white'>upto {"50"}% off</h2>
